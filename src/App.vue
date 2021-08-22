@@ -1,20 +1,78 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <TopBar title="XING博客" :logo="logo" class="topbar">
+      <template #list>
+        <div class="list">
+          <ul>
+            <router-link to="/">
+              <li>
+                首页
+              </li>
+            </router-link>
+            <router-link to="/pages/index">
+              <li>文章</li>
+            </router-link>
+          </ul>
+        </div>
+      </template>
+    </TopBar>
+    <router-view class="content"></router-view>
   </div>
 </template>
 
+<script>
+import TopBar from '@/components/topBar.vue'
+import logo from '@/assets/logo.png'
+export default {
+  components: { TopBar },
+  data() {
+    return {
+      logo: logo
+    }
+  }
+}
+</script>
+
 <style lang="less">
+.content {
+  height: 100%;
+  padding-top: 66px;
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #eee;
+  height: 100vh;
+  width: 100%;
+  .topbar {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+  }
+  .list {
+    // position: absolute;
+    // right: 0;
+    margin-left: 40px;
+    ul {
+      width: 140px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      li {
+        padding: 0 10px;
+        font-size: 16px;
+        flex-wrap: nowrap;
+        color: #111;
+        &:hover {
+          color: #42b983;
+        }
+      }
+    }
+  }
 }
 
 #nav {
