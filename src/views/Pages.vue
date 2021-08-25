@@ -1,12 +1,9 @@
 <template>
-  <div class="home" v-html="page">
-    <!-- <iframe :src="src" frameborder="0" name="myframe" onload="this.style.height = myframe.document.body.scrollHeight"></iframe> -->
-    <!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
-    <!-- <div ></div> -->
-  </div>
+  <div class="home markdown" v-html="page"></div>
 </template>
 
 <script>
+import '@/assets/css/page.less'
 export default {
   name: 'Home',
   // components: { TopBat }
@@ -28,11 +25,11 @@ export default {
   methods: {
     async initPage() {
       // console.log(this.$data.$route.params.id)
-      console.log(this.$route.params.id)
+      // console.log(this.$route.params.id)
       // this.$router
       console.log(this)
       this.$http
-        .get(`/${this.$route.params.id}.html`)
+        .get('/docs/index')
         .then(res => {
           this.page = res.data
         })
@@ -54,7 +51,15 @@ export default {
 
 <style lang="less" scoped>
 .home {
+  // @import url('./../assets/css/page.less');
+  max-width: 1000px;
+  overflow-wrap: break-word;
   padding: 0;
+  margin: auto;
+  margin-top: 70px;
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: content-box;
   // height: 100%;
   // overflow: auto;
   // padding-top: -66px;

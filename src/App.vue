@@ -4,19 +4,20 @@
       <template #list>
         <div class="list">
           <ul>
-            <router-link to="/">
-              <li>
-                首页
-              </li>
-            </router-link>
-            <router-link to="/pages/index">
-              <li>文章</li>
-            </router-link>
+            <!-- <router-link to="/"> -->
+            <li>
+              首页
+            </li>
+            <!-- </router-link> -->
+            <!-- <router-link to="/pages/index"> -->
+            <li>文章</li>
+            <!-- </router-link> -->
           </ul>
         </div>
       </template>
     </TopBar>
-    <router-view class="content"></router-view>
+    <!-- <router-view class="content"></router-view> -->
+    <pages></pages>
     <BottomInfo></BottomInfo>
   </div>
 </template>
@@ -25,8 +26,9 @@
 import TopBar from '@/components/topBar.vue'
 import logo from '@/assets/logo.png'
 import BottomInfo from '@/components/bottomInfo.vue'
+import Pages from '@/views/Pages.vue'
 export default {
-  components: { TopBar, BottomInfo },
+  components: { TopBar, BottomInfo, Pages },
   data() {
     return {
       logo: logo
@@ -45,7 +47,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
   background-color: #eee;
   // height: 100vh;

@@ -1,0 +1,251 @@
+.markdown {
+  pre code.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 1em;
+  }
+  code.hljs {
+    padding: 3px 5px;
+  } /*!
+  Theme: StackOverflow Dark
+  Description: Dark theme as used on stackoverflow.com
+  Author: stackoverflow.com
+  Maintainer: @Hirse
+  Website: https://github.com/StackExchange/Stacks
+  License: MIT
+  Updated: 2021-05-15
+
+  Updated for @stackoverflow/stacks v0.64.0
+  Code Blocks: /blob/v0.64.0/lib/css/components/_stacks-code-blocks.less
+  Colors: /blob/v0.64.0/lib/css/exports/_stacks-constants-colors.less
+*/
+  .hljs {
+    color: #fff;
+    background: #1c1b1b;
+  }
+  .hljs-subst {
+    color: #fff;
+  }
+  .hljs-comment {
+    color: #999;
+  }
+  .hljs-attr,
+  .hljs-doctag,
+  .hljs-keyword,
+  .hljs-meta .hljs-keyword,
+  .hljs-section,
+  .hljs-selector-tag {
+    color: #88aece;
+  }
+  .hljs-attribute {
+    color: #c59bc1;
+  }
+  .hljs-name,
+  .hljs-number,
+  .hljs-quote,
+  .hljs-selector-id,
+  .hljs-template-tag,
+  .hljs-type {
+    color: #f08d49;
+  }
+  .hljs-selector-class {
+    color: #88aece;
+  }
+  .hljs-link,
+  .hljs-regexp,
+  .hljs-selector-attr,
+  .hljs-string,
+  .hljs-symbol,
+  .hljs-template-variable,
+  .hljs-variable {
+    color: #b5bd68;
+  }
+  .hljs-meta,
+  .hljs-selector-pseudo {
+    color: #88aece;
+  }
+  .hljs-built_in,
+  .hljs-literal,
+  .hljs-title {
+    color: #f08d49;
+  }
+  .hljs-bullet,
+  .hljs-code {
+    color: #ccc;
+  }
+  .hljs-meta .hljs-string {
+    color: #b5bd68;
+  }
+  .hljs-deletion {
+    color: #de7176;
+  }
+  .hljs-addition {
+    color: #76c490;
+  }
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  .hljs-strong {
+    font-weight: 700;
+  }
+  a {
+    color: #3eaf7c;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1rem 0;
+    display: block;
+    overflow-x: auto;
+    thead {
+      display: table-header-group;
+      vertical-align: middle;
+      border-color: inherit;
+    }
+    tr {
+      display: table-row;
+      vertical-align: inherit;
+      border-color: inherit;
+      line-height: 24px;
+      &:nth-child(even) {
+        background-color: #f6f8fa;
+      }
+    }
+    td {
+      padding: 5px;
+      display: table-cell;
+      vertical-align: inherit;
+      border: 1px solid #dfe2e5;
+    }
+  }
+  code {
+    background-color: rgb(238, 238, 238);
+    padding: 2px 4px;
+  }
+  ::-webkit-scrollbar {
+    height: 5px;
+    width: 2px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: pink;
+    border-radius: 5px;
+  }
+  pre {
+    background-color: #212121 !important;
+
+    color: #fff;
+    padding: 10px;
+    padding-top: 30px;
+    border-radius: 5px;
+    // overflow-x: scroll;
+    // overflow: visible;
+
+    width: 100%;
+    overflow: scroll;
+    position: relative;
+    margin-right: 10px;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background-color: #fff;
+      border-radius: 14px;
+      left: 30px;
+      top: 12px;
+      background-color: red;
+      box-shadow: 30px 0px 0px 0px yellow, 60px 0px 0px 0px green;
+    }
+    // overflow: scroll;
+    // overflow: visible;
+    code {
+      background-color: #212121 !important;
+      @font-face {
+        font-family: 'consola';
+        // src: url('..//字体名称.eot');
+        src: url('./../consola.ttf') format('truetype');
+        /* url('../font/字体名称.woff') format('woff'), */
+        /* url('../font/字体名称.svg') format('svg'); */
+      }
+      // width: 100%;
+      // overflow-wrap: break-word;
+      word-wrap: break-word;
+      width: 100%;
+      // white-space: normal;
+      line-height: 22px;
+      // text-align: left;
+      text-align: left !important;
+      margin: 0;
+      font-family: consola;
+      span {
+        text-align: left !important;
+        font-size: 14px;
+      }
+      .hljs-name {
+        color: rgb(233, 88, 66);
+      }
+
+      .hljs-tag {
+        color: aqua;
+      }
+
+      .hljs-attr {
+        color: rgb(199, 146, 234);
+      }
+
+      .hljs-string {
+        color: rgb(148, 219, 141);
+      }
+
+      .hljs-keyword {
+        color: rgb(199, 146, 234);
+      }
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: left;
+    border-bottom: 1px rgb(235, 235, 235) solid !important;
+    margin: 16px 0 14px 3px !important;
+  }
+  h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+  }
+  p {
+    line-height: 22px;
+    font-size: 16px;
+    color: #2c3e50;
+    text-align: left;
+    line-height: 30px;
+  }
+  blockquote {
+    border-left: 0.25em solid rgb(206, 206, 206) !important;
+    color: rgb(173, 173, 173) !important;
+    padding: 0 1em !important;
+  }
+
+  ul {
+    list-style-type: disc;
+    li {
+      list-style: inside;
+      line-height: 2em;
+      text-align: left;
+      margin-left: 1em;
+    }
+  }
+}
