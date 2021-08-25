@@ -30,6 +30,8 @@ export default {
   position: relative;
   padding: 0 10px;
 
+  box-shadow: 0 0 50px rgba(59, 187, 138, 0.068);
+
   .logo {
     height: 50px;
   }

@@ -17,14 +17,16 @@
       </template>
     </TopBar>
     <router-view class="content"></router-view>
+    <BottomInfo></BottomInfo>
   </div>
 </template>
 
 <script>
 import TopBar from '@/components/topBar.vue'
 import logo from '@/assets/logo.png'
+import BottomInfo from '@/components/bottomInfo.vue'
 export default {
-  components: { TopBar },
+  components: { TopBar, BottomInfo },
   data() {
     return {
       logo: logo
@@ -35,7 +37,7 @@ export default {
 
 <style lang="less">
 .content {
-  height: 100%;
+  // height: 100%;
   padding-top: 66px;
   box-sizing: border-box;
 }
@@ -46,7 +48,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   background-color: #eee;
-  height: 100vh;
+  // height: 100vh;
   width: 100%;
   .topbar {
     position: fixed;

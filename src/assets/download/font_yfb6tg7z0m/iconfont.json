@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "752658",
+      "name": "Weixin",
+      "font_class": "weixin",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
+      "icon_id": "1817709",
+      "name": "qq",
+      "font_class": "qq",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "10918080",
+      "name": "bilibili-line",
+      "font_class": "bilibili-line",
+      "unicode": "e75d",
+      "unicode_decimal": 59229
+    },
+    {
+      "icon_id": "20279234",
+      "name": "email",
+      "font_class": "email",
+      "unicode": "e5c8",
+      "unicode_decimal": 58824
+    }
+  ]
+}
