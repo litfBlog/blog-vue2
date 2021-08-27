@@ -5,12 +5,14 @@
         <div class="list">
           <ul>
             <!-- <router-link to="/"> -->
-            <li>
-              首页
-            </li>
+            <a href="/">
+              <li>首页</li>
+            </a>
             <!-- </router-link> -->
             <!-- <router-link to="/pages/index"> -->
-            <li>文章</li>
+            <a href="/index">
+              <li>文章</li>
+            </a>
             <!-- </router-link> -->
           </ul>
         </div>
