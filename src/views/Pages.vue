@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-content">
     <div class="home markdown" v-html="page" v-if="status"></div>
     <errPage v-else :code="statusCode"></errPage>
   </div>
