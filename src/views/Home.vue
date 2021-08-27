@@ -25,10 +25,13 @@ export default {
 
 <style lang="less" scoped>
 .home-content {
+  text-align: center;
+  padding-top: 70px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .introduce {
     position: relative;
     margin: 0;
@@ -42,6 +45,7 @@ export default {
   .cart-list {
     position: unset;
     width: auto;
+    // margin-bottom: 500px;
     * {
       margin: 10px auto;
     }
@@ -82,25 +86,25 @@ export default {
   }
 }
 
-// @media screen and (max-width: 530px) {
-//   .home-content {
-//     .introduce {
-//       // width: 10em;
-//       width: 100%;
-//       h1 {
-//         font-size: 24px;
-//         font-weight: 700;
-//         margin-bottom: 10px;
-//       }
-//     }
-//     .cart-list {
-//       /deep/ .card-content {
-//         height: 360px;
-//         width: 260px;
-//         display: flex;
-//         flex-direction: column;
-//       }
-//     }
-//   }
-// }
+@media screen and (max-width: 530px) {
+  .home-content {
+    .introduce {
+      // width: 10em;
+      width: 100%;
+      h1 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+    }
+    .cart-list {
+      /deep/ .card-content {
+        height: 360px;
+        width: 260px;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
 </style>

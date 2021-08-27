@@ -1,5 +1,5 @@
 <template>
-  <div class="topBar-content" @click="$router.go('/')">
+  <div class="topBar-content">
     <img :src="logo" alt="logo" class="logo" v-if="logo" />
     <span class="title">{{ title }}</span>
     <slot name="list" class="list"></slot>
@@ -33,7 +33,7 @@ export default {
   box-shadow: 0 0 50px rgba(59, 187, 138, 0.068);
 
   .logo {
-    height: 50px;
+    height: 30px;
   }
   .title {
     font-size: 26px;

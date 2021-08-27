@@ -16,8 +16,8 @@
         </div>
       </template>
     </TopBar>
-    <!-- <router-view class="content"></router-view> -->
-    <pages></pages>
+    <Pages v-if="router == 'page'"></Pages>
+    <Home v-if="router == 'home'" class="home"></Home>
     <BottomInfo></BottomInfo>
   </div>
 </template>
@@ -27,11 +27,21 @@ import TopBar from '@/components/topBar.vue'
 import logo from '@/assets/logo.png'
 import BottomInfo from '@/components/bottomInfo.vue'
 import Pages from '@/views/Pages.vue'
+import Home from '@/views/Home.vue'
 export default {
-  components: { TopBar, BottomInfo, Pages },
+  components: { TopBar, BottomInfo, Pages, Home },
+  computed: {
+    router() {
+      let view = ''
+      view = window.location.pathname === '/' ? 'home' : 'page'
+      // view = window.location.pathname === '/page' ? 'page' : ''
+      return view
+    }
+  },
   data() {
     return {
       logo: logo
+      // router: 'home'
     }
   }
 }

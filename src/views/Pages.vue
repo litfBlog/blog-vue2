@@ -1,49 +1,51 @@
 <template>
-  <div class="home markdown" v-html="page"></div>
+  <div>
+    <div class="home markdown" v-html="page" v-if="status"></div>
+    <errPage v-else :code="statusCode"></errPage>
+  </div>
 </template>
 
 <script>
 import '@/assets/css/page.less'
+// import status404 from '@/components/404/404.html'
+import errPage from '@/components/404/404.vue'
 export default {
   name: 'Home',
-  // components: { TopBat }
+  components: { errPage },
+  comments: { errPage },
   data() {
     return {
-      page: ''
+      page: '',
+      status: '',
+      statusCode: ''
     }
   },
-  // computed: {
-  //   src() {
-  //     let id = this.$route.params.id
-  //     if (!id) id = ''
-  //     return `http://127.0.0.1:3000/docs/${id}.html`
-  //   }
-  // },
   created() {
+    // console.lo?)
+    console.log(window.location.pathname)
     this.initPage()
   },
   methods: {
     async initPage() {
-      // console.log(this.$data.$route.params.id)
-      // console.log(this.$route.params.id)
-      // this.$router
       console.log(this)
       this.$http
-        .get('/docs/index')
+        .get('/docs' + window.location.pathname)
         .then(res => {
+          console.log(res)
           this.page = res.data
+          if (res.status !== 200) {
+            this.status = false
+            this.statusCode = res.data.status
+          } else {
+            this.status = true
+            this.statusCode = 200
+          }
         })
-        .catch(async err => {
+        .catch(err => {
           console.log(err)
-          const { data: res } = await this.$http.get('/404.html')
-          this.page = res
+          this.status = false
+          this.statusCode = err.status
         })
-
-      // if (res.status === 404) {
-      //   res = await this.$http.get('/404.html')
-      //   res = res.data
-      // }
-      // this.page = res
     }
   }
 }
@@ -53,6 +55,7 @@ export default {
 .home {
   // @import url('./../assets/css/page.less');
   max-width: 1000px;
+  min-height: 80vh;
   overflow-wrap: break-word;
   padding: 0;
   margin: auto;
@@ -65,14 +68,14 @@ export default {
   // padding-top: -66px;
   // box-sizing: border-box;
   // margin-top: -60px;
-  /deep/ #app {
-    width: 100% !important;
-    .page {
-      width: 100% !important;
-      min-height: 100vh;
-    }
-    background-color: #fff !important;
-  }
+  // /deep/ #app {
+  //   width: 100% !important;
+  //   .page {
+  //     width: 100% !important;
+  //     min-height: 100vh;
+  //   }
+  //   background-color: #fff !important;
+  // }
 }
 iframe {
   width: 100%;

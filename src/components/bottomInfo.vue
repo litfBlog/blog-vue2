@@ -6,7 +6,7 @@
         bili &#xe75d;
         qq &#xe611;
         wx &#xe664; -->
-        <dt>联系我</dt>
+        <dt>关于</dt>
         <dd>
           <a href="https://qm.qq.com/cgi-bin/qm/qr?k=KhU1Ifs9GAuPaHfsGMHM4nUst9pR58Uj&noverify=0" target="_blank">
             <i class="iconfont">&#xe611;</i>
@@ -29,10 +29,10 @@
       <dl>
         <dt>友情链接</dt>
         <dd>
-          <a href="http://alongw.cn" target="_blank">阿龙博客</a>
+          <a href="https://www.lieyan.space/" target="_blank">烈焰博客</a>
         </dd>
         <dd>
-          <a href="https://www.lieyan.space/" target="_blank">烈焰博客</a>
+          <a href="http://alongw.cn" target="_blank">阿龙博客</a>
         </dd>
       </dl>
       <dl>
@@ -42,8 +42,11 @@
         </dd>
       </dl>
     </div>
-    <div class="copyRighr">&copy;2021 litfa all rights reserved</div>
-    <!-- <div class="icp">豫ICP备1234567号</div> -->
+    <div class="text">
+      <hr />
+      <div class="copyRighr">&copy;2021 litfa all rights reserved</div>
+      <div class="icp">豫ICP备1234567号</div>
+    </div>
   </div>
 </template>
 
@@ -53,8 +56,9 @@ export default {}
 
 <style lang="less" scoped>
 .bottomInfo-content {
+  text-align: center;
   margin-top: 20px;
-  padding: 50px 120px;
+  padding: 20px 120px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -88,11 +92,21 @@ export default {}
       }
     }
   }
-  .copyRighr {
-    font-size: 12px;
-  }
-  .icp {
-    font-size: 14px;
+  .text {
+    hr {
+      border: none;
+      border-top: 0.5px solid #666;
+    }
+    .copyRighr {
+      font-size: 12px;
+      display: inline;
+      margin: 0 10px;
+    }
+    .icp {
+      font-size: 12px;
+      display: inline;
+      margin: 0 10px;
+    }
   }
 }
 </style>

@@ -12,7 +12,7 @@ import '@/assets/css/github-gist.min.css'
 import '@/assets/css/github-markdown.min.css'
 
 import '@/assets/css/main.less'
-
+import '@/assets/vs2015.css'
 // 指定请求的根路径
 axios.defaults.baseURL = 'http://192.168.31.74:3000'
 
