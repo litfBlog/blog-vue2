@@ -2,6 +2,7 @@
   <div class="page-content">
     <div class="home markdown" v-html="page" v-if="status"></div>
     <errPage v-else :code="statusCode"></errPage>
+    <EditButton></EditButton>
   </div>
 </template>
 
@@ -9,10 +10,10 @@
 import '@/assets/css/page.less'
 // import status404 from '@/components/404/404.html'
 import errPage from '@/components/404/404.vue'
+import EditButton from '@/components/EditButton.vue'
 export default {
   name: 'Home',
-  components: { errPage },
-  comments: { errPage },
+  components: { errPage, EditButton },
   data() {
     return {
       page: '',

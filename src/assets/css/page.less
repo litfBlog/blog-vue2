@@ -239,10 +239,17 @@
     padding: 0 1em !important;
   }
 
-  ul {
+  ol li {
+    // list-style-type: unset;
+    list-style-type: decimal;
+  }
+  ul li {
     list-style-type: disc;
+  }
+  ul,
+  ol {
     li {
-      list-style: inside;
+      // list-style: inside;
       line-height: 2em;
       text-align: left;
       margin-left: 1em;

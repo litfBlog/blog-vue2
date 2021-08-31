@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="login-content">
     <form action="#" @submit.prevent="">
-      <input type="text" v-model="username" />
-      <input type="password" v-model="password" />
+      <input type="text" v-model="userName" />
+      <input type="password" v-model="passWord" />
       <button @click="login">登录</button>
+      1234
     </form>
   </div>
 </template>
@@ -12,25 +13,39 @@
 export default {
   data() {
     return {
-      username: '',
-      password: '',
+      userName: '',
+      passWord: '',
       code: ''
     }
   },
   methods: {
-    async login() {
-      const { data: res } = await this.$http.post('/login', {
-        username: this.username,
-        password: this.password,
-        code: ''
+    login() {
+      this.$http({
+        url: '/api/user/login',
+        method: 'POST',
+        data: {
+          userName: this.userName,
+          passWord: this.passWord,
+          code: ''
+        },
+        // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        // withCredentials: true
+        withCrendentials: true
+        // SameSite: true
+      }).then(res => {
+        console.log(res)
       })
-      if (res.status === 200) {
-        alert('登录成功!')
-        this.$router.push('/')
-      }
+      // if (res.code === 200) {
+      //   alert('登录成功!')
+      //   window.location.href = '/'
+      // }
     }
   }
 }
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.login-content {
+  margin-top: 70px;
+}
+</style>
