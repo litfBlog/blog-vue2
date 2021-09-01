@@ -32,13 +32,15 @@ export default {
   created() {
     // console.lo?)
     console.log(window.location.pathname)
+    console.log(this)
+    console.log(this.$route.params.pages)
     this.initPage()
   },
   methods: {
     async initPage() {
       console.log(this)
       this.$http
-        .get('/docs' + window.location.pathname)
+        .get('/docs/' + this.$route.params.pages)
         .then(res => {
           console.log(res)
           this.page = res.data.data.content
