@@ -1,7 +1,7 @@
 <template>
   <div class="edit-content">
     <input type="text" placeholder="标题" class="title" v-model="title">
-    <mavonEditor @save="saveDoc" ref="editor" v-model="doc" toolbarsFlag :toolbars="{
+    <mavonEditor @save="saveDoc" @imgAdd="$imgAdd" ref="editor" v-model="doc" toolbarsFlag :toolbars="{
       bold: true, // 粗体
       italic: true, // 斜体
       header: true, // 标题
@@ -70,6 +70,27 @@ export default {
     mysave() {
       console.log(this.$refs.editor)
       this.$refs.editor.save()
+    },
+    $imgAdd(pos, $file) {
+      // 第一步.将图片上传到服务器.
+      var formdata = new FormData()
+      formdata.append('image', $file)
+      this.$http({
+        url: '/api/docs/add/upImg',
+        method: 'post',
+        data: formdata,
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }).then((url) => {
+        // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
+        /**
+               * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+               * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+               * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+               */
+
+        console.log(url)
+        this.$refs.editor.$img2Url(pos, url.data.path)
+      })
     }
   }
 }
