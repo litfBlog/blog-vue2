@@ -41,7 +41,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  base: 'test', // 如果项目项目在 域名 根据目录下，则去掉这行
+  // base: 'test', // 如果项目项目在 域名 根据目录下，则去掉这行
   mode: 'history',
   routes
 })

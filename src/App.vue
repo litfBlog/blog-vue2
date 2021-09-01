@@ -4,16 +4,16 @@
       <template #list>
         <div class="list">
           <ul>
-            <!-- <router-link to="/"> -->
-            <a href="/">
+            <router-link to="/">
+            <!-- <a href="/"> -->
               <li>首页</li>
-            </a>
-            <!-- </router-link> -->
-            <!-- <router-link to="/pages/index"> -->
-            <a href="/index">
-              <li>文章</li>
-            </a>
-            <!-- </router-link> -->
+            <!-- </a> -->
+            </router-link>
+            <router-link to="/add">
+            <!-- <a href="/index"> -->
+              <li>投稿</li>
+            <!-- </a> -->
+            </router-link>
           </ul>
         </div>
       </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="user-content">
     <div class="login" v-if="isLogin">
-      <div class="avatar" :style="{background: avatar}"></div>
+      <img class="avatar" :src="avatar">
       <div>
         <div class="userName">{{userName}}</div>
 
@@ -47,12 +47,12 @@ export default {
     align-items: center;
     height: 100%;
     .avatar {
-      width: 40px;
-      height: 40px;
-      background-color: pink;
+      width: 30px;
+      height: 30px;
+      // background-color: pink;
       border-radius: 50%;
-      background: center no-repeat;
-      background-size: 40px;
+      // background: center no-repeat;
+      // background-size: 40px;
     }
     .userName {
       font-size: 18px;
