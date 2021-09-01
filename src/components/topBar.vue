@@ -3,11 +3,16 @@
     <img :src="logo" alt="logo" class="logo" v-if="logo" />
     <span class="title">{{ title }}</span>
     <slot name="list" class="list"></slot>
+    <div class="user">
+      <TopBarUser></TopBarUser>
+    </div>
   </div>
 </template>
 
 <script>
+import TopBarUser from '@/components/TopBarUser.vue'
 export default {
+  components: { TopBarUser },
   props: ['title', 'logo'],
   methods: {
     log() {
@@ -38,6 +43,15 @@ export default {
   }
   .title {
     font-size: 26px;
+  }
+  .user {
+    position: absolute;
+    margin: auto 0;
+    // width: 200px;
+    height: 100%;
+    right: 30px;
+    top: 0;
+    bottom: 0;
   }
 }
 @media screen and (max-width: 400px) {
