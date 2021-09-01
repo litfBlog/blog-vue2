@@ -45,7 +45,11 @@
     <div class="text">
       <hr />
       <div class="copyRighr">&copy;2021 litfa all rights reserved</div>
-      <div class="icp">豫ICP备1234567号</div>
+      <div class="icp">
+        <a href="https://beian.miit.gov.cn">
+          豫ICP备2021024510号
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -103,9 +107,12 @@ export default {}
       margin: 0 10px;
     }
     .icp {
-      font-size: 12px;
       display: inline;
       margin: 0 10px;
+      a {
+        color: #eee;
+        font-size: 12px;
+      }
     }
   }
 }

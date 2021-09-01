@@ -1,6 +1,11 @@
 <template>
   <div class="page-content">
-    <div class="home markdown" v-html="page" v-if="status"></div>
+    <div class="home markdown" v-if="status">
+      <h1>{{title}}</h1>
+      <AuthorInfo :date='date'></AuthorInfo>
+      <hr>
+      <div v-html="page"></div>
+    </div>
     <errPage v-else :code="statusCode"></errPage>
     <EditButton></EditButton>
   </div>
@@ -11,14 +16,17 @@ import '@/assets/css/page.less'
 // import status404 from '@/components/404/404.html'
 import errPage from '@/components/404/404.vue'
 import EditButton from '@/components/EditButton.vue'
+import AuthorInfo from '@/components/AuthorInfo.vue'
 export default {
   name: 'Home',
-  components: { errPage, EditButton },
+  components: { errPage, EditButton, AuthorInfo },
   data() {
     return {
       page: '',
       status: '',
-      statusCode: ''
+      statusCode: '',
+      date: 0,
+      title: ''
     }
   },
   created() {
@@ -33,7 +41,10 @@ export default {
         .get('/docs' + window.location.pathname)
         .then(res => {
           console.log(res)
-          this.page = res.data
+          this.page = res.data.data.content
+          this.date = res.data.data.date
+          this.date = Number(this.date)
+          this.title = res.data.data.title
           if (res.status !== 200) {
             this.status = false
             this.statusCode = res.data.status
