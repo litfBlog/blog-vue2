@@ -6,12 +6,9 @@
     </div>
     <div class="cart-list">
       <h1>博客文章</h1>
-      <ContentCard></ContentCard>
-      <ContentCard></ContentCard>
-      <ContentCard></ContentCard>
-      <ContentCard></ContentCard>
-      <ContentCard></ContentCard>
-      <ContentCard></ContentCard>
+      <router-link v-for='item in pages' :key="item._id" :to="`/p/${item.title}`">
+        <ContentCard  :title="item.title" :info="item.info" :date="item.date"></ContentCard>
+      </router-link>
     </div>
   </div>
 </template>
@@ -19,7 +16,23 @@
 <script>
 import ContentCard from '@/components/contentCard.vue'
 export default {
-  components: { ContentCard }
+  components: { ContentCard },
+  data() {
+    return {
+      pages: ['', '', '', '']
+    }
+  },
+  created() {
+    this.initPages()
+  },
+  methods: {
+    async initPages() {
+      const { data: res } = await this.$http.post('/api/docs/find', {
+        num: 10
+      })
+      this.pages = res.data
+    }
+  }
 }
 </script>
 
@@ -47,6 +60,7 @@ export default {
     width: auto;
     // margin-bottom: 500px;
     * {
+      color: unset;
       margin: 10px auto;
     }
   }

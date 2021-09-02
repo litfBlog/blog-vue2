@@ -28,6 +28,12 @@ axios.defaults.withCredentials = true // axios请求携带cookie    每个都需
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
+// 路由跳转后，页面回到顶部
+router.afterEach(() => {
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
+})
+
 new Vue({
   router,
   render: h => h(App)

@@ -2,20 +2,28 @@
   <div class="card-content">
     <img src="" alt="" />
     <div class="text">
-      <h2>我是标题</h2>
-      <p>文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介</p>
+      <h2>{{title}}</h2>
+      <p>{{info}}</p>
       <div class="info">
-        <span>1970-1-1</span>
-        <span>点赞</span>
+        <span>{{ dateFormat }}</span>
+        <!-- <span>点赞</span>
         <span>评论</span>
-        <span>收藏</span>
+        <span>收藏</span> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import dayjs from 'dayjs'
+export default {
+  props: ['title', 'info', 'date'],
+  computed: {
+    dateFormat() {
+      return dayjs(Number(this.date)).format('YYYY-MM-DD HH:mm')
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
