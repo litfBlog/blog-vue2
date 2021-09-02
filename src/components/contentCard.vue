@@ -1,6 +1,6 @@
 <template>
   <div class="card-content">
-    <img src="" alt="" />
+    <!-- <img src="" alt="" /> -->
     <div class="text">
       <h2>{{title}}</h2>
       <p>{{info}}</p>
