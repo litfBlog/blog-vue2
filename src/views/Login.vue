@@ -1,12 +1,16 @@
 <template>
   <div class="login-content">
     <form action="#" @submit.prevent="">
-      <input type="text" v-model="userName" placeholder="账号/邮箱" />
-      <input type="password" v-model="passWord" placeholder="密码" />
+      <input type="text" v-model.trim.lazy="userName" placeholder="账号/邮箱" @blur="authUserNameFun" />
+      <span v-show="!authUserName">请输入正确的用户名</span>
+      <input type="password" v-model.trim.lazy="passWord" placeholder="密码" @blur="authPasswordFun" />
+      <span v-show="!authPassword">请输入正确的密码</span>
+
       <div class="authCode">
-        <input type="text" v-model="authCode" placeholder="验证码">
+        <input type="text" v-model.trim.lazy="authCode" placeholder="验证码" @blur="authAuthCodeFun">
         <div v-html="codeImg" @click="initAuthCode" class="img"></div>
       </div>
+        <span v-show="!authAuthCode">请输入正确的验证码</span>
       <button @click="login">登录</button>
     </form>
   </div>
@@ -19,7 +23,12 @@ export default {
       userName: '',
       passWord: '',
       authCode: '',
-      codeImg: ''
+      codeImg: '',
+      // 默认值可以为 true  进入界面是不会显示输入错误提示
+      // 提交表单时 调用一次验证函数即可
+      authUserName: true,
+      authPassword: true,
+      authAuthCode: true
     }
   },
   created() {
@@ -30,7 +39,24 @@ export default {
       const { data: res } = await this.$http.post('/api/authCode')
       this.codeImg = res
     },
+    // 用户第一次进入界面 不需要验证  输入后再验证
+    // 不知道咋写方便 就这样 能用就行(doge)
+    authUserNameFun() {
+      this.authUserName = /^[a-z0-9_-]{3,16}$/.test(this.userName)
+    },
+    authPasswordFun() {
+      this.authPassword = /^[a-z0-9_-]{6,18}$/.test(this.passWord)
+    },
+    authAuthCodeFun() {
+      this.authAuthCode = /^[a-zA-Z0-9]{4,4}$/.test(this.authCode)
+    },
     login() {
+      this.authUserNameFun()
+      this.authPasswordFun()
+      this.authAuthCodeFun()
+      if (this.authUserName && this.authPassword && this.authAuthCode) {
+
+      } else return alert('表单填写有误！')
       this.$http({
         url: '/api/user/login',
         method: 'POST',
@@ -78,6 +104,13 @@ export default {
     box-sizing: border-box;
     // align-items: s;
     justify-content: space-between;
+    span {
+      font-size: 10px;
+      width: 100%;
+      text-align: left;
+      margin-top: -1.3em;
+      color: rgb(255, 81, 81);
+    }
     input, button {
       height: 40px;
       font-size: 18px;
