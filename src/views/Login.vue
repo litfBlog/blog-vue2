@@ -45,10 +45,13 @@ export default {
         // SameSite: true
       }).then(res => {
         console.log(res)
+        if (res.data.code === 200) {
+          alert('登录成功!')
+          window.location.href = '/'
+          // this.$router.push('/')
+        }
       })
       // if (res.code === 200) {
-      //   alert('登录成功!')
-      //   window.location.href = '/'
       // }
     }
   }

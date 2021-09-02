@@ -5,13 +5,13 @@
     </div>
 
     <div class="userInfo">
-      <div class="avatar">头像</div>
+      <img class="avatar" :src="user.avatar" />
       <div class="user">
-        <div class="userName">昵称</div>
-        <div class="data">
+        <div class="userName">{{user.userName}}</div>
+        <!-- <div class="data">
           <div>被点赞：</div>
           <div>文章：</div>
-        </div>
+        </div> -->
       </div>
     <div>
     </div>
@@ -28,10 +28,10 @@ export default {
     // },
     date: {
       type: [Number, String]
+    },
+    user: {
+      type: Object
     }
-    // user: {
-    //   type: Object
-    // }
   },
   computed: {
     dateFormat() {

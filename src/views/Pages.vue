@@ -2,7 +2,7 @@
   <div class="page-content">
     <div class="home markdown" v-if="status">
       <h1>{{title}}</h1>
-      <AuthorInfo :date='date'></AuthorInfo>
+      <AuthorInfo :date="date" :user="user"></AuthorInfo>
       <hr>
       <div v-html="page"></div>
     </div>
@@ -26,7 +26,8 @@ export default {
       status: '',
       statusCode: '',
       date: 0,
-      title: ''
+      title: '',
+      user: {}
     }
   },
   created() {
@@ -47,6 +48,7 @@ export default {
           this.date = res.data.data.date
           this.date = Number(this.date)
           this.title = res.data.data.title
+          this.user = res.data.data.author
           if (res.status !== 200) {
             this.status = false
             this.statusCode = res.data.status

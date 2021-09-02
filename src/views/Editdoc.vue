@@ -1,7 +1,7 @@
 <template>
   <div class="edit-content">
     <input type="text" placeholder="标题" class="title" v-model="title">
-    <mavonEditor @save="saveDoc" @imgAdd="$imgAdd" ref="editor" v-model="doc" toolbarsFlag :toolbars="{
+    <mavonEditor @save="saveDoc" @imgAdd="$imgAdd" @imgDel="$imgDel" ref="editor" v-model="doc" toolbarsFlag :toolbars="{
       bold: true, // 粗体
       italic: true, // 斜体
       header: true, // 标题
@@ -55,7 +55,26 @@ export default {
       info: ''
     }
   },
+  created() {
+    this.initPage()
+  },
   methods: {
+    async initPage() {
+      const { data: res } = await this.$http.post('/api/docs/add/init')
+      if (res.code === 200) {
+        if (res.type === 'editing') {
+          this.doc = res.content
+          this.title = res.title
+          this.info = res.info
+        }
+        return
+      } else if (res.code === 403) {
+        alert(res.msg)
+        this.$router.push('/login')
+        return
+      }
+      alert('err')
+    },
     // updateDoc(data) {
     //   console.log(data)
     // },
@@ -74,6 +93,7 @@ export default {
     $imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
       var formdata = new FormData()
+      console.log(formdata)
       formdata.append('image', $file)
       this.$http({
         url: '/api/docs/add/upImg',
@@ -90,6 +110,12 @@ export default {
 
         console.log(url)
         this.$refs.editor.$img2Url(pos, url.data.path)
+      })
+    },
+    $imgDel(fileName) {
+      console.log(fileName)
+      this.$http.post('/api/docs/add/delImg', {
+        fileName: fileName[0]
       })
     }
   }
