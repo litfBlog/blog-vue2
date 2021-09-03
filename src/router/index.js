@@ -5,6 +5,7 @@ import Pages from '@/views/Pages.vue'
 import Login from '@/views/Login.vue'
 import Editdoc from '@/views/Editdoc.vue'
 import Admin from '@/views/Admin.vue'
+import Register from '@/views/Register.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +28,11 @@ const routes = [
     path: '/login',
     name: '登录',
     component: Login
+  },
+  {
+    path: '/register',
+    name: '注册',
+    component: Register
   },
   {
     path: '/admin',
