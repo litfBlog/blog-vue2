@@ -2,21 +2,21 @@
   <div class="register-content">
     <form action="#" @submit.prevent="">
       <input type="text" v-model.trim.lazy="userName" placeholder="用户名" @blur="authUserNameFun" />
-      <span v-show="!authUserName">请输入正确的用户名</span>
+      <span>{{userNameText}}</span>
       <input type="text" v-model.trim.lazy="email" placeholder="邮箱" @blur="authEmailFun" />
-      <span v-show="!authEmail">请输入正确的邮箱</span>
+      <span>{{emailText}}</span>
       <input type="password" v-model.trim.lazy="passWord" placeholder="密码" @blur="authPassWordFun" />
-      <span v-show="!authPassWord">请输入正确的密码</span>
+      <span>{{passWordText}}</span>
 
       <div class="authCode">
         <input type="text" v-model.trim.lazy="authCode" placeholder="验证码" @blur="authAuthCodeFun">
         <div v-html="codeImg" @click="initAuthCode" class="img"></div>
       </div>
-      <span v-show="!authAuthCode">请输入正确的验证码</span>
+      <span>{{codeText}}</span>
 
       <div class="emailCode">
-        <input type="text" v-model.trim.lazy="emailCode" placeholder="邮箱验证码">
-        <button class="img" @click="getEmailCode">{{ EmailCodeText }}</button>
+        <input type="text" v-model.trim="emailCode" placeholder="邮箱验证码">
+        <button class="img" @click="getEmailCode" :disabled="disabledCodeSend">{{ EmailCodeText }}</button>
       </div>
 
       <button @click="register">注册</button>
@@ -40,7 +40,12 @@ export default {
       authEmail: true,
       authPassWord: true,
       authAuthCode: true,
-      EmailCodeText: '获取验证码'
+      EmailCodeText: '获取验证码',
+      userNameText: '',
+      emailText: '',
+      codeText: '',
+      passWordText: '',
+      disabledCodeSend: false
     }
   },
   created() {
@@ -53,24 +58,54 @@ export default {
     },
     // 用户第一次进入界面 不需要验证  输入后再验证
     // 不知道咋写方便 就这样 能用就行(doge)
-    authUserNameFun() {
-      this.authUserName = /^[a-z0-9_-]{3,16}$/.test(this.userName)
+    async authUserNameFun() {
+      if (!/^[a-z0-9_-]{3,16}$/.test(this.userName)) {
+        this.userNameText = '用户名有误'
+        return false
+      }
+      const { data: res } = await this.$http.post('/api/user/register/find', { userName: this.userName })
+      if (res.status === 'no') {
+        this.userNameText = '该用户名已被占用'
+        return false
+      }
+      this.userNameText = ''
+      return true
     },
-    authEmailFun() {
-      this.authEmail = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/.test(this.email)
+    async authEmailFun() {
+      if (!/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/.test(this.email)) {
+        this.emailText = '邮箱格式有误'
+        return false
+      }
+      const { data: res } = await this.$http.post('/api/user/register/find', { email: this.email })
+      if (res.status === 'no') {
+        this.emailText = '该邮箱已注册'
+        return false
+      }
+      this.emailText = ''
+      return true
     },
     authPassWordFun() {
-      this.authPassWord = /^[a-z0-9_-]{6,18}$/.test(this.passWord)
+      if (!/^[a-z0-9_-]{6,18}$/.test(this.passWord)) {
+        this.passWordText = '密码格式有误'
+        return false
+      }
+      this.passWordText = ''
+      return true
     },
     authAuthCodeFun() {
-      this.authAuthCode = /^[a-zA-Z0-9]{4,4}$/.test(this.authCode)
+      if (!/^[a-zA-Z0-9]{4,4}$/.test(this.authCode)) {
+        this.codeText = '验证码有误'
+        return false
+      }
+      this.codeText = ''
+      return true
     },
 
     getEmailCode() {
-      this.authUserNameFun()
-      this.authPassWordFun()
-      this.authAuthCodeFun()
-      if (this.authUserName && this.authPassWord && this.authAuthCode) {
+      // this.authUserNameFun()
+      // this.authPassWordFun()
+      // this.authAuthCodeFun()
+      if (this.authUserNameFun() && this.authPassWordFun() && this.authAuthCodeFun()) {
 
       } else return alert('表单填写有误！')
 
@@ -83,12 +118,24 @@ export default {
         authCode: this.authCode
       })
       // 2. 改为倒计时
+      this.disabledCodeSend = true
+      let time = 60
+      const codeTimeOut = setInterval(() => {
+        if (time === 0) {
+          this.disabledCodeSend = false
+          this.EmailCodeText = '重新获取'
+          clearInterval(codeTimeOut)
+          return
+        }
+        this.EmailCodeText = time
+        time--
+      }, 1000)
     },
     register() {
       this.authUserNameFun()
       this.authPassWordFun()
       this.authAuthCodeFun()
-      if (this.authUserName && this.authPassWord && this.authAuthCode) {
+      if (this.authUserNameFun() && this.authPassWordFun() && this.authAuthCodeFun()) {
 
       } else return alert('表单填写有误！')
       this.$http({
