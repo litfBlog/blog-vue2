@@ -2,7 +2,7 @@
   <div class="home-content">
     <div class="introduce">
       <h1>Hi! 欢迎来到XING博客</h1>
-      <p>在这里分享一些前端知识</p>
+      <p>阿巴阿巴……</p>
     </div>
     <div class="cart-list">
       <h1>博客文章</h1>

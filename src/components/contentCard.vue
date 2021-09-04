@@ -41,18 +41,31 @@ export default {
     height: 160px;
   }
   div.text {
+    text-align: left;
     height: 100%;
+    width: 200px;
+    // margin: auto;
     padding: 16px 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
     h2 {
-      line-height: 60px;
+      line-height: 50px;
       font-size: 26px;
+      text-align: left;
+      width: 100%;
     }
     p {
-      line-height: 30px;
+      line-height: 20px;
+      width: 100%;
+      word-wrap: break-word;
+      overflow: hidden;
+      max-height: 4em;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
     }
     .info {
       width: 100%;
