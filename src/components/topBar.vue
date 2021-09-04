@@ -4,7 +4,9 @@
     <span class="title">{{ title }}</span>
     <slot name="list" class="list"></slot>
     <div class="user">
-      <TopBarUser></TopBarUser>
+      <a href="/user">
+        <TopBarUser></TopBarUser>
+      </a>
     </div>
   </div>
 </template>
@@ -13,12 +15,12 @@
 import TopBarUser from '@/components/TopBarUser.vue'
 export default {
   components: { TopBarUser },
-  props: ['title', 'logo'],
-  methods: {
-    log() {
-      console.log(this)
-    }
-  }
+  props: ['title', 'logo']
+  // methods: {
+  //   log() {
+  //     console.log(this)
+  //   }
+  // }
 }
 </script>
 

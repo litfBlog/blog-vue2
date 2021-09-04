@@ -6,6 +6,7 @@ import Login from '@/views/Login.vue'
 import Editdoc from '@/views/Editdoc.vue'
 import Admin from '@/views/Admin.vue'
 import Register from '@/views/Register.vue'
+import User from '@/views/User.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -33,6 +34,11 @@ const routes = [
     path: '/register',
     name: '注册',
     component: Register
+  },
+  {
+    path: '/user',
+    name: '用户',
+    component: User
   },
   {
     path: '/admin',

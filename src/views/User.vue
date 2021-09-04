@@ -1,0 +1,117 @@
+<template>
+  <div class="user-content">
+    <div class="user">
+      <img class="avatar" :src="avatar" />
+      <div class="info iconfont">
+        <h1>{{userName}}</h1>
+        <div class="info-text-tr">
+          <!-- <p>注册时间</p> -->
+          <span>&#xe5c8; {{ email }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="button">
+      <h1>操作</h1>
+      <button @click="editData">修改资料</button>
+      <button @click="unLogin" class="exit">退出登录</button>
+    </div>
+
+    <div class="myDoc">
+      <h1>我的文章</h1>
+      <br>
+      <p>开发中……</p>
+    </div>
+  </div>
+</template>
+
+<script>
+import bus from '@/components/eventBus.js'
+export default {
+  data() {
+    return {
+      avatar: '',
+      userName: '',
+      date: '',
+      email: ''
+    }
+  },
+  created() {
+    bus.$on('userinfo', val => {
+      this.isLogin = val.data.isLogin
+      this.avatar = val.data.avatar
+      this.userName = val.data.userName
+      this.email = val.data.email
+    })
+  },
+  methods: {
+    editData() {
+      alert('暂未开放')
+    },
+    async unLogin() {
+      const { data: res } = await this.$http.post('/api/user/login/unlogin')
+      if (res.code === 200) {
+        alert('退出成功')
+        window.location.href = '/'
+      }
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.user-content {
+  margin-top: 90px;
+  .user {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    display: flex;
+    img {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+    .info {
+      h1 {
+        font-size: 50px;
+      }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-left: 10px;
+      .info-text-tr {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+  }
+  .button {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    button {
+      margin: 5px;
+      border: none;
+      background-color: #fff;
+      border: solid 1px #666;
+      border-radius: 5px;
+      width: 100px;
+      height: 35px;
+      &.exit {
+        border: solid 1px rgb(173, 0, 0);
+        color: rgb(173, 0, 0);
+      }
+    }
+  }
+  .myDoc {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+  }
+}
+</style>

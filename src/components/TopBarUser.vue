@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import bus from '@/components/eventBus.js'
 export default {
   data() {
     return {
@@ -33,6 +34,7 @@ export default {
       this.isLogin = res.data.isLogin
       this.userName = res.data.userName
       this.avatar = res.data.avatar
+      bus.$emit('userinfo', res)
     }
   }
 }
@@ -60,7 +62,7 @@ export default {
       margin-left: 0.5em;
     }
   }
-  @media screen and (max-width: 560px){
+  @media screen and (max-width: 560px) {
     .userName {
       display: none;
     }
