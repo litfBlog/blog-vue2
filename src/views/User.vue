@@ -1,7 +1,8 @@
 <template>
   <div class="user-content">
     <div class="user">
-      <img class="avatar" :src="avatar" />
+      <editUserInfo v-if="showEditUserInfo" @exit="showEditUserInfo = !showEditUserInfo"></editUserInfo>
+      <img class="avatar" :src="avatar" @click="editData" />
       <div class="info iconfont">
         <h1>{{userName}}</h1>
         <div class="info-text-tr">
@@ -27,13 +28,18 @@
 
 <script>
 import bus from '@/components/eventBus.js'
+import editUserInfo from '@/components/editUserInfo.vue'
 export default {
+  components: {
+    editUserInfo
+  },
   data() {
     return {
       avatar: '',
       userName: '',
       date: '',
-      email: ''
+      email: '',
+      showEditUserInfo: false
     }
   },
   created() {
@@ -43,10 +49,14 @@ export default {
       this.userName = val.data.userName
       this.email = val.data.email
     })
+    // this.$on('exit', () => {
+    //   console.log(111)
+    // })
   },
   methods: {
     editData() {
-      alert('暂未开放')
+      // alert('暂未开放')
+      this.showEditUserInfo = true
     },
     async unLogin() {
       const { data: res } = await this.$http.post('/api/user/login/unlogin')
@@ -54,6 +64,9 @@ export default {
         alert('退出成功')
         window.location.href = '/'
       }
+    },
+    exitEditUserInfo() {
+      console.log(1)
     }
   }
 }
