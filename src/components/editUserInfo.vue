@@ -17,8 +17,17 @@ export default {
       const config = {
         headers: { 'Content-Type': 'multipart/form-data' }
       } // 添加请求头
-      this.$http.post('/api/user/setInfo/upavatar', param, config).then(response => {
-        console.log(response.data)
+      this.$http.post('/api/user/setInfo/upavatar', param, config).then(res => {
+        console.log(res.data)
+        if (res.data.code === 200) {
+          this.$alert('修改成功！', '好耶！', {
+            confirmButtonText: '确定',
+            callback: action => {
+              // window.reload()
+              this.$router.go(0)
+            }
+          })
+        }
       })
       // // console.log(fileName)
       // const file = e.target.files[0]

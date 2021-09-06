@@ -14,7 +14,7 @@
 
     <div class="button">
       <h1>操作</h1>
-      <button @click="editData">修改资料</button>
+      <button @click="alert">修改资料</button>
       <button @click="unLogin" class="exit">退出登录</button>
     </div>
 
@@ -48,22 +48,63 @@ export default {
       this.avatar = val.data.avatar
       this.userName = val.data.userName
       this.email = val.data.email
+      if (!this.isLogin) {
+        this.$alert('请登陆后重试', '未登录', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.replace('/login')
+          }
+        })
+      }
     })
     // this.$on('exit', () => {
     //   console.log(111)
     // })
   },
   methods: {
+    alert() {
+      this.$alert('这是一段内容', '标题名称', {
+        confirmButtonText: '确定',
+        callback: action => {
+          this.$message({
+            type: 'info',
+            message: `action: ${action}`
+          })
+        }
+      })
+    },
     editData() {
       // alert('暂未开放')
       this.showEditUserInfo = true
     },
     async unLogin() {
-      const { data: res } = await this.$http.post('/api/user/login/unlogin')
-      if (res.code === 200) {
-        alert('退出成功')
-        window.location.href = '/'
-      }
+      this.$confirm('确定要退出登录吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(async () => {
+          const { data: res } = await this.$http.post('/api/user/login/unlogin')
+
+          if (res.code === 200) {
+            this.$message({
+              type: 'success',
+              message: '退出成功!'
+            })
+            window.location.href = '/'
+          } else {
+            this.$message({
+              type: 'error',
+              message: '退出失败'
+            })
+          }
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          })
+        })
     },
     exitEditUserInfo() {
       console.log(1)

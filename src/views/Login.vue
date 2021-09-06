@@ -10,7 +10,7 @@
         <input type="text" v-model.trim.lazy="authCode" placeholder="验证码" @blur="authAuthCodeFun">
         <div v-html="codeImg" @click="initAuthCode" class="img"></div>
       </div>
-        <span v-show="!authAuthCode">请输入正确的验证码</span>
+      <span v-show="!authAuthCode">请输入正确的验证码</span>
       <button @click="login">登录</button>
     </form>
   </div>
@@ -55,8 +55,12 @@ export default {
       this.authPasswordFun()
       this.authAuthCodeFun()
       if (this.authUserName && this.authPassword && this.authAuthCode) {
-
-      } else return alert('表单填写有误！')
+      } else {
+        return this.$message({
+          type: 'warning',
+          message: '表单填写有误！请修改后重试'
+        })
+      }
       this.$http({
         url: '/api/user/login',
         method: 'POST',
@@ -72,10 +76,22 @@ export default {
       }).then(res => {
         console.log(res)
         if (res.data.code === 200) {
-          alert('登录成功!')
-          window.location.href = '/'
+          this.$alert('登录成功！', '好耶！', {
+            confirmButtonText: '返回首页',
+            callback: action => {
+              this.$router.push('/')
+            }
+          })
+          return
+          // window.location.href = '/'
           // this.$router.push('/')
         }
+        this.$alert(`登录失败！${res.data.msg}`, '坏耶', {
+          confirmButtonText: '确定',
+          callback: action => {
+            window.location.href = '/login'
+          }
+        })
       })
       // if (res.code === 200) {
       // }
@@ -111,7 +127,8 @@ export default {
       margin-top: -1.3em;
       color: rgb(255, 81, 81);
     }
-    input, button {
+    input,
+    button {
       height: 40px;
       font-size: 18px;
       &::placeholder {
@@ -119,7 +136,7 @@ export default {
       }
     }
     input {
-      background-color: rgb(241,239,241);
+      background-color: rgb(241, 239, 241);
       border: none;
       padding-left: 0.7em;
       width: 100%;

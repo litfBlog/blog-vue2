@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 
+import { MessageBox, Message } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
 import '@/assets/icon/iconfont.js'
 import '@/assets/icon/iconfont.css'
 
@@ -24,6 +27,12 @@ axios.defaults.withCredentials = true // axios请求携带cookie    每个都需
 //   timeout: 10000
 // })
 // $axios.defaults.withCredentials = true
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
+// Vue.use(Button)
+// Vue.use(MessageBox)
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
