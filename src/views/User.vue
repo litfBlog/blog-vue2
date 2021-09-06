@@ -15,6 +15,7 @@
     <div class="button">
       <h1>操作</h1>
       <button @click="alert">修改资料</button>
+      <button @click="editPassWord">修改密码</button>
       <button @click="unLogin" class="exit">退出登录</button>
     </div>
 
@@ -108,6 +109,14 @@ export default {
     },
     exitEditUserInfo() {
       console.log(1)
+    },
+    editPassWord() {
+      this.$alert('暂不支持修改，请前往登录页通过邮箱重置密码。', '坏耶', {
+        confirmButtonText: '确定',
+        callback: action => {
+          this.$router.push('/login')
+        }
+      })
     }
   }
 }

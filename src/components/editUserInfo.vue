@@ -24,7 +24,8 @@ export default {
             confirmButtonText: '确定',
             callback: action => {
               // window.reload()
-              this.$router.go(0)
+              // this.$router.go(0)
+              location.reload()
             }
           })
         }
