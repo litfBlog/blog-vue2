@@ -20,6 +20,11 @@
       </div>
 
       <button @click="register">注册</button>
+
+      <div class="router-link">
+        <router-link to="/login">已有账号，去登录</router-link>
+        <router-link to=""></router-link>
+      </div>
     </form>
   </div>
 </template>
@@ -106,7 +111,6 @@ export default {
       // this.authPassWordFun()
       // this.authAuthCodeFun()
       if (this.authUserNameFun() && this.authPassWordFun() && this.authAuthCodeFun()) {
-
       } else return alert('表单填写有误！')
 
       // 1. 发起请求 发送验证码
@@ -136,7 +140,6 @@ export default {
       this.authPassWordFun()
       this.authAuthCodeFun()
       if (this.authUserNameFun() && this.authPassWordFun() && this.authAuthCodeFun()) {
-
       } else return alert('表单填写有误！')
       this.$http({
         // 两个 register 不是 bug
@@ -197,7 +200,8 @@ export default {
       margin-top: -1.3em;
       color: rgb(255, 81, 81);
     }
-    input, button {
+    input,
+    button {
       height: 40px;
       font-size: 18px;
       &::placeholder {
@@ -205,12 +209,13 @@ export default {
       }
     }
     input {
-      background-color: rgb(241,239,241);
+      background-color: rgb(241, 239, 241);
       border: none;
       padding-left: 0.7em;
       width: 100%;
     }
-    .authCode, .emailCode {
+    .authCode,
+    .emailCode {
       display: flex;
       justify-content: space-between;
       width: 100%;
@@ -242,6 +247,17 @@ export default {
       background-color: rgb(51, 156, 255);
       border-radius: 50px;
       color: #fff;
+    }
+    .router-link {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      a {
+        color: rgb(126, 126, 126);
+        &:hover {
+          color: #aaa;
+        }
+      }
     }
   }
 }

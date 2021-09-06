@@ -12,6 +12,10 @@
       </div>
       <span v-show="!authAuthCode">请输入正确的验证码</span>
       <button @click="login">登录</button>
+      <div class="router-link">
+        <router-link to="/register">没有账号，去注册</router-link>
+        <router-link to="/resetpassword">忘记密码</router-link>
+      </div>
     </form>
   </div>
 </template>
@@ -93,8 +97,6 @@ export default {
           }
         })
       })
-      // if (res.code === 200) {
-      // }
     }
   }
 }
@@ -114,7 +116,7 @@ export default {
     width: 40%;
     min-width: 300px;
     max-width: 400px;
-    height: 300px;
+    height: 350px;
     background-color: #fff;
     padding: 20px;
     box-sizing: border-box;
@@ -167,6 +169,17 @@ export default {
       background-color: rgb(51, 156, 255);
       border-radius: 50px;
       color: #fff;
+    }
+    .router-link {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      a {
+        color: rgb(126, 126, 126);
+        &:hover {
+          color: #aaa;
+        }
+      }
     }
   }
 }
