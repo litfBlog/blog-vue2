@@ -7,6 +7,7 @@ import Editdoc from '@/views/Editdoc.vue'
 import Admin from '@/views/Admin.vue'
 import Register from '@/views/Register.vue'
 import User from '@/views/User.vue'
+import ResetPassword from '@/views/ResetPassword.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -39,6 +40,11 @@ const routes = [
     path: '/user',
     name: '用户',
     component: User
+  },
+  {
+    path: '/ResetPassword',
+    name: '重置密码',
+    component: ResetPassword
   },
   {
     path: '/admin',
