@@ -106,7 +106,7 @@ export default {
       return true
     },
 
-    getEmailCode() {
+    async getEmailCode() {
       // this.authUserNameFun()
       // this.authPassWordFun()
       // this.authAuthCodeFun()
@@ -114,13 +114,25 @@ export default {
       } else return alert('表单填写有误！')
 
       // 1. 发起请求 发送验证码
-      this.$http.post('/api/user/register/auth', {
+      const { data: res } = await this.$http.post('/api/user/register/auth', {
         //  userName, email, passWord, authCode
         userName: this.userName,
         email: this.email,
         passWord: this.passWord,
         authCode: this.authCode
       })
+
+      if (res.code === 200) {
+        this.$message({
+          type: 'success',
+          message: '发送成功!'
+        })
+      } else {
+        this.$message({
+          type: 'error',
+          message: '发送失败'
+        })
+      }
       // 2. 改为倒计时
       this.disabledCodeSend = true
       let time = 60
