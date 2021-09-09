@@ -64,13 +64,13 @@ export default {
   },
   methods: {
     alert() {
-      this.$alert('这是一段内容', '标题名称', {
+      this.$alert('开发中……\n暂不支持修改', '坏耶', {
         confirmButtonText: '确定',
         callback: action => {
-          this.$message({
-            type: 'info',
-            message: `action: ${action}`
-          })
+          // this.$message({
+          //   type: 'info',
+          //   message: `action: ${action}`
+          // })
         }
       })
     },
@@ -114,7 +114,8 @@ export default {
       this.$alert('暂不支持修改，请前往登录页通过邮箱重置密码。', '坏耶', {
         confirmButtonText: '确定',
         callback: action => {
-          this.$router.push('/login')
+          // this.$router.push('/login')
+          this.unLogin()
         }
       })
     }

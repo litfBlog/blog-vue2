@@ -111,7 +111,12 @@ export default {
       // this.authPassWordFun()
       // this.authAuthCodeFun()
       if (this.authUserNameFun() && this.authPassWordFun() && this.authAuthCodeFun()) {
-      } else return alert('表单填写有误！')
+      } else {
+        return this.$message({
+          type: 'error',
+          message: '表单填写有误'
+        })
+      }
 
       // 1. 发起请求 发送验证码
       const { data: res } = await this.$http.post('/api/user/register/auth', {
@@ -152,7 +157,12 @@ export default {
       this.authPassWordFun()
       this.authAuthCodeFun()
       if (this.authUserNameFun() && this.authPassWordFun() && this.authAuthCodeFun()) {
-      } else return alert('表单填写有误！')
+      } else {
+        return this.$message({
+          type: 'error',
+          message: '表单填写有误'
+        })
+      }
       this.$http({
         // 两个 register 不是 bug
         url: '/api/user/register/register',

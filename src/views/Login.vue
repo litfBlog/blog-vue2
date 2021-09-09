@@ -1,13 +1,13 @@
 <template>
   <div class="login-content">
     <form action="#" @submit.prevent="">
-      <input type="text" v-model.trim.lazy="userName" placeholder="账号/邮箱" @blur="authUserNameFun" />
+      <input type="text" v-model.trim.lazy="userName" name="userName" placeholder="账号/邮箱" @blur="authUserNameFun" />
       <span v-show="!authUserName">请输入正确的用户名</span>
-      <input type="password" v-model.trim.lazy="passWord" placeholder="密码" @blur="authPasswordFun" />
+      <input type="password" v-model.trim.lazy="passWord" name="passWord" placeholder="密码" @blur="authPasswordFun" />
       <span v-show="!authPassword">请输入正确的密码</span>
 
       <div class="authCode">
-        <input type="text" v-model.trim.lazy="authCode" placeholder="验证码" @blur="authAuthCodeFun">
+        <input type="text" v-model.trim.lazy="authCode" name="authCode" autocomplete="off" placeholder="验证码" @blur="authAuthCodeFun">
         <div v-html="codeImg" @click="initAuthCode" class="img"></div>
       </div>
       <span v-show="!authAuthCode">请输入正确的验证码</span>
@@ -83,11 +83,11 @@ export default {
           this.$alert('登录成功！', '好耶！', {
             confirmButtonText: '返回首页',
             callback: action => {
-              this.$router.push('/')
+              // this.$router.replace('')
+              window.location.href = '/'
             }
           })
           return
-          // window.location.href = '/'
           // this.$router.push('/')
         }
         this.$alert(`登录失败！${res.data.msg}`, '坏耶', {

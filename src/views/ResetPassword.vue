@@ -3,21 +3,21 @@
     <form action="#" @submit.prevent="">
       <!-- <input type="text" v-model.trim.lazy="userName" placeholder="用户名" @blur="authUserNameFun" />
       <span>{{userNameText}}</span> -->
-      <input type="text" v-model.trim.lazy="email" placeholder="邮箱" @blur="authEmailFun" />
+      <input type="text" v-model.trim.lazy="email" placeholder="邮箱" name="email" @blur="authEmailFun" />
       <span>{{emailText}}</span>
       <!-- <input type="password" v-model.trim.lazy="passWord" placeholder="密码" @blur="authPassWordFun" />
       <span>{{passWordText}}</span> -->
       <div class="authCode">
-        <input type="text" v-model.trim.lazy="authCode" name="authCode" placeholder="验证码" @blur="authAuthCodeFun">
+        <input type="text" v-model.trim.lazy="authCode" name="authCode" autocomplete="off" placeholder="验证码" @blur="authAuthCodeFun">
         <div v-html="codeImg" @click="initAuthCode" class="img"></div>
       </div>
       <span>{{codeText}}</span>
 
-      <input type="password" v-model.trim.lazy="passWord" placeholder="新密码" @blur="authPassWordFun" />
+      <input type="password" v-model.trim.lazy="passWord" name="passWord" autocomplete="off" placeholder="新密码" @blur="authPassWordFun" />
       <span>{{passWordText}}</span>
 
       <div class="emailCode">
-        <input type="text" v-model.trim="emailCode" placeholder="邮箱验证码">
+        <input type="text" v-model.trim="emailCode" placeholder="邮箱验证码" class="emailCode" autocomplete="off">
         <button class="img" @click="getEmailCode" :disabled="disabledCodeSend">{{ EmailCodeText }}</button>
       </div>
 
@@ -120,7 +120,12 @@ export default {
         this.authPassWordFun() &&
         this.authAuthCodeFun()
       ) {
-      } else return alert('表单填写有误！')
+      } else {
+        return this.$message({
+          type: 'error',
+          message: '表单填写有误'
+        })
+      }
 
       // 1. 发起请求 发送验证码
       this.$http.post('/api/user/setInfo/reSetPassword/auth', {
@@ -153,7 +158,12 @@ export default {
         this.authPassWordFun() &&
         this.authAuthCodeFun()
       ) {
-      } else return alert('表单填写有误！')
+      } else {
+        return this.$message({
+          type: 'error',
+          message: '表单填写有误'
+        })
+      }
       this.$http({
         url: '/api/user/setInfo/reSetPassword/reSet',
         method: 'POST',
@@ -171,12 +181,20 @@ export default {
       }).then(res => {
         console.log(res)
         if (res.data.code === 200) {
-          alert('注册成功!')
-          window.location.href = '/login'
+          // alert('注册成功!')
+          this.$alert('修改成功！', '好耶！', {
+            confirmButtonText: '登录',
+            callback: action => {
+              window.location.href = '/login'
+              // this.$router.re
+            }
+          })
           return
-          // this.$router.push('/')
         }
-        alert('未知错误')
+        return this.$message({
+          type: 'error',
+          message: 'error'
+        })
       })
       // if (res.code === 200) {
       // }
