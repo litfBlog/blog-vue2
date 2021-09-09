@@ -1,7 +1,7 @@
 <template>
   <div class="user-content">
     <div class="login" v-if="isLogin">
-      <img class="avatar" :src="avatar">
+      <userAvatar class="avatar" :src="avatar"></userAvatar>
       <div>
         <div class="userName">{{userName}}</div>
 

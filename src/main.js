@@ -6,6 +6,8 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+import userAvatar from '@/components/userAvatar.vue'
+
 import '@/assets/icon/iconfont.js'
 import '@/assets/icon/iconfont.css'
 
@@ -36,6 +38,8 @@ Vue.prototype.$message = Message
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
+
+Vue.component('userAvatar', userAvatar)
 
 // 路由跳转后，页面回到顶部
 router.afterEach(() => {

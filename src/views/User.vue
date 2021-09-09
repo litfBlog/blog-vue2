@@ -2,7 +2,10 @@
   <div class="user-content">
     <div class="user">
       <editUserInfo v-if="showEditUserInfo" @exit="showEditUserInfo = !showEditUserInfo"></editUserInfo>
-      <img class="avatar" :src="avatar" @click="editData" />
+      <!-- <img class="avatar" :src="avatar" @click="editData" /> -->
+      <div @click="editData">
+        <userAvatar class="avatar" :src="avatar"></userAvatar>
+      </div>
       <div class="info iconfont">
         <h1>{{userName}}</h1>
         <div class="info-text-tr">
@@ -30,9 +33,11 @@
 <script>
 import bus from '@/components/eventBus.js'
 import editUserInfo from '@/components/editUserInfo.vue'
+// import userAvatar from '@/components/userAvatar.vue'
 export default {
   components: {
     editUserInfo
+    // userAvatar
   },
   data() {
     return {
@@ -132,11 +137,11 @@ export default {
     margin: 10px;
     border-radius: 5px;
     display: flex;
-    img {
+    div .avatar {
       width: 100px;
       height: 100px;
       background-color: pink;
-      border-radius: 50%;
+      border-radius: 50px;
     }
     .info {
       h1 {
