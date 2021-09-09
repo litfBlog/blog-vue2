@@ -1,7 +1,9 @@
 <template>
   <div class="topBar-content">
-    <img :src="logo" alt="logo" class="logo" v-if="logo" />
-    <span class="title">{{ title }}</span>
+    <router-link to="/" class="logoSrc">
+      <img :src="logo" alt="logo" class="logo" v-if="logo" />
+      <span class="title">{{ title }}</span>
+    </router-link>
     <slot name="list" class="list"></slot>
     <div class="user">
       <a href="/user">
@@ -39,12 +41,16 @@ export default {
   padding: 0 10px;
 
   box-shadow: 0 0 50px rgba(59, 187, 138, 0.068);
-
-  .logo {
-    height: 30px;
-  }
-  .title {
-    font-size: 26px;
+  a.logoSrc {
+    color: unset;
+    display: flex;
+    align-items: center;
+    .logo {
+      height: 35px;
+    }
+    .title {
+      font-size: 26px;
+    }
   }
   .user {
     position: absolute;
