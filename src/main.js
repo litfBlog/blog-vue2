@@ -2,7 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
-
+// seo优化
+import MetaInfo from 'vue-meta-info'
 import { MessageBox, Message } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -38,6 +39,7 @@ Vue.prototype.$message = Message
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
+Vue.use(MetaInfo)
 
 Vue.component('userAvatar', userAvatar)
 
@@ -49,5 +51,8 @@ router.afterEach(() => {
 
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(App),
+  mounted () {
+    document.dispatchEvent(new Event('render-event'))
+  }
 }).$mount('#app')

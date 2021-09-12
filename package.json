@@ -13,8 +13,10 @@
     "dayjs": "^1.10.6",
     "element-ui": "^2.15.6",
     "mavon-editor": "^2.9.1",
+    "prerender-spa-plugin": "^3.4.0",
     "vue": "^2.6.11",
     "vue-cropper": "^0.5.6",
+    "vue-meta-info": "^0.1.7",
     "vue-router": "^3.5.2"
   },
   "devDependencies": {
