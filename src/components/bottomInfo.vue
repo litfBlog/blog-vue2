@@ -49,13 +49,34 @@
         <a href="https://beian.miit.gov.cn">
           豫ICP备2021024510号
         </a>
+
+        <!-- <div style="width:300px;margin:0 auto; padding:20px 0;">
+          <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41018202000798" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+            <img :src="beiAnTuPian" style="float:left;" />
+            <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">豫公网安备 41018202000798号</p>
+          </a>
+        </div> -->
+        <!-- <div style="width:300px;margin:0 auto; padding:20px 0;display: inline-block;"> -->
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41018202000798" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img :src="beiAnTuPian" />
+          <span style="height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">豫公网安备 41018202000798号</span>
+        </a>
+        <!-- </div> -->
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import beiAnTuPian from '@/assets/备案图标.png'
+export default {
+  data() {
+    return {
+      beiAnTuPian
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -97,7 +118,11 @@ export default {}
     }
   }
   .text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     hr {
+      width: 100%;
       border: none;
       border-top: 0.5px solid #666;
     }
@@ -107,10 +132,11 @@ export default {}
       margin: 0 10px;
     }
     .icp {
+      display: flex;
       display: inline;
       margin: 0 10px;
       a {
-        color: #eee;
+        color: #939393;
         font-size: 12px;
       }
     }
