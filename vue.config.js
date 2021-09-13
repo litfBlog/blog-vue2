@@ -4,7 +4,7 @@ const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 const path = require('path')
 
 module.exports = {
-  publicPath: './',
+  // publicPath: './',
   configureWebpack: config => {
     if (process.env.NODE_ENV !== 'production') return
     return {
