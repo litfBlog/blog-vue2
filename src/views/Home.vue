@@ -17,6 +17,19 @@
 import ContentCard from '@/components/contentCard.vue'
 export default {
   components: { ContentCard },
+  metaInfo: {
+    title: 'WIKI-首页',
+    meta: [
+      {
+        name: 'keywords',
+        content: '李腾飞,李腾飞个人博客'
+      },
+      {
+        name: 'description',
+        content: '分享前端问题解决思路以及个人想法和生活点滴。'
+      }
+    ]
+  },
   data() {
     return {
       pages: ['', '', '', '']
