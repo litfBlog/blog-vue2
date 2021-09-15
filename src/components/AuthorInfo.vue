@@ -1,20 +1,20 @@
 <template>
   <div class="AuthorInfo-content">
     <div class="docsInfo">
-       <div class="date">{{ dateFormat }}</div>
+      <div class="date">{{ dateFormat }}</div>
     </div>
 
     <div class="userInfo">
-      <img class="avatar" :src="user.avatar" />
+      <userAvatar class="avatar" :src="user.avatar"></userAvatar>
       <div class="user">
-        <div class="userName">{{user.userName}}</div>
+        <div class="userName">
+          {{user.userName}}
+        </div>
         <!-- <div class="data">
           <div>被点赞：</div>
           <div>文章：</div>
         </div> -->
       </div>
-    <div>
-    </div>
     </div>
   </div>
 </template>
@@ -39,12 +39,10 @@ export default {
       return dayjs(this.date).format('YYYY-MM-DD HH:mm:ss')
       // return 1
     }
-
   }
   // components: {
 
   // }
-
 }
 </script>
 
