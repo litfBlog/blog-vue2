@@ -4,7 +4,7 @@ import router from './router'
 import axios from 'axios'
 // seo优化
 import MetaInfo from 'vue-meta-info'
-import { MessageBox, Message } from 'element-ui'
+import { MessageBox, Message, Loading } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import userAvatar from '@/components/userAvatar.vue'
@@ -21,15 +21,15 @@ import '@/assets/icon/iconfont.css'
 import '@/assets/css/main.less'
 
 // 百度统计
-var _hmt = ''
-_hmt = _hmt || []
-window._hmt = _hmt;
-(function () {
-  var hm = document.createElement('script')
-  hm.src = 'https://hm.baidu.com/hm.js?8f71ac1526e720514e3a3dabad06f049'
-  var s = document.getElementsByTagName('script')[0]
-  s.parentNode.insertBefore(hm, s)
-})()
+// var _hmt = ''
+// _hmt = _hmt || []
+// window._hmt = _hmt;
+// (function () {
+//   var hm = document.createElement('script')
+//   hm.src = 'https://hm.baidu.com/hm.js?8f71ac1526e720514e3a3dabad06f049'
+//   var s = document.getElementsByTagName('script')[0]
+//   s.parentNode.insertBefore(hm, s)
+// })()
 
 // import '@/assets/vs2015.css'
 // 指定请求的根路径
@@ -48,6 +48,15 @@ Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
+Vue.prototype.$loading = Loading.service
+
+Vue.directive('v-loading', {
+  // 当被绑定的元素插入到 DOM 中时……
+  inserted: function (el) {
+    // 聚焦元素
+    el.focus()
+  }
+})
 
 Vue.prototype.$http = axios
 Vue.config.productionTip = false

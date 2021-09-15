@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       page: '',
-      status: '',
+      status: 'true',
       statusCode: '',
       date: 0,
       title: '',
@@ -32,6 +32,7 @@ export default {
   },
   created() {
     // console.lo?)
+    console.log(this)
     console.log(window.location.pathname)
     console.log(this)
     console.log(this.$route.params.pages)
@@ -40,6 +41,11 @@ export default {
   methods: {
     async initPage() {
       console.log(this)
+      const loading = this.$loading({
+        text: 'Loading',
+        lock: true,
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
       this.$http
         .get('/docs/' + this.$route.params.pages)
         .then(res => {
@@ -56,6 +62,7 @@ export default {
             this.status = true
             this.statusCode = 200
           }
+          loading.close()
         })
         .catch(err => {
           console.log(err)
@@ -99,5 +106,11 @@ iframe {
   position: absolute;
   left: 0;
   top: 0;
+}
+</style>
+
+<style lang="less">
+.el-loading-mask {
+  z-index: 3 !important;
 }
 </style>
