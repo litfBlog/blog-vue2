@@ -14,7 +14,7 @@ export default {
     }
   },
   created() {
-    console.log(this.src)
+    // console.log(this.src)
     // this.src !== undefined ? (this.url = this.src) : (this.url = '/assets/defaultAvatar.jpg')
     if (!this.src) {
       this.url = defaultAvatar
