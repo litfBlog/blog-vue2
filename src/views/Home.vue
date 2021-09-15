@@ -6,7 +6,7 @@
     </div>
     <div class="cart-list">
       <h1>博客文章</h1>
-      <router-link v-for='item in pages' :key="item._id" :to="`/p/${item.title}`">
+      <router-link v-for='item in pages' :key="item._id" :to="`/p/${item._id}`">
         <ContentCard :title="item.title" :info="item.info" :date="item.date"></ContentCard>
       </router-link>
     </div>
