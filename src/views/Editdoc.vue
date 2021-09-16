@@ -1,6 +1,9 @@
 <template>
   <div class="edit-content">
-    <input type="text" placeholder="标题" class="title" v-model="title">
+    <div class="titleBox">
+      <input type="text" placeholder="标题(建议12字以内)" class="title" v-model="title">
+      <span class="text-num" :style="{color: title.length>20? 'red':'#666'}">{{title.length}}/20</span>
+    </div>
     <mavonEditor @save="saveDoc" @imgAdd="$imgAdd" @imgDel="$imgDel" ref="editor" v-model="doc" toolbarsFlag :toolbars="{
       bold: true, // 粗体
       italic: true, // 斜体
@@ -38,7 +41,10 @@
     }">
       测试ceshi1
     </mavonEditor>
-    <textarea type="text" placeholder="简介" class="info" v-model="info"></textarea>
+    <div class="infoBox">
+      <textarea type="text" placeholder="简介(建议30字以内)" class="info" v-model="info"></textarea>
+      <span class="info-num" :style="{color: info.length>50? 'red':'#666'}">{{info.length}}/50</span>
+    </div>
     <button @click="mysave" class="save">发布</button>
   </div>
 </template>
@@ -101,16 +107,63 @@ export default {
     //   console.log(data)
     // },
     saveDoc(data) {
+      // 判断是不是自己的发布按钮 禁用ctrl s
+      if (data !== 'mysave') return
+      console.log(this.$refs.editor)
       console.log(data)
-      this.$http.post('/api/docs/add', {
-        content: this.doc,
-        info: this.info,
-        title: this.title
-      })
+      if (
+        //
+        this.title.length > 20 ||
+        this.title.length < 2
+      ) {
+        this.$alert('标题过长/过短', '标题填写有误', {
+          confirmButtonText: '确定',
+          callback: action => {
+            document.body.scrollTop = 0
+            document.documentElement.scrollTop = 0
+          }
+        })
+        return
+      }
+      if (
+        //
+        this.info.length > 50 ||
+        this.info.length < 10
+      ) {
+        this.$alert('简介过长/过短', '标题填写有误', {
+          confirmButtonText: '确定',
+          callback: action => {
+            document.body.scrollTop = 0
+            document.documentElement.scrollTop = 0
+          }
+        })
+        return
+      }
+      this.$http
+        .post('/api/docs/add', {
+          content: this.doc,
+          info: this.info,
+          title: this.title
+        })
+        .then(res => {
+          if (res.data.code === 200) {
+            this.$alert(`${res.data.msg}`, '好耶!', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.$router.push('/')
+              }
+            })
+            return
+          }
+          this.$alert(`${res.data.msg}`, '发布失败', {
+            confirmButtonText: '确定'
+          })
+        })
     },
     mysave() {
       console.log(this.$refs.editor)
-      this.$refs.editor.save()
+      // 传递标识 禁用ctrl s
+      this.$refs.editor.save('mysave')
     },
     $imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
@@ -157,18 +210,34 @@ export default {
     padding: 5px;
     box-sizing: border-box;
   }
-  .title {
-    font-size: 26px;
-    color: #333;
-    &::placeholder {
-      color: #aaa;
-      font-size: 24px;
+  .titleBox {
+    position: relative;
+    .title {
+      font-size: 26px;
+      color: #333;
+      &::placeholder {
+        color: #aaa;
+        font-size: 24px;
+      }
+    }
+    .text-num {
+      position: absolute;
+      right: 0;
+      bottom: 1em;
     }
   }
-  .info {
-    height: 3em;
-    font-size: 18px;
-    resize: none;
+  .infoBox {
+    position: relative;
+    .info {
+      height: 3em;
+      font-size: 18px;
+      resize: none;
+    }
+    .info-num {
+      position: absolute;
+      right: 0;
+      bottom: 1em;
+    }
   }
   .save {
     width: 100px;
