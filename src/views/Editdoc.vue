@@ -75,11 +75,27 @@ export default {
         }
         return
       } else if (res.code === 403) {
-        alert(res.msg)
-        this.$router.push('/login')
+        // alert(res.msg)
+        this.$alert(`${res.msg}`, '坏耶！', {
+          confirmButtonText: '确定',
+          callback: action => {
+            // this.$router.replace('')
+            // window.location.href = '/'
+            this.$router.push('/login')
+          }
+        })
+        // this.$router.push('/login')
         return
       }
-      alert('err')
+      // alert('err')
+      this.$alert(`未知异常 ${res.msg}`, '坏耶！', {
+        confirmButtonText: '确定',
+        callback: action => {
+          // this.$router.replace('')
+          // window.location.href = '/'
+          this.$router.push('/login')
+        }
+      })
     },
     // updateDoc(data) {
     //   console.log(data)
