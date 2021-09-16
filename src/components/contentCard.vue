@@ -2,8 +2,8 @@
   <div class="card-content">
     <!-- <img src="" alt="" /> -->
     <div class="text">
-      <h2>{{title}}</h2>
-      <p>{{info}}</p>
+      <h2 :title="title">{{title}}</h2>
+      <p :title="info">{{info}}</p>
       <div class="info">
         <span>{{ dateFormat }}</span>
         <!-- <span>点赞</span>
@@ -51,10 +51,17 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     h2 {
-      line-height: 50px;
+      line-height: 30px;
+      width: 100%;
       font-size: 26px;
       text-align: left;
-      width: 100%;
+      max-height: 60px;
+      word-wrap: break-word;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
     }
     p {
       line-height: 20px;
