@@ -24,8 +24,17 @@
 
     <div class="myDoc">
       <h1>我的文章</h1>
-      <br>
-      <p>开发中……</p>
+      <!-- <br>
+      <p>开发中……</p> -->
+      <div class="card" v-for="i in myDoc" :key="i._id">
+        <router-link :to="`/p/${i._id}`" @click.stop="">
+          <contentCard :title="i.title" :info="i.info" :date="i.date"></contentCard>
+        </router-link>
+        <div class="edit-box">
+          <button class="edit">编辑</button>
+          <button class="remove">删除</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -34,9 +43,11 @@
 import bus from '@/components/eventBus.js'
 import editUserInfo from '@/components/editUserInfo.vue'
 // import userAvatar from '@/components/userAvatar.vue'
+import contentCard from '@/components/contentCard.vue'
 export default {
   components: {
-    editUserInfo
+    editUserInfo,
+    contentCard
     // userAvatar
   },
   data() {
@@ -45,7 +56,8 @@ export default {
       userName: '',
       date: '',
       email: '',
-      showEditUserInfo: false
+      showEditUserInfo: false,
+      myDoc: {}
     }
   },
   created() {
@@ -66,8 +78,13 @@ export default {
     // this.$on('exit', () => {
     //   console.log(111)
     // })
+    this.initMyDoc()
   },
   methods: {
+    async initMyDoc() {
+      const { data: res } = await this.$http.post('/api/docs/findMyDoc')
+      this.myDoc = res.data
+    },
     alert() {
       this.$alert('开发中……\n暂不支持修改', '坏耶', {
         confirmButtonText: '确定',
@@ -181,6 +198,30 @@ export default {
     padding: 15px;
     margin: 10px;
     border-radius: 5px;
+    .card {
+      display: block;
+      margin: 10px 0;
+      border-top: 1px rgba(116, 116, 116, 0.178) solid;
+      position: relative;
+      .edit-box {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        button {
+          background-color: #fff;
+          border: 0.5px #aaa solid;
+          width: 6em;
+          margin: 0 2px;
+        }
+        .remove {
+          border-color: rgb(173, 0, 0);
+          color: rgb(173, 0, 0);
+        }
+      }
+    }
+    a {
+      color: #000;
+    }
   }
 }
 </style>
