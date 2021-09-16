@@ -60,7 +60,13 @@ export default {
   },
   methods: {
     async initPage() {
+      const loading = this.$loading({
+        text: 'Loading',
+        lock: true,
+        background: 'rgba(0, 0, 0, 0.5)'
+      })
       const { data: res } = await this.$http.post('/api/docs/add/init')
+      loading.close()
       if (res.code === 200) {
         if (res.type === 'editing') {
           this.doc = res.content
@@ -100,13 +106,13 @@ export default {
         method: 'post',
         data: formdata,
         headers: { 'Content-Type': 'multipart/form-data' }
-      }).then((url) => {
+      }).then(url => {
         // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
         /**
-               * $vm 指为mavonEditor实例，可以通过如下两种方式获取
-               * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
-               * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
-               */
+         * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+         * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+         * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+         */
 
         console.log(url)
         this.$refs.editor.$img2Url(pos, url.data.path)
@@ -127,7 +133,8 @@ export default {
   z-index: 0;
   margin-top: 70px;
   position: relative;
-  .title,.info {
+  .title,
+  .info {
     width: 100%;
     margin: 5px 0;
     border: none;
@@ -136,7 +143,7 @@ export default {
   }
   .title {
     font-size: 26px;
-    color:#333;
+    color: #333;
     &::placeholder {
       color: #aaa;
       font-size: 24px;
@@ -158,6 +165,5 @@ export default {
     margin: 0 auto;
     display: block;
   }
-
 }
 </style>

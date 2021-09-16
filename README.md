@@ -27,5 +27,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - 文章信息头像显示问题 √
 - 代码高亮横向滚动条显示不完整(老强迫症了)
 - 投稿界面弹框样式
-- 投稿界面加载动画
+- 投稿界面加载动画 √
 - ctrl s保存
