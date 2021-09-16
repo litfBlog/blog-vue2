@@ -4,7 +4,7 @@
       <div class="date">{{ dateFormat }}</div>
     </div>
 
-    <div class="userInfo">
+    <div class="userInfo" v-if="user">
       <userAvatar class="avatar" :src="user.avatar"></userAvatar>
       <div class="user">
         <div class="userName">
