@@ -31,8 +31,8 @@
           <contentCard :title="i.title" :info="i.info" :date="i.date"></contentCard>
         </router-link>
         <div class="edit-box">
-          <button class="edit">编辑</button>
-          <button class="remove">删除</button>
+          <button class="edit" @click="editDoc(i._id)">编辑</button>
+          <button class="remove" @click="rmDoc(i._id)">删除</button>
         </div>
       </div>
     </div>
@@ -138,6 +138,32 @@ export default {
         callback: action => {
           // this.$router.push('/login')
           this.unLogin()
+        }
+      })
+    },
+    editDoc(_id) {
+      console.log(_id)
+    },
+    rmDoc(_id) {
+      console.log(_id)
+      this.$confirm('确定要删除吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const { data: res } = await this.$http.post('/api/docs/rmMyDoc', { _id })
+        console.log(res)
+        if (res.code === 200) {
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+          location.reload()
+        } else {
+          this.$message({
+            type: 'error',
+            message: `删除失败 ${res.msg}`
+          })
         }
       })
     }
