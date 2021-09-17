@@ -143,6 +143,7 @@ export default {
     },
     editDoc(_id) {
       console.log(_id)
+      this.$router.push(`/edit/${_id}`)
     },
     rmDoc(_id) {
       console.log(_id)

@@ -62,10 +62,17 @@ export default {
     }
   },
   created() {
-    this.initPage()
+    console.log(this.$route)
+    if (this.$route.name === 'edit') {
+      this.initEdit()
+    } else {
+      this.initPage()
+    }
+    // console.log(this.$router)
   },
   methods: {
     async initPage() {
+      console.log('page')
       const loading = this.$loading({
         text: 'Loading',
         lock: true,
@@ -74,11 +81,6 @@ export default {
       const { data: res } = await this.$http.post('/api/docs/add/init')
       loading.close()
       if (res.code === 200) {
-        if (res.type === 'editing') {
-          this.doc = res.content
-          this.title = res.title
-          this.info = res.info
-        }
         return
       } else if (res.code === 403) {
         // alert(res.msg)
@@ -102,6 +104,29 @@ export default {
           this.$router.push('/login')
         }
       })
+    },
+    async initEdit() {
+      const loading = this.$loading({
+        text: 'Loading',
+        lock: true,
+        background: 'rgba(0, 0, 0, 0.5)'
+      })
+      const { data: res } = await this.$http.post('/api/docs/edit/init', { _id: this.$route.params.pages })
+      loading.close()
+      if (res.code === 200) {
+        this.doc = res.content
+        this.title = res.title
+        this.info = res.info
+      } else {
+        this.$alert(`${res.msg}`, '坏耶！', {
+          confirmButtonText: '确定',
+          callback: action => {
+            // this.$router.replace('')
+            // window.location.href = '/'
+            this.$router.back(1)
+          }
+        })
+      }
     },
     // updateDoc(data) {
     //   console.log(data)
@@ -139,15 +164,23 @@ export default {
         })
         return
       }
+      // 判断请求 新增/更新
+      let url
+      if (this.$route.name === 'edit') {
+        url = '/api/docs/edit'
+      } else {
+        url = '/api/docs/add'
+      }
       this.$http
-        .post('/api/docs/add', {
+        .post(url, {
           content: this.doc,
           info: this.info,
-          title: this.title
+          title: this.title,
+          _id: this.$route.params.pages
         })
         .then(res => {
           if (res.data.code === 200) {
-            this.$alert(`${res.data.msg}`, '好耶!', {
+            this.$alert('修改成功', '好耶!', {
               confirmButtonText: '确定',
               callback: action => {
                 this.$router.push('/')
