@@ -18,11 +18,11 @@ import ContentCard from '@/components/contentCard.vue'
 export default {
   components: { ContentCard },
   metaInfo: {
-    title: 'WIKI-首页',
+    title: '李腾飞博客 首页',
     meta: [
       {
         name: 'keywords',
-        content: '李腾飞,李腾飞个人博客'
+        content: '李腾飞,博客,李腾飞博客'
       },
       {
         name: 'description',

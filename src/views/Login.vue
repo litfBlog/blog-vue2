@@ -22,6 +22,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: '李腾飞博客 登录'
+  },
   data() {
     return {
       userName: '',

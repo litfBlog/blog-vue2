@@ -1,18 +1,23 @@
 <template>
   <div id="app">
+    <template comments>
+      <div>
+        <!-- comments -->
+      </div>
+    </template>
     <TopBar title="XING博客" :logo="logo" class="topbar">
       <template #list>
         <div class="list">
           <ul>
             <router-link to="/">
-            <!-- <a href="/"> -->
+              <!-- <a href="/"> -->
               <li>首页</li>
-            <!-- </a> -->
+              <!-- </a> -->
             </router-link>
             <router-link to="/add">
-            <!-- <a href="/index"> -->
+              <!-- <a href="/index"> -->
               <li>投稿</li>
-            <!-- </a> -->
+              <!-- </a> -->
             </router-link>
           </ul>
         </div>

@@ -18,6 +18,19 @@ import errPage from '@/components/404/404.vue'
 import EditButton from '@/components/EditButton.vue'
 import AuthorInfo from '@/components/AuthorInfo.vue'
 export default {
+  metaInfo: {
+    title: '文章',
+    meta: [
+      {
+        name: 'keywords',
+        content: '李腾飞,博客,李腾飞博客'
+      },
+      {
+        name: 'description',
+        content: '分享前端问题解决思路以及个人想法和生活点滴。'
+      }
+    ]
+  },
   name: 'Home',
   components: { errPage, EditButton, AuthorInfo },
   data() {
