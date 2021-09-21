@@ -64,13 +64,13 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (window._hmt) {
-//     if (to.path) {
-//       window._hmt.push(['_trackPageview', '/#' + to.fullPath])
-//     }
-//   }
-//   next()
-// })
+router.beforeEach((to, from, next) => {
+  if (window._hmt) {
+    if (to.path) {
+      window._hmt.push(['_trackPageview', '/#' + to.fullPath])
+    }
+  }
+  next()
+})
 
 export default router

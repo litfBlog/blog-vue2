@@ -21,15 +21,15 @@ import '@/assets/icon/iconfont.css'
 import '@/assets/css/main.less'
 
 // 百度统计
-// var _hmt = ''
-// _hmt = _hmt || []
-// window._hmt = _hmt;
-// (function () {
-//   var hm = document.createElement('script')
-//   hm.src = 'https://hm.baidu.com/hm.js?8f71ac1526e720514e3a3dabad06f049'
-//   var s = document.getElementsByTagName('script')[0]
-//   s.parentNode.insertBefore(hm, s)
-// })()
+var _hmt = ''
+_hmt = _hmt || []
+window._hmt = _hmt;
+(function () {
+  var hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?8f71ac1526e720514e3a3dabad06f049'
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 
 // import '@/assets/vs2015.css'
 // 指定请求的根路径
