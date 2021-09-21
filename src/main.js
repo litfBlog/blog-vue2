@@ -26,7 +26,7 @@ _hmt = _hmt || []
 window._hmt = _hmt;
 (function () {
   var hm = document.createElement('script')
-  hm.src = 'https://hm.baidu.com/hm.js?8f71ac1526e720514e3a3dabad06f049'
+  hm.src = 'https://hm.baidu.com/hm.js?ec11a31af289a2b7cfeb74773a0da5ef'
   var s = document.getElementsByTagName('script')[0]
   s.parentNode.insertBefore(hm, s)
 })()
