@@ -66,7 +66,7 @@ export default {
     .avatar {
       width: 55px;
       height: 55px;
-      background-color: pink;
+      // background-color: pink;
       border-radius: 66px;
       text-align: center;
       line-height: 55px;

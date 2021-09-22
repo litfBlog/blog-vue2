@@ -184,7 +184,7 @@ export default {
     div .avatar {
       width: 100px;
       height: 100px;
-      background-color: pink;
+      // background-color: pink;
       border-radius: 50px;
     }
     .info {

@@ -1,6 +1,7 @@
 <template>
   <div class="userAvatar-content">
-    <div :style="{backgroundImage: `url(${url})`}"></div>
+    <div v-if="src" :style="{backgroundImage: `url(${src})`}"></div>
+    <div v-else :style="{backgroundImage: `url(${url})`}"></div>
   </div>
 </template>
 
@@ -10,15 +11,18 @@ export default {
   props: ['src'],
   data() {
     return {
-      url: ''
+      url: defaultAvatar
     }
   },
   created() {
-    // console.log(this.src)
-    // this.src !== undefined ? (this.url = this.src) : (this.url = '/assets/defaultAvatar.jpg')
-    if (!this.src) {
-      this.url = defaultAvatar
-    }
+    console.log(this.src)
+    // this.src !== undefined ? (this.url = this.src) : (this.url = defaultAvatar)
+
+    // if (!this.src) {
+    //   this.url = defaultAvatar
+    // } else {
+    //   this.url = this.src
+    // }
   }
 }
 </script>
