@@ -60,7 +60,7 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       })
       this.$http
-        .get('/docs/' + this.$route.params.pages)
+        .get('/api/docs/findOne/' + this.$route.params.pages)
         .then(res => {
           console.log(res)
           this.page = res.data.data.content
