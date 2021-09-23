@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 /dist
-
+.htaccess
+.well-known/
 
 # local env files
 .env.local
