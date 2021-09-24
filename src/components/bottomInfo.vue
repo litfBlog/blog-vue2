@@ -81,32 +81,53 @@ export default {
 
 <style lang="less" scoped>
 .bottomInfo-content {
-  text-align: center;
-  margin-top: 20px;
-  padding: 20px 120px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  // text-align: center;
+  // margin-top: 20px;
+  padding: 20px 0;
+  // display: flex;
+  // justify-content: space-between;
+  // flex-direction: column;
   background-color: rgb(43, 42, 33);
   color: #fff;
+  // width: 100%;
   .top {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    flex: 1;
     justify-content: space-around;
     margin-bottom: 20px;
     dl {
+      width: 170px;
+      // flex: 1;
+      text-align: center;
       // width: 13em;
       margin-bottom: 30px;
+      &:nth-child(1) {
+        a {
+            margin: 0 auto;
+            width: 10.5em;
+            display: block;
+            text-align: left;
+          }
+      }
+      // 隐藏第三个
+      @media screen and (max-width: 540px) {
+        &:nth-child(3) {
+          display: none;
+        }
+      }
       dt {
         font-size: 22px;
-        text-align: left;
+        text-align: center;
         font-weight: 600;
         margin-bottom: 0.5em;
       }
       dd {
         font-size: 18px;
-        text-align: left;
+        // text-align: left;
+        // margin: 0 auto;
+        // width: 11em;
         padding: 0.5em 0.4em;
         a {
           color: #eee;
@@ -121,6 +142,7 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
+    text-align: center;
     hr {
       width: 100%;
       border: none;
