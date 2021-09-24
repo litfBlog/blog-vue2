@@ -226,10 +226,15 @@ export default {
     margin: 10px;
     border-radius: 5px;
     .card {
+      width: 100%;
       display: block;
-      margin: 10px 0;
+      margin: 15px 0;
+      padding-bottom: 10px;
       border-top: 1px rgba(116, 116, 116, 0.178) solid;
       position: relative;
+      /deep/ .card-content {
+        width: 100%;
+      }
       .edit-box {
         position: absolute;
         right: 0;
