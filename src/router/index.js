@@ -8,6 +8,7 @@ import Admin from '@/views/Admin.vue'
 import Register from '@/views/Register.vue'
 import User from '@/views/User.vue'
 import ResetPassword from '@/views/ResetPassword.vue'
+import Search from '@/views/Search.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -55,6 +56,11 @@ const routes = [
     path: '/p/:pages',
     name: '页面',
     component: Pages
+  },
+  {
+    path: '/search',
+    name: '搜索',
+    component: Search
   }
 ]
 

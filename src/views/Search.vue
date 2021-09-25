@@ -1,15 +1,12 @@
 <template>
-  <div class="container container-search">
-    <!-- <el-input class="input" placeholder="搜索内容"></el-input> -->
+  <div class="container">
     <el-autocomplete class="input" v-model="state" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" @select="handleSelect" highlight-first-item>
       <template slot-scope="{ item }">
         <div class="name">{{ item.title }}</div>
         <span class="addr">{{ item.info }}</span>
       </template>
     </el-autocomplete>
-    <router-link to="/search">
-      <i class="el-icon-search" style="color: #333" @click="searchAlert"></i>
-    </router-link>
+    <!-- <i class="el-icon-search" @click="searchAlert"></i> -->
   </div>
 </template>
 
@@ -69,43 +66,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-li {
-  line-height: normal;
-  padding: 7px;
-}
-.name {
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.addr {
-  font-size: 12px;
-  color: #b4b4b4;
-}
-
 .container {
-  display: flex;
-  align-items: center;
-
-  .highlighted .addr {
-    color: #ddd;
-  }
-  /deep/ .el-input__inner:focus {
-    border-color: #3eaf7c;
-    outline: 0;
-  }
+  margin: 170px 0 300px 0;
+  width: 100%;
   .input {
-    display: none;
-  }
-  i {
-    font-size: 20px;
-    padding: 10px;
-  }
-  @media screen and (min-width: 670px) {
-    .input {
-      display: inline;
-    }
-    i {
-      display: none;
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+    /deep/ input {
+      height: 50px;
     }
   }
 }
