@@ -112,7 +112,6 @@ export default {
         background: 'rgba(0, 0, 0, 0.5)'
       })
       const { data: res } = await this.$http.post('/api/docs/edit/init', { _id: this.$route.params.pages })
-      loading.close()
       if (res.code === 200) {
         this.doc = res.content
         this.title = res.title
@@ -127,6 +126,7 @@ export default {
           }
         })
       }
+      loading.close()
     },
     // updateDoc(data) {
     //   console.log(data)
