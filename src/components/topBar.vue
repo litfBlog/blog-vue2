@@ -5,6 +5,7 @@
       <span class="title">{{ title }}</span>
     </router-link>
     <slot name="list" class="list"></slot>
+    <search></search>
     <div class="user">
       <a href="/user">
         <TopBarUser></TopBarUser>
@@ -15,8 +16,9 @@
 
 <script>
 import TopBarUser from '@/components/TopBarUser.vue'
+import search from '@/components/search.vue'
 export default {
-  components: { TopBarUser },
+  components: { TopBarUser, search },
   props: ['title', 'logo']
   // methods: {
   //   log() {

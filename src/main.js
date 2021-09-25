@@ -2,9 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
-// seo优化
+// seo优化 Identifier 'el_input' is not in camel case
 import MetaInfo from 'vue-meta-info'
-import { MessageBox, Message, Loading } from 'element-ui'
+import { MessageBox, Message, Loading, Autocomplete } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import userAvatar from '@/components/userAvatar.vue'
@@ -63,6 +63,8 @@ Vue.config.productionTip = false
 Vue.use(MetaInfo)
 
 Vue.component('userAvatar', userAvatar)
+// Vue.component('el-input', Input)
+Vue.use(Autocomplete)
 
 // 路由跳转后，页面回到顶部
 router.afterEach(() => {
