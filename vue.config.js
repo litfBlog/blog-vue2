@@ -2,13 +2,20 @@ const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 // const webpack = require('webpack')
 const path = require('path')
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
   // publicPath: './',
   configureWebpack: config => {
     if (process.env.NODE_ENV !== 'production') return
     return {
       plugins: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            compress: {
+              drop_console: true
+            }
+          }
+        }),
         new PrerenderSPAPlugin({
           // 生成文件的路径，也可以与webpakc打包的一致。
           // 下面这句话非常重要！！！
