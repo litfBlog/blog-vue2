@@ -132,50 +132,58 @@
   ::-webkit-scrollbar {
     height: 5px;
     width: 2px;
+    padding: 0 5px;
+  }
+  /*
+    https://github.com/WordPress/WordPress
+  */
+  -webkit-scrollbar-track {
+    border: none;
+    background: transparent !important;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: pink;
-    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 10px;
+    transition: background 0.3s ease;
   }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+  ::-webkit-scrollbar {
+    background: transparent;
+    height: 6px;
+  }
+
   pre {
     background-color: #212121 !important;
 
     color: #fff;
-    padding: 10px;
+    padding: 26px;
     padding-top: 30px;
-    border-radius: 5px;
-    // overflow-x: scroll;
-    // overflow: visible;
-
-    // width: 100%;
+    border-radius: 12px;
     overflow: scroll;
     position: relative;
     margin-right: 10px;
     &::after {
       content: '';
       position: absolute;
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       background-color: #fff;
       border-radius: 14px;
-      left: 30px;
+      left: 26px;
       top: 12px;
-      background-color: red;
-      box-shadow: 30px 0px 0px 0px yellow, 60px 0px 0px 0px green;
+      background-color: rgb(255, 95, 86);
+      box-shadow: 20px 0px 0px 0px rgb(255, 189, 46), 40px 0px 0px 0px rgb(39, 201, 63);
     }
-    // overflow: scroll;
-    // overflow: visible;
     code {
       background-color: #212121 !important;
       @font-face {
         font-family: 'consola';
-        // src: url('..//字体名称.eot');
         src: url('./../consola.ttf') format('truetype');
-        /* url('../font/字体名称.woff') format('woff'), */
-        /* url('../font/字体名称.svg') format('svg'); */
       }
-      // width: 100%;
-      // overflow-wrap: break-word;
       word-wrap: break-word;
       width: 100%;
       // white-space: normal;
@@ -245,7 +253,6 @@
   }
 
   ol li {
-    // list-style-type: unset;
     list-style-type: decimal;
   }
   ul li {
