@@ -23,10 +23,6 @@
         </div>
       </template>
     </TopBar>
-    <!-- <Pages v-if="router == 'page'"></Pages>
-    <Home v-if="router == 'home'" class="home"></Home>
-    <Login v-if="router == 'login'"></Login>
-    <AddDoc v-if="router == 'add'"></AddDoc> -->
     <router-view></router-view>
     <BottomInfo></BottomInfo>
   </div>
@@ -36,34 +32,11 @@
 import TopBar from '@/components/topBar.vue'
 import logo from '@/assets/logo.png'
 import BottomInfo from '@/components/bottomInfo.vue'
-// import Pages from '@/views/Pages.vue'
-// import Home from '@/views/Home.vue'
-// import Login from '@/views/Login.vue'
-// import AddDoc from '@/views/AddDoc.vue'
 export default {
   components: { TopBar, BottomInfo },
-  computed: {
-    router() {
-      // const view = ''
-      // view = window.location.pathname === '/' ? 'home' : 'page'
-      switch (window.location.pathname) {
-        case '/':
-          return 'home'
-        case '/login':
-          return 'login'
-        case '/add':
-          return 'add'
-        default:
-          return 'page'
-      }
-      // view = window.location.pathname === '/page' ? 'page' : ''
-      // return view
-    }
-  },
   data() {
     return {
-      logo: logo
-      // router: 'home'
+      logo
     }
   }
 }

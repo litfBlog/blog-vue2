@@ -37,7 +37,7 @@ export default {
 
   display: flex;
   height: 66px;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   align-items: center;
   position: relative;
   padding: 0 10px;

@@ -1,22 +1,31 @@
 <template>
   <div class="home-content">
-    <div class="introduce">
-      <h1>Hi! 欢迎来到XING博客</h1>
-      <p>阿巴阿巴……</p>
-    </div>
-    <div class="cart-list">
-      <h1>博客文章</h1>
-      <router-link v-for='item in pages' :key="item._id" :to="`/p/${item._id}`">
-        <ContentCard :title="item.title" :info="item.info" :date="item.date"></ContentCard>
-      </router-link>
+    <h1 class="title">XING博客</h1>
+    <div class="content">
+      <div class="left-bar">
+        <User></User>
+      </div>
+      <div class="cart-list">
+        <!-- <h1>博客文章</h1> -->
+        <router-link v-for='item in pages' :key="item._id" :to="`/p/${item._id}`">
+          <ContentCard :title="item.title" :info="item.info" :date="item.date"></ContentCard>
+        </router-link>
+      </div>
+      <div class="right-bar">
+        <!-- <User></User> -->
+        <FriendLinks></FriendLinks>
+        <!-- right -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import ContentCard from '@/components/contentCard.vue'
+import User from '@/components/side_bar/User.vue'
+import FriendLinks from '@/components/side_bar/FriendLinks.vue'
 export default {
-  components: { ContentCard },
+  components: { ContentCard, User, FriendLinks },
   metaInfo: {
     title: '李腾飞博客 首页',
     meta: [
@@ -51,87 +60,103 @@ export default {
 
 <style lang="less" scoped>
 .home-content {
+  // background: url(./../assets/alongw.cn_setu.jpg) center no-repeat;
+  // background-size: cover;
+  // background-attachment: fixed;
+  background-color: rgb(242, 242, 248);
   text-align: center;
-  padding-top: 70px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .introduce {
-    position: relative;
-    margin: 0;
-    margin-top: 100px;
-    // width: 100%;
-    width: 25em;
-    top: 0px;
-    // left: 50%;
-    // transform: translateX(-50%);
+  padding-top: 90px;
+  .title {
+    color: rgb(48, 48, 48);
+    font-size: 40px;
+    margin-top: 20px;
   }
-  .cart-list {
-    position: unset;
-    width: auto;
-    // margin-bottom: 500px;
-    * {
-      color: unset;
-      margin: 10px auto;
-    }
-  }
-}
-@media screen and (min-width: 888px) {
-  .home-content {
-    display: block;
-    position: relative;
-    .introduce {
-      position: fixed;
-      top: 50%;
-      width: 40%;
-      margin: 0 auto;
-      transform: translateY(-70%);
-      h1 {
-        color: #111;
-        margin-bottom: 20px;
-      }
-      p {
-        font-size: 22px;
-      }
+  .content {
+    display: flex;
+    .left-bar {
+      position: sticky;
+      top: 75px;
+      // margin-top: 40px;
+      margin-left: 15px;
+      height: 300px;
     }
     .cart-list {
-      // position: absolute;
-      // left: 40%;
-      margin-left: 40%;
-      width: 50%;
-      // margin: 0 auto;
-      z-index: 0;
-      * {
-        margin: 10px auto;
-      }
-      h1 {
-        margin-bottom: 10px;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 530px) {
-  .home-content {
-    .introduce {
-      // width: 10em;
+      // position: unset;
+      // width: auto;
+      flex: 1;
       width: 100%;
-      h1 {
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 10px;
+      margin: 0 10px;
+      // margin-bottom: 500px;
+      * {
+        color: unset;
+        margin: 0px auto 10px auto;
       }
     }
-    .cart-list {
-      /deep/ .card-content {
-        height: 360px;
-        width: 260px;
-        display: flex;
-        flex-direction: column;
+    .right-bar {
+      margin-right: 15px;
+      // margin-top: 40px;
+      &:last-child {
+        position: sticky;
+        height: 300px;
+        top: 75px;
       }
     }
   }
 }
+// @media screen and (min-width: 888px) {
+//   .home-content {
+//     display: block;
+//     position: relative;
+//     .introduce {
+//       position: fixed;
+//       top: 50%;
+//       width: 40%;
+//       margin: 0 auto;
+//       transform: translateY(-70%);
+//       h1 {
+//         color: #111;
+//         margin-bottom: 20px;
+//       }
+//       p {
+//         font-size: 22px;
+//       }
+//     }
+//     .cart-list {
+//       // position: absolute;
+//       // left: 40%;
+//       margin-left: 40%;
+//       width: 50%;
+//       // margin: 0 auto;
+//       z-index: 0;
+//       * {
+//         margin: 10px auto;
+//       }
+//       h1 {
+//         margin-bottom: 10px;
+//       }
+//     }
+//   }
+// }
+
+// @media screen and (max-width: 530px) {
+//   .home-content {
+//     .introduce {
+//       // width: 10em;
+//       width: 100%;
+//       h1 {
+//         font-size: 24px;
+//         font-weight: 700;
+//         margin-bottom: 10px;
+//       }
+//     }
+//     .cart-list {
+//       /deep/ .card-content {
+//         height: 360px;
+//         width: 260px;
+//         display: flex;
+//         flex-direction: column;
+//       }
+//     }
+//   }
+// }
 </style>
