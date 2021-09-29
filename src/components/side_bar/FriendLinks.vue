@@ -1,10 +1,8 @@
 <template>
   <div class="container">
-    <h1>阿巴阿巴</h1>
-    <a href="">111</a>
-    <a href="">222</a>
-    <a href="">333</a>
-    <a href="">444</a>
+    <h1>友链</h1>
+    <a href="http://alongw.cn" target="_blank">阿龙博客</a>
+    <a href="https://www.lieyan.space/" target="_blank">烈焰博客</a>
   </div>
 </template>
 

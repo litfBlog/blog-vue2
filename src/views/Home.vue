@@ -8,12 +8,12 @@
       <div class="cart-list">
         <!-- <h1>博客文章</h1> -->
         <router-link v-for='item in pages' :key="item._id" :to="`/p/${item._id}`">
-          <ContentCard :title="item.title" :info="item.info" :date="item.date"></ContentCard>
+          <ContentCard class="card" :title="item.title" :info="item.info" :date="item.date"></ContentCard>
         </router-link>
       </div>
       <div class="right-bar">
         <!-- <User></User> -->
-        <FriendLinks></FriendLinks>
+        <!-- <FriendLinks></FriendLinks> -->
         <!-- right -->
       </div>
     </div>
@@ -23,9 +23,13 @@
 <script>
 import ContentCard from '@/components/contentCard.vue'
 import User from '@/components/side_bar/User.vue'
-import FriendLinks from '@/components/side_bar/FriendLinks.vue'
+// import FriendLinks from '@/components/side_bar/FriendLinks.vue'
 export default {
-  components: { ContentCard, User, FriendLinks },
+  components: {
+    ContentCard,
+    User
+    //  FriendLinks
+  },
   metaInfo: {
     title: '李腾飞博客 首页',
     meta: [
@@ -61,14 +65,18 @@ export default {
 <style lang="less" scoped>
 .home-content {
   // background: url(./../assets/alongw.cn_setu.jpg) center no-repeat;
-  // background-size: cover;
-  // background-attachment: fixed;
-  background-color: rgb(242, 242, 248);
+  // background: url(https://s1.hdslb.com/bfs/static/blive/blfe-dynamic-web/static/img/background.bc725153.png) center no-repeat;
+  // background: url(./../assets/af28f8b1e00781c40a0c13a005d92156.jpg);
+  // background: url(./../assets/background.png) center;
+  background-size: cover;
+  background-attachment: fixed;
+  // filter: blur(20px);
+  // background-color: rgb(226, 226, 226);
   text-align: center;
   padding-top: 90px;
   .title {
-    color: rgb(48, 48, 48);
-    font-size: 40px;
+    color: rgb(66, 66, 66);
+    font-size: 35px;
     margin-top: 20px;
   }
   .content {
@@ -87,6 +95,14 @@ export default {
       width: 100%;
       margin: 0 10px;
       // margin-bottom: 500px;
+      .card {
+        transition: all 0.3s;
+      }
+      .card:hover {
+        // margin: 0 5px;
+        box-shadow: 0 2px 34px rgb(141, 141, 141);
+        // width: 101%;
+      }
       * {
         color: unset;
         margin: 0px auto 10px auto;
@@ -101,6 +117,16 @@ export default {
         top: 75px;
       }
     }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .right-bar {
+    display: none;
+  }
+}
+@media screen and (max-width: 800px) {
+  .left-bar {
+    display: none;
   }
 }
 // @media screen and (min-width: 888px) {

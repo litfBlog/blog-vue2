@@ -4,7 +4,7 @@ import router from './router'
 import axios from 'axios'
 // seo优化 Identifier 'el_input' is not in camel case
 import MetaInfo from 'vue-meta-info'
-import { MessageBox, Message, Loading, Autocomplete, Dialog } from 'element-ui'
+import { MessageBox, Message, Loading, Autocomplete, Dialog, Button } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import userAvatar from '@/components/userAvatar.vue'
@@ -62,6 +62,7 @@ Vue.prototype.$http = axios
 Vue.config.productionTip = false
 Vue.use(MetaInfo)
 Vue.use(Dialog)
+Vue.use(Button)
 Vue.component('userAvatar', userAvatar)
 // Vue.component('el-input', Input)
 Vue.use(Autocomplete)
