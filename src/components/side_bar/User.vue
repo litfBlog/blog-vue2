@@ -94,7 +94,7 @@ export default {
       width: 100%;
     }
     .login {
-      background-color: rgb(76, 78, 228);
+      background-color: rgb(119, 119, 228);
       color: #fff;
     }
     .register {
