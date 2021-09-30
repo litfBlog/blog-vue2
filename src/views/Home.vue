@@ -10,6 +10,8 @@
         <router-link v-for='item in pages' :key="item._id" :to="`/p/${item._id}`">
           <ContentCard class="card" :title="item.title" :info="item.info" :date="item.date"></ContentCard>
         </router-link>
+        <el-pagination background layout="prev, pager, next" :total="total" @current-change="pageChange">
+        </el-pagination>
       </div>
       <div class="right-bar">
         <!-- <User></User> -->
@@ -45,18 +47,26 @@ export default {
   },
   data() {
     return {
-      pages: ['', '', '', '']
+      pages: ['', '', '', ''],
+      total: 100
     }
   },
   created() {
     this.initPages()
   },
   methods: {
-    async initPages() {
+    async initPages(page) {
       const { data: res } = await this.$http.post('/api/docs/find', {
-        num: 10
+        num: 10,
+        page
       })
       this.pages = res.data
+      this.total = res.allNum
+    },
+    pageChange(page) {
+      console.log(page)
+      this.initPages(page)
+      window.scrollTo(0, 0)
     }
   }
 }
