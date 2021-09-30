@@ -10,7 +10,7 @@
         <router-link v-for='item in pages' :key="item._id" :to="`/p/${item._id}`">
           <ContentCard class="card" :title="item.title" :info="item.info" :date="item.date"></ContentCard>
         </router-link>
-        <el-pagination background layout="prev, pager, next" :total="total" @current-change="pageChange">
+        <el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize" @current-change="pageChange">
         </el-pagination>
       </div>
       <div class="right-bar">
@@ -48,7 +48,9 @@ export default {
   data() {
     return {
       pages: ['', '', '', ''],
-      total: 100
+      // 每页显示数量
+      pageSize: 10,
+      total: 1
     }
   },
   created() {
@@ -57,7 +59,7 @@ export default {
   methods: {
     async initPages(page) {
       const { data: res } = await this.$http.post('/api/docs/find', {
-        num: 10,
+        num: this.pageSize,
         page
       })
       this.pages = res.data
