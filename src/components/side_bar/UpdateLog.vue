@@ -25,6 +25,7 @@ export default {}
   background-color: #fff;
   padding: 10px;
   text-align: left;
+  border-radius: 6px;
   ul {
     margin-top: 20px;
     li {

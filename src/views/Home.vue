@@ -125,12 +125,13 @@ export default {
     }
     .right-bar {
       margin-right: 15px;
+      height: 332px;
       // margin-top: 40px;
-      &:last-child {
-        position: sticky;
-        height: 300px;
-        top: 75px;
-      }
+      position: sticky;
+      top: 75px;
+      // &:last-child {
+      //   height: 300px;
+      // }
     }
   }
 }
