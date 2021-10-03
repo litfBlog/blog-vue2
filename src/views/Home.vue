@@ -16,6 +16,7 @@
       <div class="right-bar">
         <!-- <User></User> -->
         <!-- <FriendLinks></FriendLinks> -->
+        <UpdateLog></UpdateLog>
         <!-- right -->
       </div>
     </div>
@@ -26,10 +27,12 @@
 import ContentCard from '@/components/contentCard.vue'
 import User from '@/components/side_bar/User.vue'
 // import FriendLinks from '@/components/side_bar/FriendLinks.vue'
+import UpdateLog from '@/components/side_bar/UpdateLog.vue'
 export default {
   components: {
     ContentCard,
-    User
+    User,
+    UpdateLog
     //  FriendLinks
   },
   metaInfo: {
