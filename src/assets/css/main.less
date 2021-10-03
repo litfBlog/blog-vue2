@@ -252,13 +252,39 @@ select,
 textarea {
   color: #222;
 }
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+  padding: 0 5px;
+}
+
+-webkit-scrollbar-track {
+  border: none;
+  background: transparent !important;
+}
+::-webkit-scrollbar-thumb {
+  background: #00000049 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 0, 0) !important;
+}
+::-webkit-scrollbar {
+  background: transparent;
+  // height: 6px;
+  width: 6px;
+}
+
 ::-moz-selection {
-  background-color: #545c64;
+  background-color: #0e6ac5;
   color: #ffd04b;
 }
 ::selection {
-  background-color: #545c64;
-  color: #ffd04b;
+  background-color: #1f75ca;
+  color: #f1c23f;
 }
 img {
   vertical-align: middle;
