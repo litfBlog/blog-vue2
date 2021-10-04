@@ -181,12 +181,23 @@ export default {
       }).then(res => {
         console.log(res)
         if (res.data.code === 200) {
-          alert('注册成功!')
-          window.location.href = '/login'
+          this.$alert('注册成功！', '好耶！', {
+            confirmButtonText: '返回首页',
+            callback: action => {
+              // this.$router.replace('')
+              // window.location.href = '/'
+              window.location.href = '/login'
+            }
+          })
           return
-          // this.$router.push('/')
         }
-        alert('未知错误')
+        this.$alert(`注册失败！ ${res.data.msg}`, '坏耶！', {
+          confirmButtonText: '确定',
+          callback: action => {
+            // 刷新验证码
+            this.getEmailCode()
+          }
+        })
       })
       // if (res.code === 200) {
       // }
