@@ -63,24 +63,11 @@ export default {
   },
   methods: {
     async initAuthCode() {
+      // 刷新时清空输入框
+      this.authCode = ''
       const { data: res } = await this.$http.post('/api/authCode')
       this.codeImg = res
     },
-    // 用户第一次进入界面 不需要验证  输入后再验证
-    // 不知道咋写方便 就这样 能用就行(doge)
-    // async authUserNameFun() {
-    //   if (!/^[a-z0-9_-]{3,16}$/.test(this.userName)) {
-    //     this.userNameText = '用户名有误'
-    //     return false
-    //   }
-    //   const { data: res } = await this.$http.post('/api/user/register/find', { userName: this.userName })
-    //   if (res.status === 'no') {
-    //     this.userNameText = '该用户名已被占用'
-    //     return false
-    //   }
-    //   this.userNameText = ''
-    //   return true
-    // },
     async authEmailFun() {
       if (!/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/.test(this.email)) {
         this.emailText = '邮箱格式有误'

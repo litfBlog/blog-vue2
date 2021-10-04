@@ -43,6 +43,8 @@ export default {
   },
   methods: {
     async initAuthCode() {
+      // 刷新时清空输入框
+      this.authCode = ''
       const { data: res } = await this.$http.post('/api/authCode')
       this.codeImg = res
     },

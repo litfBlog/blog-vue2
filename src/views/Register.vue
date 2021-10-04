@@ -58,6 +58,8 @@ export default {
   },
   methods: {
     async initAuthCode() {
+      // 刷新时清空输入框
+      this.authCode = ''
       const { data: res } = await this.$http.post('/api/authCode')
       this.codeImg = res
     },
@@ -107,9 +109,6 @@ export default {
     },
 
     async getEmailCode() {
-      // this.authUserNameFun()
-      // this.authPassWordFun()
-      // this.authAuthCodeFun()
       if (this.authUserNameFun() && this.authPassWordFun() && this.authAuthCodeFun()) {
       } else {
         return this.$message({
@@ -195,7 +194,7 @@ export default {
           confirmButtonText: '确定',
           callback: action => {
             // 刷新验证码
-            this.getEmailCode()
+            this.initAuthCode()
           }
         })
       })
