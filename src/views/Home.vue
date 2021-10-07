@@ -1,6 +1,6 @@
 <template>
   <div class="home-content">
-    <h1 class="title">XING博客</h1>
+    <h1 class="title">我的主页</h1>
     <div class="content">
       <div class="left-bar">
         <User></User>
@@ -36,7 +36,7 @@ export default {
     //  FriendLinks
   },
   metaInfo: {
-    title: '李腾飞博客 首页',
+    title: '我的主页 ',
     meta: [
       {
         name: 'keywords',
