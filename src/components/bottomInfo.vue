@@ -47,7 +47,7 @@
       <div class="copyRighr">&copy;2021 litfa all rights reserved</div>
       <div class="icp">
         <a href="https://beian.miit.gov.cn">
-          豫ICP备2021024510号-1
+          豫ICP备2021024510号-2
         </a>
         <!-- <div style="width:300px;margin:0 auto; padding:20px 0;display: inline-block;"> -->
         <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=4101820200807" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
@@ -98,11 +98,11 @@ export default {
       margin-bottom: 30px;
       &:nth-child(1) {
         a {
-            margin: 0 auto;
-            width: 10.5em;
-            display: block;
-            text-align: left;
-          }
+          margin: 0 auto;
+          width: 10.5em;
+          display: block;
+          text-align: left;
+        }
       }
       // 隐藏第三个
       @media screen and (max-width: 540px) {
