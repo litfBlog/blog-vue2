@@ -33,7 +33,7 @@ export default {
     ContentCard,
     User,
     UpdateLog
-    //  FriendLinks
+    // FriendLinks
   },
   metaInfo: {
     title: '我的主页 ',
