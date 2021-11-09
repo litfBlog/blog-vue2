@@ -6,7 +6,7 @@
       <hr>
       <div v-html="page"></div>
     </div>
-    <errPage v-else :code="statusCode"></errPage>
+    <errPage class="errPage" v-else :code="statusCode"></errPage>
     <EditButton></EditButton>
   </div>
 </template>
@@ -62,25 +62,29 @@ export default {
       this.$http
         .get('/api/docs/findOne/' + this.$route.params.pages)
         .then(res => {
+          console.log('res节点')
           console.log(res)
-          this.page = res.data.data.content
-          this.date = res.data.data.date
-          this.date = Number(this.date)
-          this.title = res.data.data.title
-          this.user = res.data.data.author
-          if (res.status !== 200) {
-            this.status = false
-            this.statusCode = res.data.status
-          } else {
+          if (res.data.code === 200) {
+            // 传递页面数据
+            this.page = res.data.data.content
+            this.date = res.data.data.date
+            this.date = Number(this.date)
+            this.title = res.data.data.title
+            this.user = res.data.data.author
             this.status = true
-            this.statusCode = 200
+          } else {
+            // 状态异常 显示异常界面
+            this.status = false
+            // 传递状态码
+            this.statusCode = res.data.code
           }
+          // 结束加载动画
           loading.close()
         })
         .catch(err => {
-          console.log(err)
           this.status = false
           this.statusCode = err.status
+          loading.close()
         })
     }
   }
@@ -89,7 +93,6 @@ export default {
 
 <style lang="less" scoped>
 .home {
-  // @import url('./../assets/css/page.less');
   max-width: 1000px;
   min-height: 80vh;
   overflow-wrap: break-word;
@@ -99,26 +102,9 @@ export default {
   background-color: #fff;
   padding: 20px;
   box-sizing: content-box;
-  // height: 100%;
-  // overflow: auto;
-  // padding-top: -66px;
-  // box-sizing: border-box;
-  // margin-top: -60px;
-  // /deep/ #app {
-  //   width: 100% !important;
-  //   .page {
-  //     width: 100% !important;
-  //     min-height: 100vh;
-  //   }
-  //   background-color: #fff !important;
-  // }
 }
-iframe {
-  width: 100%;
-  // height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
+.errPage {
+  min-height: 80vh;
 }
 </style>
 
