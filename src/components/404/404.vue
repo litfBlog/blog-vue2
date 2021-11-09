@@ -29,17 +29,10 @@ export default {
 <style lang="less" scoped>
 .err-content {
   width: 100%;
-  // height: 100%;
-  // padding-top: 70px;
   height: 400px;
-  // margin-top: 50%;
-  // margin-left: 50%;
-  // box-sizing: content-box;
-  // transform: translate(-50%);
-  // text-align: center;
   position: relative;
   .center {
-    width: 500px;
+    width: 375px;
     height: 100px;
     position: absolute;
     top: 0;
