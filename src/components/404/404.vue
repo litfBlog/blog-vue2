@@ -10,7 +10,12 @@
 
 <script>
 export default {
-  props: ['code'],
+  props: {
+    code: {
+      type: String,
+      default: '404'
+    }
+  },
   computed: {
     msgIndex() {
       return Math.floor(Math.random() * this.msg.length)
@@ -29,7 +34,7 @@ export default {
 <style lang="less" scoped>
 .err-content {
   width: 100%;
-  height: 400px;
+  height: 80vh;
   position: relative;
   .center {
     width: 375px;

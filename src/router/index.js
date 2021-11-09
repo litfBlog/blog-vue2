@@ -9,6 +9,7 @@ import Register from '@/views/Register.vue'
 import User from '@/views/User.vue'
 import ResetPassword from '@/views/ResetPassword.vue'
 import Search from '@/views/Search.vue'
+import Page404 from '@/components/404/404.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -61,6 +62,11 @@ const routes = [
     path: '/search',
     name: '搜索',
     component: Search
+  },
+  {
+    path: '*',
+    name: '404',
+    component: Page404
   }
 ]
 
