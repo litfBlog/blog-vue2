@@ -3,7 +3,7 @@
     <div class="center">
       <h1>{{ code }}</h1>
       <p>{{ msg[msgIndex] }}</p>
-      <a href="/index">返回首页</a>
+      <a href="/">返回首页</a>
     </div>
   </div>
 </template>
