@@ -9,6 +9,7 @@
         <!-- <span>点赞</span>
         <span>评论</span>
         <span>收藏</span> -->
+        <span>阅读:{{ views[0] }}</span>
       </div>
     </div>
   </div>
@@ -17,7 +18,24 @@
 <script>
 import dayjs from 'dayjs'
 export default {
-  props: ['title', 'info', 'date'],
+  // props: ['title', 'info', 'date', 'views'],
+  props: {
+    title: {
+      type: String
+    },
+    info: {
+      type: String
+    },
+    date: {
+      type: String
+    },
+    views: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+  },
   computed: {
     dateFormat() {
       return dayjs(Number(this.date)).format('YYYY-MM-DD HH:mm')
@@ -78,11 +96,8 @@ export default {
       width: 100%;
       display: flex;
       font-size: 12px;
-      span {
-        flex: 1;
-      }
+      justify-content: space-between;
       span:first-child {
-        flex: 4;
         font-size: 16px;
       }
     }

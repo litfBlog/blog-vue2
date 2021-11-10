@@ -10,10 +10,10 @@
         <div class="userName">
           {{user.userName}}
         </div>
-        <!-- <div class="data">
-          <div>被点赞：</div>
-          <div>文章：</div>
-        </div> -->
+        <div class="data">
+          <div>阅读量：{{ user.views == 0 ? 1 : user.views }}</div>
+          <!-- <div>文章：</div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -74,10 +74,12 @@ export default {
     .user {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: space-between;
+      height: 70%;
       margin: 8px 1em;
       .userName {
-        font-size: 18px;
+        font-size: 22px;
+        font-weight: 500;
         color: #000;
       }
       .data {
