@@ -97,7 +97,7 @@ export default {
       display: flex;
       font-size: 12px;
       justify-content: space-between;
-      span:first-child {
+      span {
         font-size: 16px;
       }
     }
