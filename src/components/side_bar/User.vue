@@ -10,8 +10,8 @@
           <span>文章数</span>
         </div>
         <div>
-          <span>{{fansNum}}</span>
-          <span>粉丝数</span>
+          <span>{{viewsNum}}</span>
+          <span>阅读量</span>
         </div>
         <div>
           <span>{{loveNum}}</span>
@@ -41,7 +41,8 @@ export default {
       avatar: '',
       loveNum: '',
       fansNum: '',
-      pagesNum: ''
+      pagesNum: '',
+      viewsNum: ''
     }
   },
   created() {
@@ -57,6 +58,7 @@ export default {
       this.loveNum = res.data.loveNum
       this.fansNum = res.data.fansNum
       this.pagesNum = res.data.pagesNum
+      this.viewsNum = res.data.viewsNum
       bus.$emit('userinfo', res)
     }
   }

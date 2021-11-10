@@ -12,6 +12,11 @@
           <!-- <p>注册时间</p> -->
           <span>&#xe5c8; {{ email }}</span>
         </div>
+        <div class="info-text-tr">
+          <span>阅读: {{ views }}</span>
+          <span>文章: {{ pages }}</span>
+          <span></span>
+        </div>
       </div>
     </div>
 
@@ -56,6 +61,8 @@ export default {
       userName: '',
       date: '',
       email: '',
+      views: '',
+      pages: '',
       showEditUserInfo: false,
       myDoc: {}
     }
@@ -66,6 +73,8 @@ export default {
       this.avatar = val.data.avatar
       this.userName = val.data.userName
       this.email = val.data.email
+      this.views = val.data.viewsNum
+      this.pages = val.data.pagesNum
       if (!this.isLogin) {
         this.$alert('请登陆后重试', '未登录', {
           confirmButtonText: '确定',
@@ -181,6 +190,7 @@ export default {
     margin: 10px;
     border-radius: 5px;
     display: flex;
+    // width: 100%;
     div .avatar {
       width: 100px;
       height: 100px;
@@ -197,7 +207,7 @@ export default {
       margin-left: 10px;
       .info-text-tr {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
       }
     }
   }
