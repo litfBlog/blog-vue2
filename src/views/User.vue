@@ -28,7 +28,7 @@
       <p>开发中……</p> -->
       <div class="card" v-for="i in myDoc" :key="i._id">
         <router-link :to="`/p/${i._id}`" @click.stop="">
-          <contentCard :title="i.title" :info="i.info" :date="i.date"></contentCard>
+          <contentCard :title="i.title" :info="i.info" :date="i.date" :views="i.views"></contentCard>
         </router-link>
         <div class="edit-box">
           <button class="edit" @click="editDoc(i._id)">编辑</button>
