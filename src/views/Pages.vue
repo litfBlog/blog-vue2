@@ -18,6 +18,14 @@ import errPage from '@/components/404/404.vue'
 import EditButton from '@/components/EditButton.vue'
 import AuthorInfo from '@/components/AuthorInfo.vue'
 import { marked } from 'marked'
+import highlight from 'highlight.js'
+// import 'highlight.js/styles/vs2015.css'
+
+marked.setOptions({
+  highlight: function (code) {
+    return highlight.highlightAuto(code).value
+  }
+})
 export default {
   metaInfo: {
     title: '文章',
