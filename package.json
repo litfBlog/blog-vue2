@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "dayjs": "^1.10.6",
     "element-ui": "^2.15.6",
+    "marked": "^4.0.4",
     "mavon-editor": "^2.9.1",
     "prerender-spa-plugin": "^3.4.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
