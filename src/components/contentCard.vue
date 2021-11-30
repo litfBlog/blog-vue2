@@ -10,6 +10,7 @@
         <span>评论</span>
         <span>收藏</span> -->
         <span>阅读:{{ views[0] }}</span>
+        <span>点赞:{{likes[0]}}</span>
       </div>
     </div>
   </div>
@@ -30,6 +31,12 @@ export default {
       type: String
     },
     views: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    likes: {
       type: Array,
       default: function () {
         return []
