@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
-// seo优化 Identifier 'el_input' is not in camel case
+// seo优化 Identifier
 import MetaInfo from 'vue-meta-info'
 import { MessageBox, Message, Loading, Autocomplete, Dialog, Button, Pagination } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -12,13 +12,12 @@ import userAvatar from '@/components/userAvatar.vue'
 import '@/assets/icon/iconfont.js'
 import '@/assets/icon/iconfont.css'
 
-// <!-- <link href="https://cdn.bootcss.com/github-markdown-css/2.8.0/github-markdown.min.css" rel="stylesheet">
-// <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" rel="stylesheet"> -->
-
-// import '@/assets/css/github-gist.min.css'
-// import '@/assets/css/github-markdown.min.css'
-
 import '@/assets/css/main.less'
+
+// iconpack
+import { PreviewOpen, GoodTwo } from '@icon-park/vue'
+// 引入样式 （整个项目只需1次）
+import '@icon-park/vue/styles/index.css'
 
 // 百度统计
 var _hmt = ''
@@ -31,20 +30,10 @@ window._hmt = _hmt;
   s.parentNode.insertBefore(hm, s)
 })()
 
-// import '@/assets/vs2015.css'
-// 指定请求的根路径
-// axios.defaults.baseURL = 'http://192.168.31.189'
+// axios
 axios.defaults.withCredentials = true // axios请求携带cookie    每个都需要配置
-// axios.defaults.withCredentials = true
-// axios.defaults.withCredentials = true
-// axios.defaults
-// const $axios = axios.create({
-//   timeout: 10000
-// })
-// $axios.defaults.withCredentials = true
+// element
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
-// Vue.use(Button)
-// Vue.use(MessageBox)
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
@@ -65,8 +54,11 @@ Vue.use(Dialog)
 Vue.use(Button)
 Vue.use(Pagination)
 Vue.component('userAvatar', userAvatar)
-// Vue.component('el-input', Input)
 Vue.use(Autocomplete)
+
+// iconpack
+Vue.component('PreviewOpen', PreviewOpen)
+Vue.component('GoodTwo', GoodTwo)
 
 // 路由跳转后，页面回到顶部
 router.afterEach(() => {
