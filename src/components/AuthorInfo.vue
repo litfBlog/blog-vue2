@@ -12,8 +12,9 @@
         </div>
         <div class="data">
           <div>阅读量：{{ user.views == 0 ? 1 : user.views }}</div>
+          <div>点赞:{{user.likes }}</div>
           <!-- <div>文章：</div> -->
-          <LikeDoc></LikeDoc>
+          <!-- <LikeDoc></LikeDoc> -->
         </div>
       </div>
     </div>
@@ -22,7 +23,7 @@
 
 <script>
 import dayjs from 'dayjs'
-import LikeDoc from '@/components/LikeDoc.vue'
+// import LikeDoc from '@/components/LikeDoc.vue'
 export default {
   props: {
     // info: {
@@ -35,7 +36,7 @@ export default {
       type: Object
     }
   },
-  components: { LikeDoc },
+  // components: { LikeDoc },
   computed: {
     dateFormat() {
       // this.date = 0

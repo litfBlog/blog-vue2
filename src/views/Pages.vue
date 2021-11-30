@@ -83,6 +83,7 @@ export default {
             this.user = res.data.data.author
             // 阅读量
             this.user.views = res.data.data.views[0]
+            this.user.likes = res.data.data.likes[0]
             this.status = true
           } else {
             // 状态异常 显示异常界面
