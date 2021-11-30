@@ -17,13 +17,22 @@ import '@/assets/css/page.less'
 import errPage from '@/components/404/404.vue'
 import EditButton from '@/components/EditButton.vue'
 import AuthorInfo from '@/components/AuthorInfo.vue'
+import { marked } from 'marked'
+import highlight from 'highlight.js'
+// import 'highlight.js/styles/vs2015.css'
+
+marked.setOptions({
+  highlight: function (code) {
+    return highlight.highlightAuto(code).value
+  }
+})
 export default {
   metaInfo: {
     title: '文章',
     meta: [
       {
         name: 'keywords',
-        content: '李腾飞,博客,李腾飞博客'
+        content: '博客,李腾飞博客'
       },
       {
         name: 'description',
@@ -62,11 +71,12 @@ export default {
       this.$http
         .get('/api/docs/findOne/' + this.$route.params.pages)
         .then(res => {
-          console.log('res节点')
-          console.log(res)
           if (res.data.code === 200) {
             // 传递页面数据
-            this.page = res.data.data.content
+            // this.page = res.data.data.content
+
+            this.page = marked(res.data.data.content)
+
             this.date = res.data.data.date
             this.date = Number(this.date)
             this.title = res.data.data.title
