@@ -12,7 +12,7 @@
         </div>
         <div class="data">
           <div>
-            <preview-open theme="outline" size="18" fill="#333" />{{ user.views == 0 ? 1 : user.views }}
+            <preview-open theme="outline" size="18" fill="#666" />{{ user.views == 0 ? 1 : user.views }}
           </div>
           <!-- <div>
             <good-two theme="outline" size="18" fill="#333" />{{user.likes }}
