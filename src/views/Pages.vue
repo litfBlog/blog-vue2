@@ -4,7 +4,11 @@
       <h1>{{title}}</h1>
       <AuthorInfo :date="date" :user="user"></AuthorInfo>
       <hr>
-      <div v-html="page"></div>
+      <div class="page" v-html="page"></div>
+
+      <div class="buttons">
+        <LikeDoc :liked="user.liked" :likes="user.likes"></LikeDoc>
+      </div>
     </div>
     <errPage class="errPage" v-else :code="statusCode"></errPage>
     <EditButton></EditButton>
@@ -19,7 +23,7 @@ import EditButton from '@/components/EditButton.vue'
 import AuthorInfo from '@/components/AuthorInfo.vue'
 import { marked } from 'marked'
 import highlight from 'highlight.js'
-// import 'highlight.js/styles/vs2015.css'
+import LikeDoc from '@/components/LikeDoc.vue'
 
 marked.setOptions({
   highlight: function (code) {
@@ -41,7 +45,8 @@ export default {
     ]
   },
   name: 'Home',
-  components: { errPage, EditButton, AuthorInfo },
+  components: { errPage, EditButton, AuthorInfo, LikeDoc },
+
   data() {
     return {
       page: '',
@@ -108,7 +113,6 @@ export default {
 <style lang="less" scoped>
 .home {
   max-width: 1000px;
-  min-height: 80vh;
   overflow-wrap: break-word;
   padding: 0;
   margin: auto;
@@ -116,6 +120,9 @@ export default {
   background-color: #fff;
   padding: 20px;
   box-sizing: content-box;
+  .page {
+    min-height: 80vh;
+  }
 }
 .errPage {
   min-height: 80vh;

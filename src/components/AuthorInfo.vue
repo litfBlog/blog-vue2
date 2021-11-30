@@ -23,15 +23,15 @@
       </div>
     </div>
 
-    <div class="buttons">
+    <!-- <div class="buttons">
       <LikeDoc :liked="user.liked" :likes="user.likes"></LikeDoc>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import dayjs from 'dayjs'
-import LikeDoc from '@/components/LikeDoc.vue'
+// import LikeDoc from '@/components/LikeDoc.vue'
 
 export default {
   props: {
@@ -42,7 +42,7 @@ export default {
       type: Object
     }
   },
-  components: { LikeDoc },
+  // components: { LikeDoc },
   computed: {
     dateFormat() {
       // this.date = 0
@@ -59,7 +59,7 @@ export default {
 <style lang="less" scoped>
 .AuthorInfo-content {
   width: 100%;
-  height: 140px;
+  height: 88px;
   display: flex;
   flex-direction: column;
   .docsInfo {
