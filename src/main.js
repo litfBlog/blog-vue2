@@ -15,7 +15,7 @@ import '@/assets/icon/iconfont.css'
 import '@/assets/css/main.less'
 
 // iconpack
-import { PreviewOpen, GoodTwo } from '@icon-park/vue'
+import { PreviewOpen, GoodTwo, Editor } from '@icon-park/vue'
 // 引入样式 （整个项目只需1次）
 import '@icon-park/vue/styles/index.css'
 
@@ -59,6 +59,7 @@ Vue.use(Autocomplete)
 // iconpack
 Vue.component('PreviewOpen', PreviewOpen)
 Vue.component('GoodTwo', GoodTwo)
+Vue.component('Editor', Editor)
 
 // 路由跳转后，页面回到顶部
 router.afterEach(() => {

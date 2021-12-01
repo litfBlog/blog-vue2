@@ -14,7 +14,7 @@
           <span>阅读量</span>
         </div>
         <div>
-          <span>{{loveNum}}</span>
+          <span>{{likesNum}}</span>
           <span>获赞数</span>
         </div>
       </div>
@@ -39,7 +39,7 @@ export default {
       isLogin: false,
       userName: '',
       avatar: '',
-      loveNum: '',
+      likesNum: '',
       fansNum: '',
       pagesNum: '',
       viewsNum: ''
@@ -55,7 +55,7 @@ export default {
       this.isLogin = res.data.isLogin
       this.userName = res.data.userName
       this.avatar = res.data.avatar
-      this.loveNum = res.data.loveNum
+      this.likesNum = res.data.likesNum
       this.fansNum = res.data.fansNum
       this.pagesNum = res.data.pagesNum
       this.viewsNum = res.data.viewsNum

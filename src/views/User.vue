@@ -13,8 +13,19 @@
           <span>&#xe5c8; {{ email }}</span>
         </div>
         <div class="info-text-tr">
-          <span>阅读: {{ views }}</span>
-          <span>文章: {{ pages }}</span>
+          <span>
+            <preview-open theme="outline" size="18" fill="#333" />
+            {{ views }}
+          </span>
+          <span>
+            <editor theme="outline" size="18" fill="#333" />
+            {{ pages }}
+          </span>
+
+          <span>
+            <good-two theme="outline" size="18" fill="#333" />
+            {{ likes }}
+          </span>
           <span></span>
         </div>
       </div>
@@ -63,6 +74,7 @@ export default {
       email: '',
       views: '',
       pages: '',
+      likes: '',
       showEditUserInfo: false,
       myDoc: {}
     }
@@ -75,6 +87,7 @@ export default {
       this.email = val.data.email
       this.views = val.data.viewsNum
       this.pages = val.data.pagesNum
+      this.likes = val.data.likesNum
       if (!this.isLogin) {
         this.$alert('请登陆后重试', '未登录', {
           confirmButtonText: '确定',
