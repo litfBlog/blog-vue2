@@ -28,6 +28,7 @@ import ContentCard from '@/components/contentCard.vue'
 import User from '@/components/side_bar/User.vue'
 // import FriendLinks from '@/components/side_bar/FriendLinks.vue'
 import UpdateLog from '@/components/side_bar/UpdateLog.vue'
+import { findDocApi } from '@/apis/findDoc.js'
 export default {
   components: {
     ContentCard,
@@ -61,10 +62,7 @@ export default {
   },
   methods: {
     async initPages(page) {
-      const { data: res } = await this.$http.post('/api/docs/find', {
-        num: this.pageSize,
-        page
-      })
+      const { data: res } = await findDocApi(this.pageSize, page)
       this.pages = res.data
       this.total = res.allNum
     },
