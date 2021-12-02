@@ -56,10 +56,11 @@
 </template>
 
 <script>
-import bus from '@/components/eventBus.js'
 import editUserInfo from '@/components/editUserInfo.vue'
 // import userAvatar from '@/components/userAvatar.vue'
 import contentCard from '@/components/contentCard.vue'
+import { getUserStatusApi } from '@/apis/getUserStatus.js'
+
 export default {
   components: {
     editUserInfo,
@@ -80,14 +81,21 @@ export default {
     }
   },
   created() {
-    bus.$on('userinfo', val => {
-      this.isLogin = val.data.isLogin
-      this.avatar = val.data.avatar
-      this.userName = val.data.userName
-      this.email = val.data.email
-      this.views = val.data.viewsNum
-      this.pages = val.data.pagesNum
-      this.likes = val.data.likesNum
+    // 传递登录状态
+    this.initUserStatus()
+    this.initMyDoc()
+  },
+  methods: {
+    async initUserStatus() {
+      const { data: res } = await getUserStatusApi()
+      this.isLogin = res.data.isLogin
+      this.avatar = res.data.avatar
+      this.userName = res.data.userName
+      this.email = res.data.email
+      this.views = res.data.viewsNum
+      this.pages = res.data.pagesNum
+      this.likes = res.data.likesNum
+      // 未登录跳转登录界面
       if (!this.isLogin) {
         this.$alert('请登陆后重试', '未登录', {
           confirmButtonText: '确定',
@@ -96,13 +104,7 @@ export default {
           }
         })
       }
-    })
-    // this.$on('exit', () => {
-    //   console.log(111)
-    // })
-    this.initMyDoc()
-  },
-  methods: {
+    },
     async initMyDoc() {
       const { data: res } = await this.$http.post('/api/docs/findMyDoc')
       this.myDoc = res.data
