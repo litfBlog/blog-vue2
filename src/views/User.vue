@@ -61,6 +61,7 @@ import editUserInfo from '@/components/editUserInfo.vue'
 import contentCard from '@/components/contentCard.vue'
 import { getUserStatusApi } from '@/apis/getUserStatus.js'
 import { findMyDocApi } from '@/apis/findMyDoc.js'
+import { unLoginApi } from '@/apis/unLogin.js'
 
 export default {
   components: {
@@ -132,7 +133,7 @@ export default {
         type: 'warning'
       })
         .then(async () => {
-          const { data: res } = await this.$http.post('/api/user/login/unlogin')
+          const { data: res } = await unLoginApi()
 
           if (res.code === 200) {
             this.$message({
