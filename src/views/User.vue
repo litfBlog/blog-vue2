@@ -60,6 +60,7 @@ import editUserInfo from '@/components/editUserInfo.vue'
 // import userAvatar from '@/components/userAvatar.vue'
 import contentCard from '@/components/contentCard.vue'
 import { getUserStatusApi } from '@/apis/getUserStatus.js'
+import { findMyDocApi } from '@/apis/findMyDoc.js'
 
 export default {
   components: {
@@ -106,7 +107,7 @@ export default {
       }
     },
     async initMyDoc() {
-      const { data: res } = await this.$http.post('/api/docs/findMyDoc')
+      const { data: res } = await findMyDocApi()
       this.myDoc = res.data
     },
     alert() {
