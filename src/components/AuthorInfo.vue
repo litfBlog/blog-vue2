@@ -11,21 +11,30 @@
           {{user.userName}}
         </div>
         <div class="data">
-          <div>阅读量：{{ user.views == 0 ? 1 : user.views }}</div>
+          <div>
+            <preview-open theme="outline" size="18" fill="#666" />{{ user.views == 0 ? 1 : user.views }}
+          </div>
+          <!-- <div>
+            <good-two theme="outline" size="18" fill="#333" />{{user.likes }}
+          </div> -->
           <!-- <div>文章：</div> -->
+          <!-- <LikeDoc></LikeDoc> -->
         </div>
       </div>
     </div>
+
+    <!-- <div class="buttons">
+      <LikeDoc :liked="user.liked" :likes="user.likes"></LikeDoc>
+    </div> -->
   </div>
 </template>
 
 <script>
 import dayjs from 'dayjs'
+// import LikeDoc from '@/components/LikeDoc.vue'
+
 export default {
   props: {
-    // info: {
-    //   type: String
-    // },
     date: {
       type: [Number, String]
     },
@@ -33,6 +42,7 @@ export default {
       type: Object
     }
   },
+  // components: { LikeDoc },
   computed: {
     dateFormat() {
       // this.date = 0
@@ -86,6 +96,8 @@ export default {
         display: flex;
         div {
           margin: 0 5px 0 0;
+          display: flex;
+          align-items: flex-end;
         }
       }
     }

@@ -13,8 +13,19 @@
           <span>&#xe5c8; {{ email }}</span>
         </div>
         <div class="info-text-tr">
-          <span>阅读: {{ views }}</span>
-          <span>文章: {{ pages }}</span>
+          <span>
+            <preview-open theme="outline" size="18" fill="#333" />
+            {{ views }}
+          </span>
+          <span>
+            <editor theme="outline" size="18" fill="#333" />
+            {{ pages }}
+          </span>
+
+          <span>
+            <good-two theme="outline" size="18" fill="#333" />
+            {{ likes }}
+          </span>
           <span></span>
         </div>
       </div>
@@ -33,7 +44,7 @@
       <p>开发中……</p> -->
       <div class="card" v-for="i in myDoc" :key="i._id">
         <router-link :to="`/p/${i._id}`" @click.stop="">
-          <contentCard :title="i.title" :info="i.info" :date="i.date" :views="i.views"></contentCard>
+          <contentCard :title="i.title" :info="i.info" :date="i.date" :views="i.views" :likes="i.likes"></contentCard>
         </router-link>
         <div class="edit-box">
           <button class="edit" @click="editDoc(i._id)">编辑</button>
@@ -63,6 +74,7 @@ export default {
       email: '',
       views: '',
       pages: '',
+      likes: '',
       showEditUserInfo: false,
       myDoc: {}
     }
@@ -75,6 +87,7 @@ export default {
       this.email = val.data.email
       this.views = val.data.viewsNum
       this.pages = val.data.pagesNum
+      this.likes = val.data.likesNum
       if (!this.isLogin) {
         this.$alert('请登陆后重试', '未登录', {
           confirmButtonText: '确定',

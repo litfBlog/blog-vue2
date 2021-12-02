@@ -8,7 +8,7 @@
       <div class="cart-list">
         <!-- <h1>博客文章</h1> -->
         <router-link v-for='item in pages' :key="item._id" :to="`/p/${item._id}`">
-          <ContentCard class="card" :title="item.title" :info="item.info" :date="item.date" :views="item.views"></ContentCard>
+          <ContentCard class="card" :title="item.title" :info="item.info" :date="item.date" :views="item.views" :likes="item.likes"></ContentCard>
         </router-link>
         <el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize" @current-change="pageChange">
         </el-pagination>
