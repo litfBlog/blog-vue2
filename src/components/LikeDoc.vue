@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { likeApi, unLikeApi, getLikeApi } from '@/apis/likeDoc.js'
 export default {
   props: {
     liked: {
@@ -41,17 +42,17 @@ export default {
   },
   methods: {
     async like() {
-      await this.$http.post('/api/docs/likeDoc/like', { _id: this.$route.params.pages })
+      await likeApi(this.$route.params.pages)
       this.isLiked = !this.isLiked
       this.getLikes()
     },
     async unLike() {
-      await this.$http.post('/api/docs/likeDoc/unlike', { _id: this.$route.params.pages })
+      await unLikeApi(this.$route.params.pages)
       this.isLiked = !this.isLiked
       this.getLikes()
     },
     async getLikes() {
-      const { data: res } = await this.$http.post('/api/docs/likeDoc/get', { _id: this.$route.params.pages })
+      const { data: res } = await getLikeApi(this.$route.params.pages)
       this.isLiked = res.liked
       this.likesNum = res.likes
     }
