@@ -62,6 +62,7 @@ import contentCard from '@/components/contentCard.vue'
 import { getUserStatusApi } from '@/apis/getUserStatus.js'
 import { findMyDocApi } from '@/apis/findMyDoc.js'
 import { unLoginApi } from '@/apis/unLogin.js'
+import { rmMyDoc } from '@/apis/rmMyDoc.js'
 
 export default {
   components: {
@@ -178,7 +179,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        const { data: res } = await this.$http.post('/api/docs/rmMyDoc', { _id })
+        const { data: res } = await rmMyDoc(_id)
         console.log(res)
         if (res.code === 200) {
           this.$message({
