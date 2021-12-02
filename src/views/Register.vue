@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { authCodeApi } from '@/apis/authCode.js'
 export default {
   data() {
     return {
@@ -60,7 +61,7 @@ export default {
     async initAuthCode() {
       // 刷新时清空输入框
       this.authCode = ''
-      const { data: res } = await this.$http.post('/api/authCode')
+      const { data: res } = await authCodeApi()
       this.codeImg = res
     },
     // 用户第一次进入界面 不需要验证  输入后再验证
