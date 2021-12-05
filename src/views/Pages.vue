@@ -1,6 +1,6 @@
 <template>
   <div class="page-content">
-    <div class="home markdown" v-if="status">
+    <div class="home markdown" v-if="status == true">
       <h1>{{title}}</h1>
       <AuthorInfo :date="date" :user="user"></AuthorInfo>
       <hr>
@@ -10,8 +10,12 @@
         <LikeDoc :liked="user.liked" :likes="user.likes"></LikeDoc>
       </div>
     </div>
-    <errPage class="errPage" v-else :code="statusCode"></errPage>
-    <EditButton></EditButton>
+    <errPage class="errPage" v-else-if="status == false" :code="statusCode"></errPage>
+    <div v-if="status == 'passWord'" class="password">
+      <h1>该文章需要输入密码</h1>
+      <el-input placeholder="请输入密码" v-model="passWord" show-password></el-input>
+      <el-button @click="initPage(passWord)">提交</el-button>
+    </div>
   </div>
 </template>
 
@@ -19,7 +23,6 @@
 import '@/assets/css/page.less'
 // import status404 from '@/components/404/404.html'
 import errPage from '@/components/404/404.vue'
-import EditButton from '@/components/EditButton.vue'
 import AuthorInfo from '@/components/AuthorInfo.vue'
 import { marked } from 'marked'
 import highlight from 'highlight.js'
@@ -45,7 +48,7 @@ export default {
     ]
   },
   name: 'Home',
-  components: { errPage, EditButton, AuthorInfo, LikeDoc },
+  components: { errPage, AuthorInfo, LikeDoc },
 
   data() {
     return {
@@ -54,7 +57,8 @@ export default {
       statusCode: '',
       date: 0,
       title: '',
-      user: {}
+      user: {},
+      passWord: ''
     }
   },
   created() {
@@ -66,17 +70,26 @@ export default {
     this.initPage()
   },
   methods: {
-    async initPage() {
+    async initPage(passWord) {
       console.log(this)
       const loading = this.$loading({
         text: 'Loading',
         lock: true,
         background: 'rgba(0, 0, 0, 0.7)'
       })
+      let data = {}
+      if (passWord) {
+        data = { passWord }
+      }
       this.$http
-        .get('/api/docs/findOne/' + this.$route.params.pages)
+        .post('/api/docs/findOne/' + this.$route.params.pages, data)
         .then(res => {
           if (res.data.code === 200) {
+            if (res.data.type === 'usePassWord') {
+              this.status = 'passWord'
+              loading.close()
+              return
+            }
             // 传递页面数据
             // this.page = res.data.data.content
 
@@ -126,6 +139,10 @@ export default {
 }
 .errPage {
   min-height: 80vh;
+}
+
+.password {
+  margin-top: 100px;
 }
 </style>
 

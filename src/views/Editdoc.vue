@@ -1,7 +1,7 @@
 <template>
   <div class="edit-content">
     <div class="titleBox">
-      <input type="text" placeholder="标题(建议12字以内)" class="title" v-model="title">
+      <input type="text" placeholder="标题(建议12字以内)" class="title" name="title" v-model="title">
       <span class="text-num" :style="{color: title.length>20? 'red':'#666'}">{{title.length}}/20</span>
     </div>
     <mavonEditor @save="saveDoc" @imgAdd="$imgAdd" @imgDel="$imgDel" ref="editor" v-model="doc" toolbarsFlag :toolbars="{
@@ -45,6 +45,34 @@
       <textarea type="text" placeholder="简介(建议30字以内)" class="info" v-model="info"></textarea>
       <span class="info-num" :style="{color: info.length>50? 'red':'#666'}">{{info.length}}/50</span>
     </div>
+    <el-collapse v-model="configPermission" @change="handleChange" class="config">
+      <!-- <el-collapse-item title="权限设置" name="1">
+        <el-checkbox v-model="noIndexView">
+          不在主页展示
+        </el-checkbox>
+        <el-tooltip placement="top">
+          <div slot="content">开启后将不在首页展示，但仍能通过链接访问</div>
+          <attention theme="outline" size="16" fill="#666" :strokeWidth="2" />
+        </el-tooltip>
+        <br>
+        <br>
+        <el-checkbox v-model="usePassword">加密访问</el-checkbox>
+        <el-input placeholder="访问密码" v-model="viewPassword" show-password :disabled="!usePassword"></el-input>
+      </el-collapse-item> -->
+      <el-collapse-item title="权限设置" name="1">
+        <el-radio v-model="viewConfig" label="public">公开</el-radio>
+        <el-radio v-model="viewConfig" label="encrypt">加密</el-radio>
+        <el-radio v-model="viewConfig" label="privacy">私密</el-radio>
+        <el-input v-if="viewConfig === 'encrypt'" placeholder="访问密码" v-model="viewPassword" show-password></el-input>
+
+        <el-collapse v-model="configMore" @change="handleChange" class="configMore">
+          <el-collapse-item title="高级设置" name="1" class="more">
+            <el-checkbox v-model="noSearch" :disabled="viewConfig === 'privacy'">不允许被搜索</el-checkbox>
+            <el-checkbox v-model="noIndexView" :disabled="viewConfig === 'privacy'">不在主页展示</el-checkbox>
+          </el-collapse-item>
+        </el-collapse>
+      </el-collapse-item>
+    </el-collapse>
     <button @click="mysave" class="save">发布</button>
   </div>
 </template>
@@ -58,7 +86,32 @@ export default {
     return {
       doc: '',
       title: '',
-      info: ''
+      info: '',
+      configPermission: ['0'],
+      configMore: ['0'],
+      noIndexView: false,
+      noSearch: false,
+      usePassword: false,
+      viewPassword: '',
+      viewConfig: ''
+    }
+  },
+  watch: {
+    viewConfig(val1, val2) {
+      console.log(val1, val2)
+      if (val1 === 'public') {
+        this.noIndexView = false
+        this.noSearch = false
+        this.usePassword = false
+      } else if (val1 === 'encrypt') {
+        this.usePassword = true
+        this.noIndexView = true
+        this.noSearch = true
+      } else if (val1 === 'privacy') {
+        this.noIndexView = true
+        this.noSearch = true
+        this.usePassword = false
+      }
     }
   },
   created() {
@@ -116,6 +169,8 @@ export default {
         this.doc = res.content
         this.title = res.title
         this.info = res.info
+        this.noIndexView = res.docConfig.noIndexView
+        this.noSearch = res.docConfig.noSearch
       } else {
         this.$alert(`${res.msg}`, '坏耶！', {
           confirmButtonText: '确定',
@@ -164,6 +219,17 @@ export default {
         })
         return
       }
+      // 密码
+      if (
+        //
+        this.viewPassword.length > 20 ||
+        this.viewPassword.length < 2
+      ) {
+        this.$alert('密码为 2~12 位', '密码不符合要求', {
+          confirmButtonText: '确定'
+        })
+        return
+      }
       // 判断请求 新增/更新
       let url
       if (this.$route.name === 'edit') {
@@ -176,6 +242,12 @@ export default {
           content: this.doc,
           info: this.info,
           title: this.title,
+          docConfig: {
+            noIndexView: this.noIndexView,
+            noSearch: this.noSearch,
+            usePassWord: this.usePassword,
+            passWord: this.viewPassword
+          },
           _id: this.$route.params.pages
         })
         .then(res => {
@@ -225,16 +297,25 @@ export default {
       this.$http.post('/api/docs/add/delImg', {
         fileName: fileName[0]
       })
+    },
+    handleChange(val) {
+      console.log(val)
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+@media screen and (max-width: 500px) {
+  .edit-content {
+    padding: 0 !important;
+  }
+}
 .edit-content {
   z-index: 0;
   margin-top: 70px;
   position: relative;
+  padding: 0 20px;
   .title,
   .info {
     width: 100%;
@@ -255,7 +336,7 @@ export default {
     }
     .text-num {
       position: absolute;
-      right: 0;
+      right: 10px;
       bottom: 1em;
     }
   }
@@ -268,8 +349,17 @@ export default {
     }
     .info-num {
       position: absolute;
-      right: 0;
+      right: 10px;
       bottom: 1em;
+    }
+  }
+  .config {
+    /deep/ .el-checkbox {
+      margin-right: 3px;
+      margin-left: 10px;
+    }
+    .configMore {
+      margin-left: 25px;
     }
   }
   .save {
