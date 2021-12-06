@@ -13,8 +13,10 @@
     <errPage class="errPage" v-else-if="status == false" :code="statusCode"></errPage>
     <div v-if="status == 'passWord'" class="password">
       <h1>该文章需要输入密码</h1>
-      <el-input placeholder="请输入密码" v-model="passWord" show-password></el-input>
-      <el-button @click="initPage(passWord)">提交</el-button>
+      <div class="form">
+        <el-input autocomplete="new-password" placeholder="请输入密码" v-model="passWord" show-password name="docPass"></el-input>
+        <el-button autocomplete="off" @click="initPage(passWord)" type="primary">确定</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -104,11 +106,12 @@ export default {
             this.user.likes = res.data.data.likes[0]
             this.user.liked = res.data.liked
             this.status = true
-          } else {
+          } else if (res.data.code === 403) {
             // 状态异常 显示异常界面
-            this.status = false
-            // 传递状态码
-            this.statusCode = res.data.code
+            // this.status = false
+            // // 传递状态码
+            // this.statusCode = res.data.code
+            this.$message.error('密码错误')
           }
           // 结束加载动画
           loading.close()
@@ -142,7 +145,25 @@ export default {
 }
 
 .password {
-  margin-top: 100px;
+  // margin-top: 100px;
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  * {
+    display: inline;
+  }
+  .el-input {
+    width: 300px;
+    margin: 30px 10px;
+  }
+  .form {
+    display: flex;
+    align-items: center;
+  }
 }
 </style>
 
