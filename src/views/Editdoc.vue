@@ -93,7 +93,8 @@ export default {
       noSearch: false,
       usePassword: false,
       viewPassword: '',
-      viewConfig: ''
+      viewConfig: 'public',
+      public: true
     }
   },
   watch: {
@@ -103,13 +104,16 @@ export default {
         this.noIndexView = false
         this.noSearch = false
         this.usePassword = false
+        this.public = true
       } else if (val1 === 'encrypt') {
         this.usePassword = true
         this.noIndexView = true
         this.noSearch = true
+        this.public = true
       } else if (val1 === 'privacy') {
         this.noIndexView = true
         this.noSearch = true
+        this.public = false
         this.usePassword = false
       }
     }
@@ -171,6 +175,15 @@ export default {
         this.info = res.info
         this.noIndexView = res.docConfig.noIndexView
         this.noSearch = res.docConfig.noSearch
+        this.public = res.docConfig.public
+        // 私密文章
+        if (!res.docConfig.public) this.viewConfig = 'privacy'
+        // 使用密码
+        if (res.docConfig.usePassWord) {
+          this.viewConfig = 'encrypt'
+          this.viewPassword = res.docConfig.passWord
+        }
+        // 默认为公开
       } else {
         this.$alert(`${res.msg}`, '坏耶！', {
           confirmButtonText: '确定',
@@ -248,7 +261,8 @@ export default {
             noIndexView: this.noIndexView,
             noSearch: this.noSearch,
             usePassWord: this.usePassword,
-            passWord: this.viewPassword
+            passWord: this.viewPassword,
+            public: this.public
           },
           _id: this.$route.params.pages
         })
