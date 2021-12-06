@@ -106,12 +106,13 @@ export default {
             this.user.likes = res.data.data.likes[0]
             this.user.liked = res.data.liked
             this.status = true
-          } else if (res.data.code === 403) {
+          } else if (res.data.code === 403 && res.data.msg) {
+            this.$message.error(res.data.msg)
+          } else {
             // 状态异常 显示异常界面
-            // this.status = false
-            // // 传递状态码
-            // this.statusCode = res.data.code
-            this.$message.error('密码错误')
+            // 传递状态码
+            this.status = false
+            this.statusCode = res.data.code
           }
           // 结束加载动画
           loading.close()
