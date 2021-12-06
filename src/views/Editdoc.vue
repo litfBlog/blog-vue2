@@ -220,15 +220,17 @@ export default {
         return
       }
       // 密码
-      if (
-        //
-        this.viewPassword.length > 20 ||
-        this.viewPassword.length < 2
-      ) {
-        this.$alert('密码为 2~12 位', '密码不符合要求', {
-          confirmButtonText: '确定'
-        })
-        return
+      if (this.usePassword) {
+        if (
+          //
+          this.viewPassword.length > 20 ||
+          this.viewPassword.length < 2
+        ) {
+          this.$alert('密码为 2~12 位', '密码不符合要求', {
+            confirmButtonText: '确定'
+          })
+          return
+        }
       }
       // 判断请求 新增/更新
       let url
