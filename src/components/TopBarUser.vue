@@ -76,6 +76,9 @@ export default {
     width: 5em;
     a {
       color: #333;
+      &:hover {
+        color: #42b983;
+      }
     }
   }
 }
