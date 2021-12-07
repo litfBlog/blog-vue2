@@ -16,6 +16,7 @@
       <div class="right-bar">
         <!-- <User></User> -->
         <!-- <FriendLinks></FriendLinks> -->
+        <ActivityBanner></ActivityBanner>
         <UpdateLog></UpdateLog>
         <!-- right -->
       </div>
@@ -27,13 +28,15 @@
 import ContentCard from '@/components/contentCard.vue'
 import User from '@/components/side_bar/User.vue'
 // import FriendLinks from '@/components/side_bar/FriendLinks.vue'
+import ActivityBanner from '@/components/side_bar/ActivityBanner.vue'
 import UpdateLog from '@/components/side_bar/UpdateLog.vue'
 import { findDocApi } from '@/apis/findDoc.js'
 export default {
   components: {
     ContentCard,
     User,
-    UpdateLog
+    UpdateLog,
+    ActivityBanner
     // FriendLinks
   },
   metaInfo: {
