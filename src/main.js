@@ -4,7 +4,7 @@ import router from './router'
 import axios from 'axios'
 // seo优化 Identifier
 import MetaInfo from 'vue-meta-info'
-import { MessageBox, Message, Loading, Autocomplete, Dialog, Button, Pagination } from 'element-ui'
+import { MessageBox, Message, Loading, Autocomplete, Dialog, Button, Pagination, Collapse, CollapseItem, Input, Checkbox, Tooltip, Radio } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import userAvatar from '@/components/userAvatar.vue'
@@ -15,7 +15,7 @@ import '@/assets/icon/iconfont.css'
 import '@/assets/css/main.less'
 
 // iconpack
-import { PreviewOpen, GoodTwo, Editor } from '@icon-park/vue'
+import { PreviewOpen, GoodTwo, Editor, Attention } from '@icon-park/vue'
 // 引入样式 （整个项目只需1次）
 import '@icon-park/vue/styles/index.css'
 
@@ -55,11 +55,18 @@ Vue.use(Button)
 Vue.use(Pagination)
 Vue.component('userAvatar', userAvatar)
 Vue.use(Autocomplete)
+Vue.use(Collapse)
+Vue.use(CollapseItem)
+Vue.use(Input)
+Vue.use(Checkbox)
+Vue.use(Tooltip)
+Vue.use(Radio)
 
 // iconpack
 Vue.component('PreviewOpen', PreviewOpen)
 Vue.component('GoodTwo', GoodTwo)
 Vue.component('Editor', Editor)
+Vue.component('Attention', Attention)
 
 // 路由跳转后，页面回到顶部
 router.afterEach(() => {

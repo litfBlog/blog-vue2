@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import bus from '@/components/eventBus.js'
+import { getUserStatusApi } from '@/apis/getUserStatus.js'
 export default {
   data() {
     return {
@@ -50,8 +50,7 @@ export default {
   },
   methods: {
     async initUser() {
-      const { data: res } = await this.$http.post('/api/user/loginStatus')
-      console.log(res.data.isLogin)
+      const { data: res } = await getUserStatusApi()
       this.isLogin = res.data.isLogin
       this.userName = res.data.userName
       this.avatar = res.data.avatar
@@ -59,7 +58,6 @@ export default {
       this.fansNum = res.data.fansNum
       this.pagesNum = res.data.pagesNum
       this.viewsNum = res.data.viewsNum
-      bus.$emit('userinfo', res)
     }
   }
 }
@@ -96,7 +94,7 @@ export default {
       width: 100%;
     }
     .login {
-      background-color: rgb(119, 119, 228);
+      background-color: #42b983;
       color: #fff;
     }
     .register {
