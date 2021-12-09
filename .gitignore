@@ -4,6 +4,10 @@ node_modules
 .htaccess
 .well-known/
 
+test*
+*test
+*.bak
+
 # local env files
 .env.local
 .env.*.local

@@ -4,68 +4,25 @@
       <input type="text" placeholder="标题(建议12字以内)" class="title" name="title" v-model="title">
       <span class="text-num" :style="{color: title.length>20? 'red':'#666'}">{{title.length}}/20</span>
     </div>
-    <mavonEditor @save="saveDoc" @imgAdd="$imgAdd" @imgDel="$imgDel" ref="editor" v-model="doc" toolbarsFlag :toolbars="{
-      bold: true, // 粗体
-      italic: true, // 斜体
-      header: true, // 标题
-      underline: false, // 下划线
-      strikethrough: false, // 中划线
-      mark: false, // 标记
-      superscript: false, // 上角标
-      subscript: false, // 下角标
-      quote: true, // 引用
-      ol: true, // 有序列表
-      ul: true, // 无序列表
-      link: true, // 链接
-      imagelink: true, // 图片链接
-      code: true, // code
-      table: true, // 表格
-      fullscreen: true, // 全屏编辑
-      readmodel: true, // 沉浸式阅读
-      htmlcode: false, // 展示html源码
-      help: true, // 帮助
-      /* 1.3.5 */
-      undo: true, // 上一步
-      redo: true, // 下一步
-      trash: true, // 清空
-      save: false, // 保存（触发events中的save事件）
-      /* 1.4.2 */
-      navigation: true, // 导航目录
-      /* 2.1.8 */
-      alignleft: false, // 左对齐
-      aligncenter: false, // 居中
-      alignright: false, // 右对齐
-      /* 2.2.1 */
-      subfield: true, // 单双栏模式
-      preview: true, // 预览
-    }">
-      测试ceshi1
-    </mavonEditor>
+
+    <div class="edit">
+      <div class="edit-topbar"></div>
+      <div class="edit-container"></div>
+    </div>
+
     <div class="infoBox">
       <textarea type="text" placeholder="简介(建议30字以内)" class="info" v-model="info"></textarea>
       <span class="info-num" :style="{color: info.length>50? 'red':'#666'}">{{info.length}}/50</span>
     </div>
-    <el-collapse v-model="configPermission" @change="handleChange" class="config">
-      <!-- <el-collapse-item title="权限设置" name="1">
-        <el-checkbox v-model="noIndexView">
-          不在主页展示
-        </el-checkbox>
-        <el-tooltip placement="top">
-          <div slot="content">开启后将不在首页展示，但仍能通过链接访问</div>
-          <attention theme="outline" size="16" fill="#666" :strokeWidth="2" />
-        </el-tooltip>
-        <br>
-        <br>
-        <el-checkbox v-model="usePassword">加密访问</el-checkbox>
-        <el-input placeholder="访问密码" v-model="viewPassword" show-password :disabled="!usePassword"></el-input>
-      </el-collapse-item> -->
+
+    <el-collapse v-model="configPermission" class="config">
       <el-collapse-item title="权限设置" name="1">
         <el-radio v-model="viewConfig" label="public">公开</el-radio>
         <el-radio v-model="viewConfig" label="encrypt">加密</el-radio>
         <el-radio v-model="viewConfig" label="privacy">私密</el-radio>
         <el-input v-if="viewConfig === 'encrypt'" placeholder="访问密码" v-model="viewPassword" show-password></el-input>
 
-        <el-collapse v-model="configMore" @change="handleChange" class="configMore">
+        <el-collapse v-model="configMore" class="configMore">
           <el-collapse-item title="高级设置" name="1" class="more">
             <el-checkbox v-model="noSearch" :disabled="viewConfig === 'privacy'">不允许被搜索</el-checkbox>
             <el-checkbox v-model="noIndexView" :disabled="viewConfig === 'privacy'">不在主页展示</el-checkbox>
@@ -73,22 +30,25 @@
         </el-collapse>
       </el-collapse-item>
     </el-collapse>
-    <button @click="mysave" class="save">发布</button>
+    <button @click="saveDoc" class="save">发布</button>
   </div>
 </template>
 
 <script>
-import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import { docPushApi } from '@/apis/docPush.js'
+let editor = {}
 export default {
-  components: { mavonEditor },
   data() {
     return {
+      // 文章
       doc: '',
       title: '',
       info: '',
+      // 设置折叠框
       configPermission: ['0'],
       configMore: ['0'],
+      // 设置项
       noIndexView: false,
       noSearch: false,
       usePassword: false,
@@ -120,12 +80,9 @@ export default {
   },
   created() {
     console.log(this.$route)
-    if (this.$route.name === 'edit') {
-      this.initEdit()
-    } else {
-      this.initPage()
-    }
-    // console.log(this.$router)
+  },
+  mounted() {
+    this.iniEditor()
   },
   methods: {
     async initPage() {
@@ -170,7 +127,8 @@ export default {
       })
       const { data: res } = await this.$http.post('/api/docs/edit/init', { _id: this.$route.params.pages })
       if (res.code === 200) {
-        this.doc = res.content
+        // this.doc = res.content
+        editor.txt.html(res.content)
         this.title = res.title
         this.info = res.info
         this.noIndexView = res.docConfig.noIndexView
@@ -196,16 +154,61 @@ export default {
       }
       loading.close()
     },
-    // updateDoc(data) {
-    //   console.log(data)
-    // },
-    saveDoc(data) {
-      // 判断是不是自己的发布按钮 禁用ctrl s
-      if (data !== 'mysave') return
-      console.log(this.$refs.editor)
-      console.log(data)
+    async iniEditor() {
+      editor = new this.$E('.edit-topbar', '.edit-container')
+      // 取消自动 focus
+      editor.config.focus = false
+      // 菜单栏提示改下标
+      editor.config.menuTooltipPosition = 'down'
+      // 弹框 调用element
+      editor.config.customAlert = function (s, t) {
+        switch (t) {
+          case 'success':
+            this.$message({
+              type: 'success',
+              message: s
+            })
+            break
+          case 'info':
+            this.$message({
+              type: 'info',
+              message: s
+            })
+            break
+          case 'warning':
+            this.$message({
+              type: 'warning',
+              message: s
+            })
+            break
+          case 'error':
+            this.$message({
+              type: 'error',
+              message: s
+            })
+            break
+          default:
+            this.$message({
+              type: 'info',
+              message: s
+            })
+            break
+        }
+      }
+
+      editor.config.uploadImgShowBase64 = true
+
+      editor.create()
+
+      if (this.$route.name === 'edit') {
+        this.initEdit()
+      } else {
+        this.initPage()
+      }
+    },
+    async saveDoc() {
       if (
-        //
+        // 标题
         this.title.length > 20 ||
         this.title.length < 2
       ) {
@@ -219,7 +222,7 @@ export default {
         return
       }
       if (
-        //
+        // 简介
         this.info.length > 50 ||
         this.info.length < 10
       ) {
@@ -245,77 +248,44 @@ export default {
           return
         }
       }
-      // 判断请求 新增/更新
-      let url
-      if (this.$route.name === 'edit') {
-        url = '/api/docs/edit'
-      } else {
-        url = '/api/docs/add'
-      }
-      this.$http
-        .post(url, {
-          content: this.doc,
-          info: this.info,
-          title: this.title,
-          docConfig: {
-            noIndexView: this.noIndexView,
-            noSearch: this.noSearch,
-            usePassWord: this.usePassword,
-            passWord: this.viewPassword,
-            public: this.public
-          },
-          _id: this.$route.params.pages
-        })
-        .then(res => {
-          if (res.data.code === 200) {
-            this.$alert('修改成功', '好耶!', {
-              confirmButtonText: '确定',
-              callback: action => {
-                this.$router.push('/')
-              }
-            })
-            return
-          }
-          this.$alert(`${res.data.msg}`, '发布失败', {
-            confirmButtonText: '确定'
-          })
-        })
-    },
-    mysave() {
-      console.log(this.$refs.editor)
-      // 传递标识 禁用ctrl s
-      this.$refs.editor.save('mysave')
-    },
-    $imgAdd(pos, $file) {
-      // 第一步.将图片上传到服务器.
-      var formdata = new FormData()
-      console.log(formdata)
-      formdata.append('image', $file)
-      this.$http({
-        url: '/api/docs/add/upImg',
-        method: 'post',
-        data: formdata,
-        headers: { 'Content-Type': 'multipart/form-data' }
-      }).then(url => {
-        // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
-        /**
-         * $vm 指为mavonEditor实例，可以通过如下两种方式获取
-         * 1. 通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
-         * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
-         */
 
-        console.log(url)
-        this.$refs.editor.$img2Url(pos, url.data.path)
-      })
-    },
-    $imgDel(fileName) {
-      console.log(fileName)
-      this.$http.post('/api/docs/add/delImg', {
-        fileName: fileName[0]
-      })
-    },
-    handleChange(val) {
-      console.log(val)
+      const content = editor.txt.html()
+
+      let type = ''
+      if (this.$route.name === 'edit') {
+        type = 'edit'
+      } else {
+        type = 'add'
+      }
+
+      // (type, title, info, content, docConfig[, _id])
+      const { data: res } = await docPushApi(
+        type,
+        this.title,
+        this.info,
+        content,
+        {
+          noIndexView: this.noIndexView,
+          noSearch: this.noSearch,
+          usePassWord: this.usePassword,
+          passWord: this.viewPassword,
+          public: this.public
+        },
+        this.$route.params.pages
+      )
+      console.log(res)
+      if (res.code === 200) {
+        this.$alert('发布成功', '好耶!', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/')
+          }
+        })
+      } else {
+        this.$alert(`${res.msg}`, '发布失败', {
+          confirmButtonText: '确定'
+        })
+      }
     }
   }
 }
@@ -328,6 +298,8 @@ export default {
   }
 }
 .edit-content {
+  max-width: 1000px;
+  margin: 0 auto;
   z-index: 0;
   margin-top: 70px;
   position: relative;
@@ -354,6 +326,20 @@ export default {
       position: absolute;
       right: 10px;
       bottom: 1em;
+    }
+  }
+  .edit {
+    position: relative;
+    .edit-topbar {
+      position: sticky;
+      top: 66px;
+      z-index: 100000;
+    }
+    /deep/ .w-e-text {
+      min-height: 60vh;
+    }
+    /deep/ .eleImg {
+      max-width: 100px;
     }
   }
   .infoBox {

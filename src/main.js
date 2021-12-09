@@ -9,6 +9,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import userAvatar from '@/components/userAvatar.vue'
 
+import E from 'wangeditor'
+
 import '@/assets/icon/iconfont.js'
 import '@/assets/icon/iconfont.css'
 
@@ -38,6 +40,7 @@ Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
 Vue.prototype.$loading = Loading.service
+Vue.prototype.$E = E
 
 Vue.directive('v-loading', {
   // 当被绑定的元素插入到 DOM 中时……

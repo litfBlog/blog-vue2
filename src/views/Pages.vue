@@ -95,7 +95,8 @@ export default {
             // 传递页面数据
             // this.page = res.data.data.content
 
-            this.page = marked(res.data.data.content)
+            // this.page = marked(res.data.data.content)
+            this.page = res.data.data.content
 
             this.date = res.data.data.date
             this.date = Number(this.date)
