@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { searchApi } from '@/apis/search.js'
 export default {
   data() {
     return {
@@ -44,7 +45,7 @@ export default {
     },
     // 发起请求
     async createStateFilter(queryString) {
-      const { data: res } = await this.$http.post('/api/docs/search', { key: queryString })
+      const { data: res } = await searchApi(queryString)
       if (res.length === 0) {
         return [
           {

@@ -15,7 +15,8 @@
 </template>
 
 <script>
-import bus from '@/components/eventBus.js'
+// import bus from '@/components/eventBus.js'
+import { getUserStatusApi } from '@/apis/getUserStatus.js'
 export default {
   data() {
     return {
@@ -29,12 +30,12 @@ export default {
   },
   methods: {
     async initUser() {
-      const { data: res } = await this.$http.post('/api/user/loginStatus')
+      const { data: res } = await getUserStatusApi()
       console.log(res.data.isLogin)
       this.isLogin = res.data.isLogin
       this.userName = res.data.userName
       this.avatar = res.data.avatar
-      bus.$emit('userinfo', res)
+      // bus.$emit('userinfo', res)
     }
   }
 }
@@ -75,6 +76,9 @@ export default {
     width: 5em;
     a {
       color: #333;
+      &:hover {
+        color: #42b983;
+      }
     }
   }
 }

@@ -8,7 +8,7 @@
       <div class="cart-list">
         <!-- <h1>博客文章</h1> -->
         <router-link v-for='item in pages' :key="item._id" :to="`/p/${item._id}`">
-          <ContentCard class="card" :title="item.title" :info="item.info" :date="item.date" :views="item.views"></ContentCard>
+          <ContentCard class="card" :title="item.title" :info="item.info" :date="item.date" :views="item.views" :likes="item.likes"></ContentCard>
         </router-link>
         <el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize" @current-change="pageChange">
         </el-pagination>
@@ -16,6 +16,7 @@
       <div class="right-bar">
         <!-- <User></User> -->
         <!-- <FriendLinks></FriendLinks> -->
+        <ActivityBanner></ActivityBanner>
         <UpdateLog></UpdateLog>
         <!-- right -->
       </div>
@@ -27,12 +28,15 @@
 import ContentCard from '@/components/contentCard.vue'
 import User from '@/components/side_bar/User.vue'
 // import FriendLinks from '@/components/side_bar/FriendLinks.vue'
+import ActivityBanner from '@/components/side_bar/ActivityBanner.vue'
 import UpdateLog from '@/components/side_bar/UpdateLog.vue'
+import { findDocApi } from '@/apis/findDoc.js'
 export default {
   components: {
     ContentCard,
     User,
-    UpdateLog
+    UpdateLog,
+    ActivityBanner
     // FriendLinks
   },
   metaInfo: {
@@ -61,10 +65,7 @@ export default {
   },
   methods: {
     async initPages(page) {
-      const { data: res } = await this.$http.post('/api/docs/find', {
-        num: this.pageSize,
-        page
-      })
+      const { data: res } = await findDocApi(this.pageSize, page)
       this.pages = res.data
       this.total = res.allNum
     },

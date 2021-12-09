@@ -13,8 +13,19 @@
           <span>&#xe5c8; {{ email }}</span>
         </div>
         <div class="info-text-tr">
-          <span>阅读: {{ views }}</span>
-          <span>文章: {{ pages }}</span>
+          <span>
+            <preview-open theme="outline" size="18" fill="#333" />
+            {{ views }}
+          </span>
+          <span>
+            <editor theme="outline" size="18" fill="#333" />
+            {{ pages }}
+          </span>
+
+          <span>
+            <good-two theme="outline" size="18" fill="#333" />
+            {{ likes }}
+          </span>
           <span></span>
         </div>
       </div>
@@ -33,7 +44,7 @@
       <p>开发中……</p> -->
       <div class="card" v-for="i in myDoc" :key="i._id">
         <router-link :to="`/p/${i._id}`" @click.stop="">
-          <contentCard :title="i.title" :info="i.info" :date="i.date" :views="i.views"></contentCard>
+          <contentCard :title="i.title" :info="i.info" :date="i.date" :views="i.views" :likes="i.likes"></contentCard>
         </router-link>
         <div class="edit-box">
           <button class="edit" @click="editDoc(i._id)">编辑</button>
@@ -45,10 +56,14 @@
 </template>
 
 <script>
-import bus from '@/components/eventBus.js'
 import editUserInfo from '@/components/editUserInfo.vue'
 // import userAvatar from '@/components/userAvatar.vue'
 import contentCard from '@/components/contentCard.vue'
+import { getUserStatusApi } from '@/apis/getUserStatus.js'
+import { findMyDocApi } from '@/apis/findMyDoc.js'
+import { unLoginApi } from '@/apis/unLogin.js'
+import { rmMyDoc } from '@/apis/rmMyDoc.js'
+
 export default {
   components: {
     editUserInfo,
@@ -63,18 +78,27 @@ export default {
       email: '',
       views: '',
       pages: '',
+      likes: '',
       showEditUserInfo: false,
       myDoc: {}
     }
   },
   created() {
-    bus.$on('userinfo', val => {
-      this.isLogin = val.data.isLogin
-      this.avatar = val.data.avatar
-      this.userName = val.data.userName
-      this.email = val.data.email
-      this.views = val.data.viewsNum
-      this.pages = val.data.pagesNum
+    // 传递登录状态
+    this.initUserStatus()
+    this.initMyDoc()
+  },
+  methods: {
+    async initUserStatus() {
+      const { data: res } = await getUserStatusApi()
+      this.isLogin = res.data.isLogin
+      this.avatar = res.data.avatar
+      this.userName = res.data.userName
+      this.email = res.data.email
+      this.views = res.data.viewsNum
+      this.pages = res.data.pagesNum
+      this.likes = res.data.likesNum
+      // 未登录跳转登录界面
       if (!this.isLogin) {
         this.$alert('请登陆后重试', '未登录', {
           confirmButtonText: '确定',
@@ -83,15 +107,9 @@ export default {
           }
         })
       }
-    })
-    // this.$on('exit', () => {
-    //   console.log(111)
-    // })
-    this.initMyDoc()
-  },
-  methods: {
+    },
     async initMyDoc() {
-      const { data: res } = await this.$http.post('/api/docs/findMyDoc')
+      const { data: res } = await findMyDocApi()
       this.myDoc = res.data
     },
     alert() {
@@ -116,7 +134,7 @@ export default {
         type: 'warning'
       })
         .then(async () => {
-          const { data: res } = await this.$http.post('/api/user/login/unlogin')
+          const { data: res } = await unLoginApi()
 
           if (res.code === 200) {
             this.$message({
@@ -161,7 +179,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        const { data: res } = await this.$http.post('/api/docs/rmMyDoc', { _id })
+        const { data: res } = await rmMyDoc(_id)
         console.log(res)
         if (res.code === 200) {
           this.$message({

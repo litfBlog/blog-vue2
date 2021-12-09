@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "servedev": "code .|vue-cli-service serve",
+    "servedev": "code .|wt split-pane -d ./|vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@icon-park/vue": "^1.3.5",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.6",

@@ -5,7 +5,7 @@
         <!-- comments -->
       </div>
     </template>
-    <TopBar title="XING博客" :logo="logo" class="topbar">
+    <TopBar title="XING博客" :logo="require('@/assets/logo.webp')" class="topbar">
       <template #list>
         <div class="list">
           <ul>
@@ -30,13 +30,13 @@
 
 <script>
 import TopBar from '@/components/topBar.vue'
-import logo from '@/assets/logo.png'
+// import logo from '@/assets/logo.png'
 import BottomInfo from '@/components/bottomInfo.vue'
 export default {
   components: { TopBar, BottomInfo },
   data() {
     return {
-      logo
+      // logo
     }
   }
 }

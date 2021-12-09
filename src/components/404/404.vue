@@ -12,7 +12,7 @@
 export default {
   props: {
     code: {
-      type: String,
+      type: [String, Number],
       default: '404'
     }
   },

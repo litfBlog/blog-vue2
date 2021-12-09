@@ -14,7 +14,7 @@
           <span>阅读量</span>
         </div>
         <div>
-          <span>{{loveNum}}</span>
+          <span>{{likesNum}}</span>
           <span>获赞数</span>
         </div>
       </div>
@@ -32,14 +32,14 @@
 </template>
 
 <script>
-import bus from '@/components/eventBus.js'
+import { getUserStatusApi } from '@/apis/getUserStatus.js'
 export default {
   data() {
     return {
       isLogin: false,
       userName: '',
       avatar: '',
-      loveNum: '',
+      likesNum: '',
       fansNum: '',
       pagesNum: '',
       viewsNum: ''
@@ -50,16 +50,14 @@ export default {
   },
   methods: {
     async initUser() {
-      const { data: res } = await this.$http.post('/api/user/loginStatus')
-      console.log(res.data.isLogin)
+      const { data: res } = await getUserStatusApi()
       this.isLogin = res.data.isLogin
       this.userName = res.data.userName
       this.avatar = res.data.avatar
-      this.loveNum = res.data.loveNum
+      this.likesNum = res.data.likesNum
       this.fansNum = res.data.fansNum
       this.pagesNum = res.data.pagesNum
       this.viewsNum = res.data.viewsNum
-      bus.$emit('userinfo', res)
     }
   }
 }
@@ -96,7 +94,7 @@ export default {
       width: 100%;
     }
     .login {
-      background-color: rgb(119, 119, 228);
+      background-color: #42b983;
       color: #fff;
     }
     .register {
