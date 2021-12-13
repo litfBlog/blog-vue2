@@ -130,6 +130,9 @@
     background-color: rgb(238, 238, 238);
     padding: 2px 4px;
   }
+
+  // 代码块横向滚动条
+  // #region
   ::-webkit-scrollbar {
     height: 5px;
     width: 2px;
@@ -156,6 +159,7 @@
     background: transparent;
     height: 6px;
   }
+  // #endregion
 
   pre {
     background-color: #212121 !important;
@@ -226,13 +230,14 @@
   h5,
   h6 {
     font-weight: 600;
-    color: #2c3e50;
+    color: #131313;
     text-align: left;
-    border-bottom: 1px rgb(235, 235, 235) solid !important;
     margin: 16px 0 14px 3px !important;
+    display: block;
   }
   h1 {
-    display: block;
+    border-bottom: 1px rgb(235, 235, 235) solid !important;
+    padding-bottom: 5px;
     font-size: 2em;
     margin-block-start: 0.67em;
     margin-block-end: 0.67em;

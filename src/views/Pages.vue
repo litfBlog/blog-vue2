@@ -130,14 +130,14 @@ export default {
 
 <style lang="less" scoped>
 .home {
-  max-width: 1000px;
+  max-width: 800px;
   overflow-wrap: break-word;
   padding: 0;
   margin: auto;
   margin-top: 70px;
   background-color: #fff;
   padding: 20px;
-  box-sizing: content-box;
+  box-sizing: border-box;
   .page {
     min-height: 80vh;
   }

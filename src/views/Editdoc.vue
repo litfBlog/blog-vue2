@@ -298,7 +298,7 @@ export default {
   }
 }
 .edit-content {
-  max-width: 1000px;
+  max-width: 800px;
   margin: 0 auto;
   z-index: 0;
   margin-top: 70px;
