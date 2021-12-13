@@ -160,6 +160,44 @@ export default {
       editor.config.focus = false
       // 菜单栏提示改下标
       editor.config.menuTooltipPosition = 'down'
+      // 字体颜色
+      editor.config.colors = [
+        //
+        'rgb(137,212,255)',
+        'rgb(11,132,237)',
+        'rgb(1,118,186)',
+        'rgb(0,78,128)',
+
+        'rgb(115,253,234)',
+        'rgb(24,231,207)',
+        'rgb(6,143,134)',
+        'rgb(1,124,118)',
+
+        'rgb(137,250,78)',
+        'rgb(96,216,55)',
+        'rgb(29,177,0)',
+        'rgb(1,112,1)',
+
+        'rgb(255,243,89)',
+        'rgb(251,226,49)',
+        'rgb(248,186,0)',
+        'rgb(255,146,1)',
+
+        'rgb(255,150,141)',
+        'rgb(255,101,78)',
+        'rgb(238,35,13)',
+        'rgb(180,23,0)',
+
+        'rgb(255,160,208)',
+        'rgb(234,0,119)',
+        'rgb(203,41,122)',
+        'rgb(153,25,94)',
+
+        'rgb(214,213,213)',
+        'rgb(146,146,146)',
+        'rgb(95,95,95)',
+        'rgb(#000)'
+      ]
       // 弹框 调用element
       editor.config.customAlert = function (s, t) {
         switch (t) {
@@ -340,6 +378,17 @@ export default {
     }
     /deep/ .eleImg {
       max-width: 100px;
+    }
+    /deep/ .w-e-item {
+      i {
+        &::before {
+          content: '■';
+          font-size: 25px;
+        }
+      }
+    }
+    /deep/.w-e-block {
+      text-align: center;
     }
   }
   .infoBox {
