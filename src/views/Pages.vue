@@ -1,6 +1,6 @@
 <template>
   <div class="page-content">
-    <div class="home markdown" v-if="status == true">
+    <div class="home doc" v-if="status == true">
       <h1>{{title}}</h1>
       <AuthorInfo :date="date" :user="user"></AuthorInfo>
       <hr>

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import 'mavon-editor/dist/css/index.css'
+// import 'mavon-editor/dist/css/index.css'
 import { docPushApi } from '@/apis/docPush.js'
 let editor = {}
 export default {
@@ -380,7 +380,8 @@ export default {
       max-width: 100px;
     }
     /deep/ .w-e-item {
-      i {
+      i.w-e-icon-paint-brush,
+      i.w-e-icon-pencil2 {
         &::before {
           content: '■';
           font-size: 25px;
