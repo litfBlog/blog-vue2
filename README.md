@@ -1,4 +1,4 @@
-# wiki-ui
+# blog-ui
 
 ## Project setup
 
