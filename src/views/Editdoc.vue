@@ -1,8 +1,8 @@
 <template>
   <div class="edit-content">
     <div class="titleBox">
-      <input type="text" placeholder="标题(建议12字以内)" class="title" name="title" v-model="title">
-      <span class="text-num" :style="{color: title.length>20? 'red':'#666'}">{{title.length}}/20</span>
+      <input type="text" placeholder="标题" class="title" name="title" v-model="title">
+      <span class="text-num" :style="{color: title.length>editConfig.docTitle.rules.maxLength? 'red':'#666'}">{{title.length}}/{{editConfig.docTitle.rules.maxLength}}</span>
     </div>
 
     <div class="edit">
@@ -54,7 +54,11 @@ export default {
       usePassword: false,
       viewPassword: '',
       viewConfig: 'public',
-      public: true
+      public: true,
+
+      editConfig: {
+        docTitle: { rules: { maxLength: 1 } }
+      }
     }
   },
   watch: {
@@ -95,6 +99,8 @@ export default {
       const { data: res } = await this.$http.post('/api/docs/add/init')
       loading.close()
       if (res.code === 200) {
+        // 文章规则限制
+        this.editConfig = res.editConfig
         return
       } else if (res.code === 403) {
         // alert(res.msg)
@@ -141,6 +147,9 @@ export default {
           this.viewConfig = 'encrypt'
           this.viewPassword = res.docConfig.passWord
         }
+
+        // 文章规则限制
+        this.editConfig = res.editConfig
         // 默认为公开
       } else {
         this.$alert(`${res.msg}`, '坏耶！', {
@@ -247,10 +256,10 @@ export default {
     async saveDoc() {
       if (
         // 标题
-        this.title.length > 20 ||
-        this.title.length < 2
+        this.title.length > this.editConfig.docTitle.rules.maxLength ||
+        this.title.length < this.editConfig.docTitle.rules.minLength
       ) {
-        this.$alert('标题过长/过短', '标题填写有误', {
+        this.$alert(this.editConfig.docTitle.tip, '标题不符合要求', {
           confirmButtonText: '确定',
           callback: action => {
             document.body.scrollTop = 0
@@ -277,14 +286,25 @@ export default {
       if (this.usePassword) {
         if (
           //
-          this.viewPassword.length > 20 ||
-          this.viewPassword.length < 2
+          this.viewPassword.length > this.editConfig.viewPassword.rules.maxLength ||
+          this.viewPassword.length < this.editConfig.viewPassword.rules.minLength
         ) {
-          this.$alert('密码为 2~12 位', '密码不符合要求', {
+          this.$alert(this.editConfig.viewPassword.tip, '密码不符合要求', {
             confirmButtonText: '确定'
           })
           return
         }
+      }
+      // 内容
+      if (
+        // 标题
+        editor.txt.text().length > this.editConfig.docContent.rules.maxLength ||
+        editor.txt.text().length < this.editConfig.docContent.rules.minLength
+      ) {
+        this.$alert(this.editConfig.docContent.tip, '文章不符合要求', {
+          confirmButtonText: '确定'
+        })
+        return
       }
 
       const content = editor.txt.html()
