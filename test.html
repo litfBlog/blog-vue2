@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script src="./xss.js"></script>
+  <script>
+    var source = `
+      <p style="text-align:center; line-height:100px;">aaaaaa</p>
+      <font size="8">​11111</font>
+      <font size="6" face="楷体">​11111你好
+        
+        <font color="#c24f4a"><i>​</i><b><font size="6" face="楷体">好</font></b></font>
+        </font>
+
+        <span style="background-color: rgb(194, 79, 74);">1111​</span>
+        <ul class="w-e-todo"><li><span contenteditable="false"><input type="checkbox"></span>12121</li></ul>
+
+        <table border="0" width="100%" cellpadding="0" cellspacing="0"><tbody><tr><th></th><th></th><th></th><th></th><th></th></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+    `;
+
+    console.log(filterXSS.whiteList);
+    let defaultWhitelist = {
+
+      'a': [
+        'target',
+        'href',
+        'title'
+      ],
+      'abbr': [
+        'title'
+      ],
+      'address': [],
+      'area': [
+        'shape',
+        'coords',
+        'href',
+        'alt'
+      ],
+      'article': [],
+      'aside': [],
+      'audio': [
+        'autoplay',
+        'controls',
+        'crossorigin',
+        'loop',
+        'muted',
+        'preload',
+        'src'
+      ],
+      'b': [],
+      'bdi': [
+        'dir'
+      ],
+      'bdo': [
+        'dir'
+      ],
+      'big': [],
+      'blockquote': [
+        'cite'
+      ],
+      'br': [],
+      'caption': [],
+      'center': [],
+      'cite': [],
+      'code': [],
+      'col': [
+        'align',
+        'valign',
+        'span',
+        'width'
+      ],
+      'colgroup': [
+        'align',
+        'valign',
+        'span',
+        'width'
+      ],
+      'dd': [],
+      'del': [
+        'datetime'
+      ],
+      'details': [
+        'open'
+      ],
+      'div': [],
+      'dl': [],
+      'dt': [],
+      'em': [],
+      'figcaption': [],
+      'figure': [],
+      'font': [
+        'color',
+        'size',
+        'face'
+      ],
+      'footer': [],
+      'h1': [],
+      'h2': [],
+      'h3': [],
+      'h4': [],
+      'h5': [],
+      'h6': [],
+      'header': [],
+      'hr': [],
+      'i': [],
+      'img': [
+        'src',
+        'alt',
+        'title',
+        'width',
+        'height'
+      ],
+      'ins': [
+        'datetime'
+      ],
+      'li': [],
+      'mark': [],
+      'nav': [],
+      'ol': [],
+      'p': [],
+      'pre': [],
+      's': [],
+      'section': [],
+      'small': [],
+      'span': [],
+      'sub': [],
+      'summary': [],
+      'sup': [],
+      'strong': [],
+      'strike': [],
+      'table': [
+        'width',
+        'border',
+        'align',
+        'valign'
+      ],
+      'tbody': [
+        'align',
+        'valign'
+      ],
+      'td': [
+        'width',
+        'rowspan',
+        'colspan',
+        'align',
+        'valign'
+      ],
+      'tfoot': [
+        'align',
+        'valign'
+      ],
+      'th': [
+        'width',
+        'rowspan',
+        'colspan',
+        'align',
+        'valign'
+      ],
+      'thead': [
+        'align',
+        'valign'
+      ],
+      'tr': [
+        'rowspan',
+        'align',
+        'valign'
+      ],
+      'tt': [],
+      'u': [],
+      'ul': [],
+      'video': [
+        'autoplay',
+        'controls',
+        'crossorigin',
+        'loop',
+        'muted',
+        'playsinline',
+        'poster',
+        'preload',
+        'src',
+        'height',
+        'width'
+      ]
+
+    }
+    let myWhiteList = {
+      iframe: [],
+      input: ['type', 'checked'],
+      p: ["style"],
+      span: ["style", 'class'],
+    }
+    let whiteList = { ...defaultWhitelist, ...myWhiteList }
+
+    let options = {
+      whiteList,
+      css: {
+        whiteList: {
+          'line-height': true,
+          'text-align': true,
+          'padding-left': true,
+          'background-color': true
+        }
+      },
+      onTagAttr: function (tag, name, value) {
+        console.log(tag)
+        console.log(value.substr(0, 21))
+        if (tag == 'iframe' && value.substr(0, 22) === '//player.bilibili.com/') {
+          // 通过内置的escapeAttrValue函数来对属性值进行转义
+          return name + '="' + xss.escapeAttrValue(value) + '"'
+        }
+      }
+    }
+    var html = filterXSS(source, options);
+
+    document.write(html)
+    document.write()
+  </script>
+</body>
+
+</html>
+
+<!--
+  <h1 id="h63nj">11111111</h1>
+<p><b>1212121212</b><br /></p>
+<p><b>12121212</b></p>
+<p><b></b>23232323232<b><br /></b></p>
+<p style="line-height:1.6;">23232323232</p>
+<p><br /></p>
+<p>
+  <font face="仿宋">12212121212</font><br />
+</p>
+<p>
+  <font face="仿宋"><br /></font>
+</p>
+<p>
+  <font face="仿宋"><br /></font>
+</p>
+<p>
+  <font face="仿宋">1111111111</font>121<strike>21212</strike>1<u>1212<u>1212121</u>2</u>
+</p>
+<p><u><br /></u></p>
+<blockquote>
+  <p data-we-empty-p="" style="padding-left:2em; text-align:justify;"><u>11111111</u></p>
+  <hr />
+  <p><br /></p>
+</blockquote>
+
+<h1>11111111</h1>
+<p><b>1212121212</b><br /></p>
+<p><b>12121212</b></p>
+<p><b></b>23232323232<b><br /></b></p>
+<p>23232323232</p>
+<p><br /></p>
+<p>
+  <font face="仿宋">12212121212</font><br />
+</p>
+<p>
+  <font face="仿宋"><br /></font>
+</p>
+<p>
+  <font face="仿宋"><br /></font>
+</p>
+<p>
+  <font face="仿宋">1111111111</font>121<strike>21212</strike>1<u>1212<u>1212121</u>2</u>
+</p>
+<p><u><br /></u></p>
+<blockquote>
+  <p><u>11111111</u></p>
+  <hr />
+  <p><br /></p>
+</blockquote>

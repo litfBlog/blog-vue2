@@ -21,6 +21,7 @@
         <!-- right -->
       </div>
     </div>
+    <jiaoZi></jiaoZi>
   </div>
 </template>
 
@@ -31,12 +32,16 @@ import User from '@/components/side_bar/User.vue'
 import ActivityBanner from '@/components/side_bar/ActivityBanner.vue'
 import UpdateLog from '@/components/side_bar/UpdateLog.vue'
 import { findDocApi } from '@/apis/findDoc.js'
+
+// 2021-12-21冬至活动海报
+import jiaoZi from '@/components/jiaozi.vue'
 export default {
   components: {
     ContentCard,
     User,
     UpdateLog,
-    ActivityBanner
+    ActivityBanner,
+    jiaoZi
     // FriendLinks
   },
   metaInfo: {
