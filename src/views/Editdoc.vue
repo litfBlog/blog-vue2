@@ -100,7 +100,15 @@ export default {
       loading.close()
       if (res.code === 200) {
         // 文章规则限制
-        this.editConfig = res.editConfig
+        const editConfig = res.editConfig
+        for (const i in editConfig) {
+          editConfig[i].rules.rule = editConfig[i].rules.rule.substr(1)
+          editConfig[i].rules.rule = editConfig[i].rules.rule.substr(0, editConfig[i].rules.rule.length - 1)
+
+          editConfig[i].rules.rule = RegExp(editConfig[i].rules.rule)
+        }
+        console.log(editConfig)
+        this.editConfig = editConfig
         return
       } else if (res.code === 403) {
         // alert(res.msg)
@@ -147,9 +155,16 @@ export default {
           this.viewConfig = 'encrypt'
           this.viewPassword = res.docConfig.passWord
         }
-
         // 文章规则限制
-        this.editConfig = res.editConfig
+        const editConfig = res.editConfig
+        for (const i in editConfig) {
+          editConfig[i].rules.rule = editConfig[i].rules.rule.substr(1)
+          editConfig[i].rules.rule = editConfig[i].rules.rule.substr(0, editConfig[i].rules.rule.length - 1)
+
+          editConfig[i].rules.rule = RegExp(editConfig[i].rules.rule)
+        }
+        console.log(editConfig)
+        this.editConfig = editConfig
         // 默认为公开
       } else {
         this.$alert(`${res.msg}`, '坏耶！', {
@@ -254,11 +269,8 @@ export default {
       }
     },
     async saveDoc() {
-      if (
-        // 标题
-        this.title.length > this.editConfig.docTitle.rules.maxLength ||
-        this.title.length < this.editConfig.docTitle.rules.minLength
-      ) {
+      // 标题
+      if (!this.editConfig.docTitle.rules.rule.test(this.title)) {
         this.$alert(this.editConfig.docTitle.tip, '标题不符合要求', {
           confirmButtonText: '确定',
           callback: action => {
@@ -270,8 +282,7 @@ export default {
       }
       if (
         // 简介
-        this.info.length > 50 ||
-        this.info.length < 10
+        !this.info
       ) {
         this.$alert('简介过长/过短', '标题填写有误', {
           confirmButtonText: '确定',
@@ -283,11 +294,10 @@ export default {
         return
       }
       // 密码
-      if (this.usePassword) {
+      if (!this.editConfig.viewPassword.rules.rule.test(this.usePassword)) {
         if (
           //
-          this.viewPassword.length > this.editConfig.viewPassword.rules.maxLength ||
-          this.viewPassword.length < this.editConfig.viewPassword.rules.minLength
+          this.viewPassword
         ) {
           this.$alert(this.editConfig.viewPassword.tip, '密码不符合要求', {
             confirmButtonText: '确定'
@@ -296,11 +306,7 @@ export default {
         }
       }
       // 内容
-      if (
-        // 标题
-        editor.txt.text().length > this.editConfig.docContent.rules.maxLength ||
-        editor.txt.text().length < this.editConfig.docContent.rules.minLength
-      ) {
+      if (!this.editConfig.docContent.rules.rule.test(editor.txt.text())) {
         this.$alert(this.editConfig.docContent.tip, '文章不符合要求', {
           confirmButtonText: '确定'
         })
@@ -316,7 +322,6 @@ export default {
         type = 'add'
       }
 
-      // (type, title, info, content, docConfig[, _id])
       const { data: res } = await docPushApi(
         type,
         this.title,
@@ -331,7 +336,6 @@ export default {
         },
         this.$route.params.pages
       )
-      console.log(res)
       if (res.code === 200) {
         this.$alert('发布成功', '好耶!', {
           confirmButtonText: '确定',
