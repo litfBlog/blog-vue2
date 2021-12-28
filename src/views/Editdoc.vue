@@ -10,11 +10,6 @@
       <div class="edit-container"></div>
     </div>
 
-    <div class="infoBox">
-      <textarea type="text" placeholder="简介(建议30字以内)" class="info" v-model="info"></textarea>
-      <span class="info-num" :style="{color: info.length>50? 'red':'#666'}">{{info.length}}/50</span>
-    </div>
-
     <el-collapse v-model="configPermission" class="config">
       <el-collapse-item title="权限设置" name="1">
         <el-radio v-model="viewConfig" label="public">公开</el-radio>
@@ -44,7 +39,6 @@ export default {
       // 文章
       doc: '',
       title: '',
-      info: '',
       // 设置折叠框
       configPermission: ['0'],
       configMore: ['0'],
@@ -366,13 +360,13 @@ export default {
   margin-top: 70px;
   position: relative;
   padding: 0 20px;
-  .title,
-  .info {
+  .title {
     width: 100%;
     margin: 5px 0;
     border: none;
     padding: 5px;
     box-sizing: border-box;
+    background-color: #fff;
   }
   .titleBox {
     position: relative;
@@ -416,20 +410,9 @@ export default {
       text-align: center;
     }
   }
-  .infoBox {
-    position: relative;
-    .info {
-      height: 3em;
-      font-size: 18px;
-      resize: none;
-    }
-    .info-num {
-      position: absolute;
-      right: 10px;
-      bottom: 1em;
-    }
-  }
   .config {
+    padding-left: 10px;
+    background-color: #fff;
     /deep/ .el-checkbox {
       margin-right: 3px;
       margin-left: 10px;
@@ -446,7 +429,7 @@ export default {
     color: #fff;
     font-size: 18px;
     border-radius: 5px;
-    margin: 0 auto;
+    margin: 10px auto;
     display: block;
   }
 }
