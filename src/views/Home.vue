@@ -7,10 +7,16 @@
       </div>
       <div class="cart-list">
         <!-- <h1>博客文章</h1> -->
-        <router-link v-for='item in pages' :key="item._id" :to="`/p/${item._id}`">
-          <ContentCard class="card" :title="item.title" :info="item.info" :date="item.date" :views="item.views" :likes="item.likes"></ContentCard>
+        <router-link v-for='item in pages' :key="item._id"
+          :to="`/p/${item._id}`">
+          <ContentCard class="card" :title="item.title"
+            :info="item.info" :date="item.date"
+            :views="item.views" :likes="item.likes">
+          </ContentCard>
         </router-link>
-        <el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize" @current-change="pageChange">
+        <el-pagination background layout="prev, pager, next"
+          :total="total" :page-size="pageSize"
+          @current-change="pageChange">
         </el-pagination>
       </div>
       <div class="right-bar">
@@ -21,6 +27,7 @@
         <!-- right -->
       </div>
     </div>
+    <denglong></denglong>
     <jiaoZi></jiaoZi>
   </div>
 </template>
@@ -33,15 +40,17 @@ import ActivityBanner from '@/components/side_bar/ActivityBanner.vue'
 import UpdateLog from '@/components/side_bar/UpdateLog.vue'
 import { findDocApi } from '@/apis/findDoc.js'
 
-// 2021-12-21冬至活动海报
+// 2022-2-12 海报
 import jiaoZi from '@/components/jiaozi.vue'
+import denglong from '@/components/denglong.vue'
 export default {
   components: {
     ContentCard,
     User,
     UpdateLog,
     ActivityBanner,
-    jiaoZi
+    jiaoZi,
+    denglong
     // FriendLinks
   },
   metaInfo: {

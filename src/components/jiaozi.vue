@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="activity">
-      <img :src="require('@/assets/2.png')" alt="">
+      <!-- <img :src="require('@/assets/2.png')" alt=""> -->
       <div class="jiaoZi">
         <span></span>
         <span></span>
@@ -44,12 +44,12 @@ export default {
 }
 
 .activity img {
-  z-index: 1000000;
+  z-index: 1000;
   position: fixed;
   bottom: 0;
   display: block;
   width: 100%;
-  transform: translateY(10%);
+  transform: translateY(50%);
 }
 
 .activity .jiaoZi {
@@ -63,8 +63,8 @@ export default {
 .activity .jiaoZi span {
   position: absolute;
   width: 100px;
-  height: 80px;
-  background: url('./../assets/jiaozi-01.png') no-repeat;
+  height: 100px;
+  background: url('./../assets/xiongmao.png') no-repeat;
   background-size: 100%;
   left: 0;
   top: -200px;
