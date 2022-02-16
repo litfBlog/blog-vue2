@@ -8,7 +8,8 @@
         wx &#xe664; -->
         <dt>关于</dt>
         <dd>
-          <a href="https://qm.qq.com/cgi-bin/qm/qr?k=KhU1Ifs9GAuPaHfsGMHM4nUst9pR58Uj&noverify=0" target="_blank">
+          <a href="https://qm.qq.com/cgi-bin/qm/qr?k=KhU1Ifs9GAuPaHfsGMHM4nUst9pR58Uj&noverify=0"
+            target="_blank">
             <i class="iconfont">&#xe611;</i>
             1586380249
           </a>
@@ -20,7 +21,8 @@
           </a>
         </dd>
         <dd>
-          <a href="mailto:admin@litf.com.cn" target="_blank">
+          <a href="mailto:admin@litf.com.cn"
+            target="_blank">
             <i class="iconfont">&#xe5c8;</i>
             admin@litf.com.cn
           </a>
@@ -29,10 +31,16 @@
       <dl>
         <dt>友情链接</dt>
         <dd>
-          <a href="https://www.lieyan.space/" target="_blank">烈焰博客</a>
+          <a href="https://www.lieyan.space/"
+            target="_blank">烈焰博客</a>
         </dd>
         <dd>
-          <a href="http://alongw.cn" target="_blank">阿龙博客</a>
+          <a href="http://alongw.cn"
+            target="_blank">阿龙博客</a>
+        </dd>
+        <dd>
+          <a href="https://jsun969.cn/"
+            target="_blank">荆棘小栈</a>
         </dd>
       </dl>
       <dl>
@@ -44,15 +52,20 @@
     </div>
     <div class="text">
       <hr />
-      <div class="copyRighr">&copy;2021 litfa all rights reserved</div>
+      <div class="copyRighr">&copy;2021 litfa all rights
+        reserved</div>
       <div class="icp">
         <a href="https://beian.miit.gov.cn">
           豫ICP备2021024510号-2
         </a>
         <!-- <div style="width:300px;margin:0 auto; padding:20px 0;display: inline-block;"> -->
-        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=4101820200807" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+        <a target="_blank"
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=4101820200807"
+          style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
           <img :src="beiAnTuPian" />
-          <span style="height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">豫公网安备 4101820200807号</span>
+          <span
+            style="height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">豫公网安备
+            4101820200807号</span>
         </a>
         <!-- </div> -->
 
