@@ -7,17 +7,23 @@
       </div>
       <div class="cart-list">
         <!-- <h1>博客文章</h1> -->
-        <router-link v-for='item in pages' :key="item._id"
-          :to="`/p/${item._id}`">
-          <ContentCard class="card" :title="item.title"
-            :info="item.info" :date="item.date"
-            :views="item.views" :likes="item.likes">
-          </ContentCard>
+        <router-link v-for="item in pages" :key="item._id" :to="`/p/${item._id}`">
+          <ContentCard
+            class="card"
+            :title="item.title"
+            :info="item.info"
+            :date="item.date"
+            :views="item.views"
+            :likes="item.likes"
+          ></ContentCard>
         </router-link>
-        <el-pagination background layout="prev, pager, next"
-          :total="total" :page-size="pageSize"
-          @current-change="pageChange">
-        </el-pagination>
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="total"
+          :page-size="pageSize"
+          @current-change="pageChange"
+        ></el-pagination>
       </div>
       <div class="right-bar">
         <!-- <User></User> -->
@@ -27,8 +33,14 @@
         <!-- right -->
       </div>
     </div>
-    <denglong></denglong>
-    <jiaoZi></jiaoZi>
+    <template v-if="referrer.indexOf('along') != -1">
+      <along></along>
+      <birthday></birthday>
+    </template>
+    <template v-else>
+      <denglong></denglong>
+      <jiaoZi></jiaoZi>
+    </template>
   </div>
 </template>
 
@@ -43,6 +55,9 @@ import { findDocApi } from '@/apis/findDoc.js'
 // 2022-2-12 海报
 import jiaoZi from '@/components/jiaozi.vue'
 import denglong from '@/components/denglong.vue'
+// alng
+import along from '@/components/along.vue'
+import birthday from '@/components/birthday.vue'
 export default {
   components: {
     ContentCard,
@@ -50,40 +65,39 @@ export default {
     UpdateLog,
     ActivityBanner,
     jiaoZi,
-    denglong
+    denglong,
+    along,
+    birthday
     // FriendLinks
   },
   metaInfo: {
     title: '我的主页 ',
     meta: [
       {
-        name: 'keywords',
-        content: '李腾飞,博客,李腾飞博客'
-      },
-      {
         name: 'description',
         content: '分享前端问题解决思路以及个人想法和生活点滴。'
       }
     ]
   },
-  data() {
+  data () {
     return {
       pages: ['', '', '', ''],
       // 每页显示数量
       pageSize: 10,
-      total: 1
+      total: 1,
+      referrer: document.referrer
     }
   },
-  created() {
+  created () {
     this.initPages()
   },
   methods: {
-    async initPages(page) {
+    async initPages (page) {
       const { data: res } = await findDocApi(this.pageSize, page)
       this.pages = res.data
       this.total = res.allNum
     },
-    pageChange(page) {
+    pageChange (page) {
       console.log(page)
       this.initPages(page)
       window.scrollTo(0, 0)
